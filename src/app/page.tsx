@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { map } from "zod";
 import { db } from "~/server/db";
+
+export const dynamic = "force-dynamic";
 
 const nodes = [
   {
