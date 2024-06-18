@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { map } from "zod";
+import { db } from "~/server/db";
 
 const nodes = [
   {
@@ -93,12 +94,17 @@ const mockData = nodes.map((node, index) => ({
   node
 }));
 
-export default function HomePage() {
+export default async function HomePage() {
+
+  const posts = await db.query.posts.findMany();
+
+  console.log(posts)
+
   return (
     <main className="">
       <div className="flex flex-wrap">
-        {[...mockData, ...mockData, ...mockData].map((node) => (
-          <div key={node.id} className="w-1/4 p-2">
+        {[...mockData, ...mockData, ...mockData].map((node, index) => (
+          <div key={node.id + "-" + index} className="w-1/4 p-2">
             <div className="p-4 rounded-lg">
               <h2 className="text-xl font-bold">{node.node.NodeName}</h2>
               <p className="text-sm">{node.node.NodeType}</p>
