@@ -1,8 +1,10 @@
 import { db } from "~/server/db";
+import { nodes } from "~/server/db/schema";
+const fs = require('fs');
 
 export const dynamic = "force-dynamic";
 
-const nodes = [
+const mockNodes = [
   {
     "NodeId": 1,
     "NodeName": "Velia",
@@ -89,29 +91,28 @@ const nodes = [
   },
 ];
 
-const mockData = nodes.map((node, index) => ({
+const mockData = mockNodes.map((node, index) => ({
   id: index + 1,
   node
 }));
 
 export default async function HomePage() {
 
-  const posts = await db.query.posts.findMany();
-
-  console.log(posts)
+  const nodes = await db.query.nodes.findMany();
+  nodes.sort((a, b) => (a?.nodeId || 0) - (b?.nodeId || 0));
 
   return (
     <main className="">
       <div className="flex flex-wrap">
-        {[...mockData, ...mockData, ...mockData].map((node, index) => (
-          <div key={node.id + "-" + index} className="w-1/4 p-2">
-            <div className="p-4 rounded-lg">
-              <h2 className="text-xl font-bold">{node.node.NodeName}</h2>
-              <p className="text-sm">{node.node.NodeType}</p>
-              <p className="text-sm">{"Territory: " + node.node.Territory}</p>
+        <ul>
+          {nodes.map((node, index) => (
+            <div key={index} className="flex flex-wrap">
+              <li>{node.territory}</li>
+              <li>{node.name}</li>
+              <li>{node.type}</li>
             </div>
-          </div>
-        ))}
+          ))}
+        </ul>
       </div>
     </main>
   );

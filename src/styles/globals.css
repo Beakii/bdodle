@@ -5,3 +5,12 @@
 body {
     @apply bg-gray-900 text-white;
 }
+
+li {
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    position: relative;
+}

@@ -6,8 +6,9 @@ import {
   index,
   pgTableCreator,
   serial,
-  timestamp,
   varchar,
+  integer,
+  json
 } from "drizzle-orm/pg-core";
 
 /**
@@ -18,15 +19,17 @@ import {
  */
 export const createTable = pgTableCreator((name) => `bdodle_${name}`);
 
-export const posts = createTable(
-  "post",
+export const nodes = createTable(
+  "nodes",
   {
     id: serial("id").primaryKey(),
+    nodeId: integer("nodeId"),
     name: varchar("name", { length: 256 }),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: timestamp("updatedAt", { withTimezone: true }),
+    type: varchar("type", { length: 256 }),
+    connections: integer("connections").array(),
+    coordinates: json("coordinates"),
+    contribution: integer("contribution"),
+    territory: varchar("territory", { length: 256 }),
   },
   (example) => ({
     nameIndex: index("name_idx").on(example.name),
