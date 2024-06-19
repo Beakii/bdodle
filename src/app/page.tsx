@@ -1,119 +1,77 @@
 import { db } from "~/server/db";
-import { nodes } from "~/server/db/schema";
-const fs = require('fs');
+import BdodleDropdown from "./_components/bdodleDropdown";
+import Balenos from "~/assets/png/territories/Balenos.webp";
+import Serendia from "~/assets/png/territories/Serendia.webp";
+import Calpheon from "~/assets/png/territories/Calpheon.webp";
+import Mediah from "~/assets/png/territories/Mediah.webp";
+import Valencia from "~/assets/png/territories/Valencia.webp";
+import Kamasylvia from "~/assets/png/territories/Kamasylvia.webp";
+import Drieghan from "~/assets/png/territories/Drieghan.webp";
+import Odyllita from "~/assets/png/territories/O'dyllita.webp";
+import MountainofEternalWinter from "~/assets/png/territories/MountainofEternalWinter.webp";
+import LandofMorningLight from "~/assets/png/territories/LandofMorningLight.webp";
+import Ulukita from "~/assets/png/territories/Ulukita.webp";
+import City from "~/assets/png/nodeTypes/City.png";
+import Gateway from "~/assets/png/nodeTypes/Gateway.png";
+import TradingPost from "~/assets/png/nodeTypes/TradingPost.png";
+import Connection from "~/assets/png/nodeTypes/Connection.png";
+import Danger from "~/assets/png/nodeTypes/Danger.png";
+import Town from "~/assets/png/nodeTypes/Town.png";
 
-export const dynamic = "force-dynamic";
-
-const mockNodes = [
-  {
-    "NodeId": 1,
-    "NodeName": "Velia",
-    "NodeType": "City",
-    "NodeConnections": [
-      21,
-      22,
-      26,
-      43,
-      46,
-      102,
-      103,
-      1018
-    ],
-    "Coordinates": {
-      "x": 13799.6,
-      "y": 76995.8
-    },
-    "ReqContribution": 0,
-    "Territory": "Balenos"
-  },
-  {
-    "NodeId": 2,
-    "NodeName": "Western Guard Camp",
-    "NodeType": "Town",
-    "NodeConnections": [
-      4,
-      5,
-      25,
-      45
-    ],
-    "Coordinates": {
-      "x": -61936.7,
-      "y": 44013.9
-    },
-    "ReqContribution": 1,
-    "Territory": "Balenos"
-  },
-  {
-    "NodeId": 3,
-    "NodeName": "Cron Castle",
-    "NodeType": "Danger",
-    "NodeConnections": [
-      41
-    ],
-    "Coordinates": {
-      "x": 11273,
-      "y": 122779
-    },
-    "ReqContribution": 2,
-    "Territory": "Balenos"
-  },
-  {
-    "NodeId": 4,
-    "NodeName": "Western Gateway",
-    "NodeType": "Gateway",
-    "NodeConnections": [
-      2,
-      49,
-      66
-    ],
-    "Coordinates": {
-      "x": -82191,
-      "y": 51588.4
-    },
-    "ReqContribution": 3,
-    "Territory": "Balenos"
-  },
-  {
-    "NodeId": 5,
-    "NodeName": "Bandit's Den Byway",
-    "NodeType": "Gateway",
-    "NodeConnections": [
-      2,
-      48,
-      371
-    ],
-    "Coordinates": {
-      "x": -70797.2,
-      "y": -4113.7
-    },
-    "ReqContribution": 3,
-    "Territory": "Serendia"
-  },
-];
-
-const mockData = mockNodes.map((node, index) => ({
-  id: index + 1,
-  node
-}));
-
+interface Node {
+  id: number;
+  nodeId: number | null;
+  name: string | null;
+  type: string | null;
+  connections: number[] | null;
+  coordinates: unknown;
+  contribution: number | null;
+  territory: string | null;
+}
 export default async function HomePage() {
+
+  const territoryImages = [
+    Balenos,
+    Serendia,
+    Calpheon,
+    Mediah,
+    Valencia,
+    Kamasylvia,
+    Drieghan,
+    Odyllita,
+    MountainofEternalWinter,
+    LandofMorningLight,
+    Ulukita
+  ]
+
+  const nodeTypeImages = [
+    City,
+    Gateway,
+    TradingPost,
+    Connection,
+    Danger,
+    Town
+  ]
 
   const nodes = await db.query.nodes.findMany();
   nodes.sort((a, b) => (a?.nodeId || 0) - (b?.nodeId || 0));
 
   return (
     <main className="">
-      <div className="flex flex-wrap">
-        <ul>
-          {nodes.map((node, index) => (
-            <div key={index} className="flex flex-wrap">
-              <li>{node.territory}</li>
-              <li>{node.name}</li>
-              <li>{node.type}</li>
-            </div>
-          ))}
-        </ul>
-      </div>
+      {
+        nodes == null
+          ?
+          <div>Loading...</div>
+          :
+          <BdodleDropdown
+            nodes={nodes}
+            territoryImage={territoryImages}
+            nodeTypeImage={nodeTypeImages}
+          />
+      }
+
     </main>
   );
 }
+
+

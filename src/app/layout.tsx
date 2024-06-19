@@ -1,4 +1,5 @@
 import "~/styles/globals.css";
+import bdo from "../assets/png/bdoAssets/BlackSpiritIcon.png";
 
 import { GeistSans } from "geist/font/sans";
 
@@ -10,8 +11,12 @@ export const metadata = {
 
 function TopNav() {
   return (
-    <nav className="flex w-full items-center justify-center border-b p-5 text-5xl font-semibold">
-      <div>BDOdle</div>
+    <nav className="flex w-full items-center justify-center border-b p-5 text-5xl font-semibold bg-black">
+      <div className="flex">
+        <span>BD</span>
+        <img src={bdo.src} className="h-11 w-11 m-1" />
+        <span>dle</span>
+      </div>
     </nav>
   );
 }

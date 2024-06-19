@@ -2,15 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    @apply bg-gray-900 text-white;
+@font-face {
+    font-family: 'BDO';
+    src: url(../assets/web_pearl_original.ttf) format('truetype');
 }
 
-li {
+body {
+    @apply bg-stone-900;
+    font-family: 'BDO', sans-serif;
+    color: #E8E4D9;
+}
+
+main {
+    max-width: 50vw;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+/* li {
     cursor: pointer;
     padding: 5px;
     display: flex;
     gap: 12px;
     align-items: center;
     position: relative;
-}
+} */
