@@ -1,6 +1,11 @@
 'use client'
 import { StaticImageData } from "next/image";
 import BdodleInput from "./bdodleInput";
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "~/components/ui/hover-card"
 import { useState } from "react";
 
 interface Node {
@@ -44,15 +49,25 @@ const BdodleDropdown = ({ nodes, territoryImage, nodeTypeImage }: BdodleDropdown
     const filteredNodes = nodes.filter((node: Node) => node.name?.toLowerCase().includes(inputValue.toLowerCase()));
 
     return (
-        <div className="w-full">
+        <div className="w-full absolute">
             <BdodleInput getInput={updateInputValue} />
-            <div className="bg-yellow-950 flex flex-wrap">
-                <ul className="w-full">
+            <div className="flex">
+                <ul className=" bg-yellow-950 w-full overflow-y-auto max-h-[400px] absolute z-10">
                     {filteredNodes.map((node: Node, index: number) => (
-                        <li key={index} className="flex flex-wrap p-3 pl-10 pr-10 border border-yellow-700 cursor-pointer items-center">
-                            <img src={getTerritoryImage(node)?.src} alt={node.territory ?? ""} className="w-10 h-10" />
+                        <li key={index} className="flex p-3 pl-10 pr-10 border border-yellow-700 cursor-pointer items-center">
+                            <HoverCard>
+                                <HoverCardTrigger><img src={getTerritoryImage(node)?.src} alt={node.territory ?? ""} className="w-10 h-10" /></HoverCardTrigger>
+                                <HoverCardContent>
+                                    {node.territory}
+                                </HoverCardContent>
+                            </HoverCard>
                             <span className="pl-10 mr-auto">{node.name}</span>
-                            <img src={getNodeTypeImage(node)?.src} alt={node.type ?? ""} className="ml-auto w-10 h-10" />
+                            <HoverCard>
+                                <HoverCardTrigger><img src={getNodeTypeImage(node)?.src} alt={node.type ?? ""} className="ml-auto w-10 h-10" /></HoverCardTrigger>
+                                <HoverCardContent>
+                                    {node.type}
+                                </HoverCardContent>
+                            </HoverCard>
                         </li>
                     ))}
                 </ul>
