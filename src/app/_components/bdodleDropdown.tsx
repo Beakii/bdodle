@@ -30,11 +30,6 @@ const BdodleDropdown = ({ nodes, territoryImage, nodeTypeImage, submitGuess }: B
     const [inputValue, setInputValue] = useState("");
 
     function updateInputValue(input: string) {
-        // if (input === "") {
-
-        //     setInputValue("  ");
-        //     return;
-        // }
         setInputValue(input)
     }
 
