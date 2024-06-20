@@ -8,25 +8,10 @@ import {
 import { StaticImageData } from "next/image";
 import Arrow from "~/assets/png/bdoAssets/Arrow.png";
 import { useEffect, useState } from "react";
+import { Node, BdodleAnswerTableProps } from "../types";
 
-interface Node {
-    id: number;
-    nodeId: number | null;
-    name: string | null;
-    type: string | null;
-    connections: number[] | null;
-    coordinates: unknown;
-    contribution: number | null;
-    territory: string | null;
-}
 
-interface BdodleDropdownProps {
-    nodes: Node[];
-    territoryImage: StaticImageData[];
-    nodeTypeImage: StaticImageData[];
-}
-
-const BdodleAnswersTable = ({ nodes, territoryImage, nodeTypeImage }: BdodleDropdownProps) => {
+const BdodleAnswersTable = ({ nodes, territoryImage, nodeTypeImage, correctNode }: BdodleAnswerTableProps) => {
     const [listOfGusses, setListOfGusses] = useState(nodes || []);
 
     useEffect(() => {

@@ -27,14 +27,14 @@ interface BdodleDropdownProps {
 }
 
 const BdodleDropdown = ({ nodes, territoryImage, nodeTypeImage, submitGuess }: BdodleDropdownProps) => {
-    const [inputValue, setInputValue] = useState("  ");
+    const [inputValue, setInputValue] = useState("");
 
     function updateInputValue(input: string) {
-        if (input === "") {
+        // if (input === "") {
 
-            setInputValue("  ");
-            return;
-        }
+        //     setInputValue("  ");
+        //     return;
+        // }
         setInputValue(input)
     }
 
@@ -57,9 +57,11 @@ const BdodleDropdown = ({ nodes, territoryImage, nodeTypeImage, submitGuess }: B
 
     return (
         <div className="">
-            <BdodleInput getInput={updateInputValue} />
+            <BdodleInput
+                getInput={updateInputValue}
+                inputValue={inputValue} />
             <div className="flex">
-                <ul className="bg-yellow-950 overflow-y-auto max-h-[400px] absolute z-10">
+                <ul className={`bg-yellow-950 overflow-y-auto max-h-[400px] absolute z-10 ` + (inputValue === "" ? 'hidden' : '')}>
                     {filteredNodes.map((node: Node, index: number) => (
                         <li onClick={() => submitClicked(node)} key={index} className="flex p-3 pl-10 pr-10 border border-yellow-700 cursor-pointer items-center">
                             <HoverCard>

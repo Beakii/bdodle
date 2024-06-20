@@ -1,6 +1,5 @@
 'use server'
 import { db } from "~/server/db";
-import BdodleDropdown from "./_components/bdodleDropdown";
 import Balenos from "~/assets/png/territories/Balenos.webp";
 import Serendia from "~/assets/png/territories/Serendia.webp";
 import Calpheon from "~/assets/png/territories/Calpheon.webp";
@@ -18,19 +17,8 @@ import TradingPost from "~/assets/png/nodeTypes/TradingPost.png";
 import Connection from "~/assets/png/nodeTypes/Connection.png";
 import Danger from "~/assets/png/nodeTypes/Danger.png";
 import Town from "~/assets/png/nodeTypes/Town.png";
-import BdodleAnswersTable from "./_components/bdodleAnswersTable";
 import Game from "./_components/game";
-
-interface Node {
-  id: number;
-  nodeId: number | null;
-  name: string | null;
-  type: string | null;
-  connections: number[] | null;
-  coordinates: unknown; // Update the type of 'coordinates' property
-  contribution: number | null;
-  territory: string | null;
-}
+import { Node } from "./types";
 
 export default async function HomePage() {
 

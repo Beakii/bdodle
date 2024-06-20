@@ -3,24 +3,8 @@ import { StaticImageData } from "next/image";
 import { useEffect, useState } from "react";
 import BdodleDropdown from "./bdodleDropdown";
 import BdodleAnswersTable from "./bdodleAnswersTable";
+import { Node, BdodleDropdownProps } from "../types";
 
-interface Node {
-    id: number;
-    nodeId: number | null;
-    name: string | null;
-    type: string | null;
-    connections: number[] | null;
-    coordinates: unknown;
-    contribution: number | null;
-    territory: string | null;
-}
-
-interface BdodleDropdownProps {
-    nodes: Node[];
-    correctNode: Node;
-    territoryImage: StaticImageData[];
-    nodeTypeImage: StaticImageData[];
-}
 
 const Game = ({ nodes, correctNode, territoryImage, nodeTypeImage }: BdodleDropdownProps) => {
     const [listOfGusses, setListOfGusses] = useState<Node[]>([]);
@@ -38,6 +22,7 @@ const Game = ({ nodes, correctNode, territoryImage, nodeTypeImage }: BdodleDropd
                 submitGuess={updatedListOfGusses} />
             <BdodleAnswersTable
                 nodes={listOfGusses}
+                correctNode={correctNode}
                 territoryImage={territoryImage}
                 nodeTypeImage={nodeTypeImage} />
         </div>
