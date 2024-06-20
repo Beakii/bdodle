@@ -10,7 +10,10 @@
  - [x] Add validation of answer against correct node
  - [x] Rotate arrow based on validation of contribution & connections
  - [ ] Add local storage persistence
- - [ ] Add win condition state
+ - [x] Add win condition state
  - [ ] Build score component + show counter to new bdodle
  - [ ] Add task? to change correct answer every 24 hours
  - [ ] Fix styling
+
+
+

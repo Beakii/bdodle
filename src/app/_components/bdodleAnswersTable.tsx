@@ -8,23 +8,88 @@ import {
 import Arrow from "~/assets/png/bdoAssets/Arrow.png";
 import { useEffect, useState } from "react";
 import { Node, BdodleAnswerTableProps } from "../types";
+import { set } from "zod";
 
 export const dynamic = "force-dynamic";
 const BdodleAnswersTable = ({ nodes, territoryImage, nodeTypeImage, correctNode }: BdodleAnswerTableProps) => {
-    const [listOfGusses, setListOfGusses] = useState(nodes || []);
-    const [rotation, setRotation] = useState(0);
+    const [listOfGusses, setListOfGusses] = useState<Node[]>([]);
+    const [isWin, setIsWin] = useState(false);
 
+    //ALL THE STATE NEEDS TO BE REVIEW AND REFACTORED
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //This gets called when a user clicks on a node form the list to submit a guess & on component mount
     useEffect(() => {
-        setListOfGusses(nodes)
-        localStorage.setItem("nodes", JSON.stringify(listOfGusses));
+        console.log("a new node has been submitted to the answers table")
+        if (listOfGusses.length !== 0) {
+            setListOfGusses([...listOfGusses, ...nodes])
+        }
+        else {
+            setListOfGusses(nodes);
+        }
     }, [nodes]);
 
-    function handleLocalStorage() {
-        const nodes = localStorage.getItem("nodes");
-        if (nodes) {
-            setListOfGusses(JSON.parse(nodes));
+    //This gets called when isWin changes & on component mount
+    useEffect(() => {
+        console.log("iswin is called")
+        console.log(isWin)
+        const storeWinnerObject = localStorage.getItem("winner");
+        const storeListOfNodes = localStorage.getItem("nodes");
+        //If they won and are returning to the page
+        if (storeWinnerObject && !isWin) {
+            //Eventually add a check to clear the local storage if the time is === reset time
+            const winner = JSON.parse(storeWinnerObject);
+            setIsWin(winner);
+            setListOfGusses(JSON.parse(storeWinnerObject));
+            return;
         }
-    }
+
+        if (!storeWinnerObject && isWin) {
+            localStorage.clear();
+            localStorage.setItem("winner", JSON.stringify(nodes[nodes.length - 1]));
+            return;
+        }
+
+        if (!storeWinnerObject && !isWin && storeListOfNodes) {
+            console.log("iswin is false and there are nodes in local storage")
+            setListOfGusses(JSON.parse(storeListOfNodes));
+            return;
+        }
+
+    }, [isWin]);
+
+
+    //This gets called when ListOfGuesses changes
+    useEffect(() => {
+        if (nodes[nodes.length - 1]?.name === correctNode?.name) {
+            console.log("the last node submitted is correct")
+            setIsWin(true);
+        }
+        if (listOfGusses.length !== 0) {
+            localStorage.setItem("nodes", JSON.stringify(listOfGusses));
+            console.log("the list of nodes is not empty and im saving it to local storage")
+        }
+    }, [listOfGusses]);
+
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+
 
     function getTerritoryImage(node: Node) {
         node.territory = node.territory?.replace(/\s/g, '') ?? "";
