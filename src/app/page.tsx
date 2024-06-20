@@ -44,29 +44,13 @@ export default async function HomePage() {
     Danger,
     Town
   ]
-
+  //@ts-ignore
   const nodes: Node[] = await db.query.nodes.findMany();
   nodes.sort((a, b) => (a?.nodeId || 0) - (b?.nodeId || 0));
 
+
   //ADD A DB CALL TO GET A RANDOM NODE HERE AND CACHE IT IN LOCAL STORAGE WHEN PASSED INTO COMPONENT
-  const mockCorrectNode: Node = {
-    "id": 1052,
-    "nodeId": 1052,
-    "name": "Louruve Island",
-    "type": "Connection",
-    "connections": [
-      1051,
-      1053,
-      1054,
-      1088
-    ],
-    "coordinates": {
-      "x": -213127,
-      "y": 234473
-    },
-    "contribution": 1,
-    "territory": "Balenos"
-  };
+  const mockCorrectNode: Node | undefined = nodes.find(node => node.nodeOfDay === true);
 
   return (
     <main className="">

@@ -1,12 +1,11 @@
 'use client'
-import { StaticImageData } from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BdodleDropdown from "./bdodleDropdown";
 import BdodleAnswersTable from "./bdodleAnswersTable";
-import { Node, BdodleDropdownProps } from "../types";
+import { Node, GameProps } from "../types";
 
 
-const Game = ({ nodes, correctNode, territoryImage, nodeTypeImage }: BdodleDropdownProps) => {
+const Game = ({ nodes, correctNode, territoryImage, nodeTypeImage }: GameProps) => {
     const [listOfGusses, setListOfGusses] = useState<Node[]>([]);
 
     function updatedListOfGusses(node: Node) {

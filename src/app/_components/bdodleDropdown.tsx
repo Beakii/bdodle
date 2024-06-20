@@ -1,5 +1,4 @@
 'use client'
-import { StaticImageData } from "next/image";
 import BdodleInput from "./bdodleInput";
 import {
     HoverCard,
@@ -7,24 +6,7 @@ import {
     HoverCardTrigger,
 } from "~/components/ui/hover-card"
 import { useState } from "react";
-
-interface Node {
-    id: number;
-    nodeId: number | null;
-    name: string | null;
-    type: string | null;
-    connections: number[] | null;
-    coordinates: unknown;
-    contribution: number | null;
-    territory: string | null;
-}
-
-interface BdodleDropdownProps {
-    nodes: Node[];
-    territoryImage: StaticImageData[];
-    nodeTypeImage: StaticImageData[];
-    submitGuess: (node: Node) => void;
-}
+import { Node, BdodleDropdownProps } from "../types";
 
 const BdodleDropdown = ({ nodes, territoryImage, nodeTypeImage, submitGuess }: BdodleDropdownProps) => {
     const [inputValue, setInputValue] = useState("");

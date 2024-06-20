@@ -8,7 +8,8 @@ import {
   serial,
   varchar,
   integer,
-  json
+  json,
+  boolean
 } from "drizzle-orm/pg-core";
 
 /**
@@ -30,6 +31,7 @@ export const nodes = createTable(
     coordinates: json("coordinates"),
     contribution: integer("contribution"),
     territory: varchar("territory", { length: 256 }),
+    nodeOfDay: boolean("nodeOfDay"),
   },
   (example) => ({
     nameIndex: index("name_idx").on(example.name),
