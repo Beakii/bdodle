@@ -6,7 +6,9 @@
  - [x] Attached DB to ui
  - [x] Add red eyes under title
  - [x] Add answers table
- - [ ] Connect search props to answer table
+ - [x] Connect search props to answer table
+ - [ ] Add validation of answer against correct node
+ - [ ] Rotate arrow based on vector to correct node
  - [ ] Add local storage persistence
  - [ ] Add task? to change correct answer every 24 hours
  - [ ] Fix styling

@@ -1,3 +1,4 @@
+'use server'
 import { db } from "~/server/db";
 import BdodleDropdown from "./_components/bdodleDropdown";
 import Balenos from "~/assets/png/territories/Balenos.webp";
@@ -18,11 +19,7 @@ import Connection from "~/assets/png/nodeTypes/Connection.png";
 import Danger from "~/assets/png/nodeTypes/Danger.png";
 import Town from "~/assets/png/nodeTypes/Town.png";
 import BdodleAnswersTable from "./_components/bdodleAnswersTable";
-
-interface Coordinates {
-  x: number;
-  y: number;
-}
+import Game from "./_components/game";
 
 interface Node {
   id: number;
@@ -30,10 +27,11 @@ interface Node {
   name: string | null;
   type: string | null;
   connections: number[] | null;
-  coordinates: Coordinates;
+  coordinates: unknown; // Update the type of 'coordinates' property
   contribution: number | null;
   territory: string | null;
 }
+
 export default async function HomePage() {
 
   const territoryImages = [
@@ -59,44 +57,37 @@ export default async function HomePage() {
     Town
   ]
 
-  const nodes = await db.query.nodes.findMany();
+  const nodes: Node[] = await db.query.nodes.findMany();
   nodes.sort((a, b) => (a?.nodeId || 0) - (b?.nodeId || 0));
 
   //ADD A DB CALL TO GET A RANDOM NODE HERE AND CACHE IT IN LOCAL STORAGE WHEN PASSED INTO COMPONENT
-  const mockCorrectNode: Node[] = [
-    {
-      "id": 1052,
-      "nodeId": 1052,
-      "name": "Louruve Island",
-      "type": "Connection",
-      "connections": [
-        1051,
-        1053,
-        1054,
-        1088
-      ],
-      "coordinates": {
-        "x": -213127,
-        "y": 234473
-      },
-      "contribution": 1,
-      "territory": "Balenos"
+  const mockCorrectNode: Node = {
+    "id": 1052,
+    "nodeId": 1052,
+    "name": "Louruve Island",
+    "type": "Connection",
+    "connections": [
+      1051,
+      1053,
+      1054,
+      1088
+    ],
+    "coordinates": {
+      "x": -213127,
+      "y": 234473
     },
-  ];
+    "contribution": 1,
+    "territory": "Balenos"
+  };
 
   return (
     <main className="">
-      <BdodleDropdown
+      <Game
         nodes={nodes}
+        correctNode={mockCorrectNode}
         territoryImage={territoryImages}
         nodeTypeImage={nodeTypeImages}
       />
-      <BdodleAnswersTable
-        nodes={mockCorrectNode}
-        territoryImage={territoryImages}
-        nodeTypeImage={nodeTypeImages}
-      />
-
     </main>
   );
 }

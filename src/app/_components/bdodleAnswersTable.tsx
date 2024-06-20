@@ -2,16 +2,12 @@
 import {
     Card,
     CardContent,
-    CardDescription,
     CardHeader,
     CardTitle,
 } from "~/components/ui/card"
 import { StaticImageData } from "next/image";
 import Arrow from "~/assets/png/bdoAssets/Arrow.png";
-interface Coordinates {
-    x: number;
-    y: number;
-}
+import { useEffect, useState } from "react";
 
 interface Node {
     id: number;
@@ -19,7 +15,7 @@ interface Node {
     name: string | null;
     type: string | null;
     connections: number[] | null;
-    coordinates: Coordinates;
+    coordinates: unknown;
     contribution: number | null;
     territory: string | null;
 }
@@ -31,6 +27,11 @@ interface BdodleDropdownProps {
 }
 
 const BdodleAnswersTable = ({ nodes, territoryImage, nodeTypeImage }: BdodleDropdownProps) => {
+    const [listOfGusses, setListOfGusses] = useState(nodes || []);
+
+    useEffect(() => {
+        setListOfGusses(nodes)
+    }, [nodes]);
 
     function getTerritoryImage(node: Node) {
         node.territory = node.territory?.replace(/\s/g, '') ?? "";
@@ -43,8 +44,8 @@ const BdodleAnswersTable = ({ nodes, territoryImage, nodeTypeImage }: BdodleDrop
     }
 
     return (
-        <div id="results" className="grid-flow-row gap-10 mt-[75]">
-            <div id="tableHeader" className="flex gap-5">
+        <div id="results" className=" gap-10 mt-[75]">
+            <div id="tableHeader" className="min-w-full flex justify-between gap-3">
                 <Card>
                     <CardHeader>
                         <CardTitle>Name</CardTitle>
@@ -72,8 +73,8 @@ const BdodleAnswersTable = ({ nodes, territoryImage, nodeTypeImage }: BdodleDrop
                 </Card>
             </div>
             {
-                nodes?.map((node: Node, index: number) => (
-                    <div key={index} id="tableResults" className="flex gap-5">
+                listOfGusses?.map((node: Node, index: number) => (
+                    <div key={index} id="tableResults" className="w-full justify-between flex gap-3">
                         <Card>
                             <CardHeader>
                                 <CardContent>
@@ -84,29 +85,29 @@ const BdodleAnswersTable = ({ nodes, territoryImage, nodeTypeImage }: BdodleDrop
                         <Card>
                             <CardHeader>
                                 <CardContent>
-                                    <CardDescription>t</CardDescription>
-                                    <img src={getNodeTypeImage(node)?.src} alt="Node Type" />
+                                    <img className="h-24 w-24" src={getNodeTypeImage(node)?.src} alt="Location" />
                                 </CardContent>
                             </CardHeader>
                         </Card>
                         <Card>
                             <CardHeader>
                                 <CardContent>
-                                    <CardDescription></CardDescription>
-                                    <img src={Arrow.src} alt="Location" />
+                                    <img className="h-24 w-24" src={Arrow.src} alt="Location" />
                                 </CardContent>
                             </CardHeader>
                         </Card>
                         <Card>
                             <CardHeader>
                                 <CardContent>
-                                    <div className="">{node.connections?.length}</div>
+                                    <div className="text-2xl">{node.connections?.length}</div>
                                 </CardContent>
                             </CardHeader>
                         </Card>
                         <Card>
                             <CardHeader>
-                                <CardTitle>Territory</CardTitle>
+                                <CardContent>
+                                    <img className="h-24 w-24 p-3" src={getTerritoryImage(node)?.src} alt="Location" />
+                                </CardContent>
                             </CardHeader>
                         </Card>
                     </div>

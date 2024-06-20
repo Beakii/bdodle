@@ -23,13 +23,15 @@ interface BdodleDropdownProps {
     nodes: Node[];
     territoryImage: StaticImageData[];
     nodeTypeImage: StaticImageData[];
+    submitGuess: (node: Node) => void;
 }
 
-const BdodleDropdown = ({ nodes, territoryImage, nodeTypeImage }: BdodleDropdownProps) => {
+const BdodleDropdown = ({ nodes, territoryImage, nodeTypeImage, submitGuess }: BdodleDropdownProps) => {
     const [inputValue, setInputValue] = useState("  ");
 
     function updateInputValue(input: string) {
         if (input === "") {
+
             setInputValue("  ");
             return;
         }
@@ -46,15 +48,20 @@ const BdodleDropdown = ({ nodes, territoryImage, nodeTypeImage }: BdodleDropdown
         return nodeTypeImage.find((imageStaticData) => imageStaticData.src.toLowerCase().includes(node.type?.toLowerCase() ?? ""));
     }
 
+    function submitClicked(node: Node) {
+        submitGuess(node);
+        updateInputValue("");
+    }
+
     const filteredNodes = nodes.filter((node: Node) => node.name?.toLowerCase().includes(inputValue.toLowerCase()));
 
     return (
-        <div className="w-full absolute">
+        <div className="">
             <BdodleInput getInput={updateInputValue} />
             <div className="flex">
-                <ul className=" bg-yellow-950 w-full overflow-y-auto max-h-[400px] absolute z-10">
+                <ul className="bg-yellow-950 overflow-y-auto max-h-[400px] absolute z-10">
                     {filteredNodes.map((node: Node, index: number) => (
-                        <li key={index} className="flex p-3 pl-10 pr-10 border border-yellow-700 cursor-pointer items-center">
+                        <li onClick={() => submitClicked(node)} key={index} className="flex p-3 pl-10 pr-10 border border-yellow-700 cursor-pointer items-center">
                             <HoverCard>
                                 <HoverCardTrigger><img src={getTerritoryImage(node)?.src} alt={node.territory ?? ""} className="w-10 h-10" /></HoverCardTrigger>
                                 <HoverCardContent>
