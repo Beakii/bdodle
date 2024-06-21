@@ -15,21 +15,15 @@ export interface Node {
 export interface GameProps {
     nodes: Node[];
     correctNode: Node | undefined;
-    territoryImage: StaticImageData[];
-    nodeTypeImage: StaticImageData[];
 }
 
 export interface BdodleAnswerTableProps {
-    nodes: Node[];
+    userListOfGuesses: Node[];
     correctNode: Node | undefined;
-    territoryImage: StaticImageData[];
-    nodeTypeImage: StaticImageData[];
 }
 
 export interface BdodleDropdownProps {
     nodes: Node[];
-    territoryImage: StaticImageData[];
-    nodeTypeImage: StaticImageData[];
     submitGuess: (node: Node) => void;
 }
 

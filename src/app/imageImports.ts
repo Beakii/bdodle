@@ -1,0 +1,17 @@
+export { default as Balenos } from "~/assets/png/territories/Balenos.webp";
+export { default as Serendia } from "~/assets/png/territories/Serendia.webp";
+export { default as Calpheon } from "~/assets/png/territories/Calpheon.webp";
+export { default as Mediah } from "~/assets/png/territories/Mediah.webp";
+export { default as Valencia } from "~/assets/png/territories/Valencia.webp";
+export { default as Kamasylvia } from "~/assets/png/territories/Kamasylvia.webp";
+export { default as Drieghan } from "~/assets/png/territories/Drieghan.webp";
+export { default as Odyllita } from "~/assets/png/territories/O'dyllita.webp";
+export { default as MountainofEternalWinter } from "~/assets/png/territories/MountainofEternalWinter.webp";
+export { default as LandofMorningLight } from "~/assets/png/territories/LandofMorningLight.webp";
+export { default as Ulukita } from "~/assets/png/territories/Ulukita.webp";
+export { default as City } from "~/assets/png/nodeTypes/City.png";
+export { default as Gateway } from "~/assets/png/nodeTypes/Gateway.png";
+export { default as TradingPost } from "~/assets/png/nodeTypes/TradingPost.png";
+export { default as Connection } from "~/assets/png/nodeTypes/Connection.png";
+export { default as Danger } from "~/assets/png/nodeTypes/Danger.png";
+export { default as Town } from "~/assets/png/nodeTypes/Town.png";

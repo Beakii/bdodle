@@ -1,4 +1,6 @@
 'use client'
+import { Balenos, Serendia, Calpheon, Mediah, Valencia, Kamasylvia, Drieghan, Odyllita, MountainofEternalWinter, LandofMorningLight, Ulukita } from "../imageImports";
+import { City, Gateway, TradingPost, Connection, Danger, Town } from "../imageImports";
 import BdodleInput from "./bdodleInput";
 import {
     HoverCard,
@@ -8,8 +10,31 @@ import {
 import { useState } from "react";
 import { Node, BdodleDropdownProps } from "../types";
 
-const BdodleDropdown = ({ nodes, territoryImage, nodeTypeImage, submitGuess }: BdodleDropdownProps) => {
+const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
     const [inputValue, setInputValue] = useState("");
+
+    const territoryImage = [
+        Balenos,
+        Serendia,
+        Calpheon,
+        Mediah,
+        Valencia,
+        Kamasylvia,
+        Drieghan,
+        Odyllita,
+        MountainofEternalWinter,
+        LandofMorningLight,
+        Ulukita
+    ];
+
+    const nodeTypeImage = [
+        City,
+        Gateway,
+        TradingPost,
+        Connection,
+        Danger,
+        Town
+    ];
 
     function updateInputValue(input: string) {
         setInputValue(input)
