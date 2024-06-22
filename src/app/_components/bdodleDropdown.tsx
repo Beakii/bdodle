@@ -58,14 +58,14 @@ const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
     const filteredNodes = nodes.filter((node: Node) => node.name?.toLowerCase().includes(inputValue.toLowerCase()));
 
     return (
-        <div className="">
+        <div className="min-w-full flex flex-col justify-center items-center xl:pt-16 pt-5">
             <BdodleInput
                 getInput={updateInputValue}
                 inputValue={inputValue} />
             <div className="flex">
-                <ul className={`bg-yellow-950 overflow-y-auto max-h-[400px] absolute z-10 ` + (inputValue === "" ? 'hidden' : '')}>
+                <ul className={`absolute lg:max-w-[35vw] lg:min-w-[35vw] lg:left-[32.5vw] min-w-[99vw] left-1 max-h-[400px] bg-yellow-950 overflow-y-auto z-10 ` + (inputValue === "" ? 'hidden' : '')}>
                     {filteredNodes.map((node: Node, index: number) => (
-                        <li onClick={() => submitClicked(node)} key={index} className="flex p-3 pl-10 pr-10 border border-yellow-700 cursor-pointer items-center">
+                        <li onClick={() => submitClicked(node)} key={index} className="flex p-3 pl-10 pr-10 border-l-2 border-r-2 border-b-2 border-yellow-700 cursor-pointer items-center">
                             <HoverCard>
                                 <HoverCardTrigger><img src={getTerritoryImage(node)?.src} alt={node.territory ?? ""} className="w-10 h-10" /></HoverCardTrigger>
                                 <HoverCardContent>

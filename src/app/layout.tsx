@@ -9,14 +9,16 @@ export const metadata = {
 
 function TopNav() {
   return (
-    <nav className="flex w-full items-center justify-center border-b pl-16 p-5 pb-10 text-5xl font-semibold bg-black">
+    <nav className="flex flex-col w-full items-center border-b p-5 text-5xl font-semibold bg-black">
       <div id="title" className="flex">
         <span>BD</span>
-        <img src={bdo.src} className="h-11 w-11 m-1" />
+        <img src={bdo.src} className="size-11 m-1" />
         <span>dle</span>
       </div>
-      <div className="eye blur-sm" id="leftEye"></div>
-      <div className="eye blur-sm" id="rightEye"></div>
+      <div className="flex gap-20 pt-3">
+        <div className="bg-[#E30D03] size-7 rounded-full blur-sm"></div>
+        <div className="bg-[#E30D03] size-7 rounded-full blur-sm"></div>
+      </div>
     </nav>
   );
 }
@@ -28,7 +30,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex flex-col gap-4 justify-center items-center min-w-full">
+      <body className="flex flex-col min-w-full ">
         <TopNav />
         {children}
       </body>

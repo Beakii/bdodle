@@ -1,25 +1,25 @@
-import { StaticImageData } from "next/image";
+//Type Interfaces
 
 export interface Node {
     id: number;
-    nodeId: number | null;
-    name: string | null;
-    type: string | null;
-    connections: number[] | null;
+    nodeId: number;
+    name: string;
+    type: string;
+    connections: number[];
     coordinates: { x: number, y: number };
-    contribution: number | null;
-    territory: string | null;
-    nodeOfDay: boolean | null;
+    contribution: number;
+    territory: string;
+    nodeOfDay: boolean | null; //nodeOfDay is stored in DB as true or null
 }
 
 export interface GameProps {
     nodes: Node[];
-    correctNode: Node | undefined;
+    correctNode: Node;
 }
 
 export interface BdodleAnswerTableProps {
     userListOfGuesses: Node[];
-    correctNode: Node | undefined;
+    correctNode: Node;
 }
 
 export interface BdodleDropdownProps {
@@ -30,4 +30,13 @@ export interface BdodleDropdownProps {
 export interface BdodleInputProps {
     getInput: (input: string) => void;
     inputValue: string;
+}
+
+export interface BdodleScoreCardProps {
+    numberOfAttempts: number;
+    timeToNewGame: number;
+}
+
+export interface BdodleBouncingButtonProps {
+    isWin: boolean;
 }

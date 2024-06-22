@@ -27,10 +27,18 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        flip: {
+          "0%": { transform: "perspective(400px) rotateY(90deg)", opacity: "0" },
+          "40%": { transform: "perspective(400px) rotateY(-20deg)" },
+          "60%": { transform: "perspective(400px) rotateY(10deg)" },
+          "80%": { transform: "perspective(400px) rotateY(-5deg)" },
+          "100%": { transform: "perspective(400px)", opacity: "1" },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "flip": "flip 2s forwards",
       },
     },
   },

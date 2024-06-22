@@ -1,7 +1,6 @@
 'use client'
 import { Balenos, Serendia, Calpheon, Mediah, Valencia, Kamasylvia, Drieghan, Odyllita, MountainofEternalWinter, LandofMorningLight, Ulukita } from "../imageImports";
 import { City, Gateway, TradingPost, Connection, Danger, Town } from "../imageImports";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card"
 import Arrow from "~/assets/png/bdoAssets/Arrow.png";
 import { useEffect, useState } from "react";
 import { Node, BdodleAnswerTableProps } from "../types";
@@ -13,10 +12,7 @@ const BdodleAnswersTable = ({ userListOfGuesses, correctNode, }: BdodleAnswerTab
     // Handle new guesses and check for win condition
     useEffect(() => {
         if (userListOfGuesses.length !== 0) {
-            console.log("I AM SETTING ANSWER TABLE FROM LISTENING TO USERLIST WITH:")
-            console.log([...userListOfGuesses])
             setAnswerTable([...userListOfGuesses]);
-            localStorage.setItem('guessHistory', JSON.stringify(userListOfGuesses));
         }
     }, [userListOfGuesses]);
 
@@ -56,29 +52,47 @@ const BdodleAnswersTable = ({ userListOfGuesses, correctNode, }: BdodleAnswerTab
 
     function validateName(node: Node) {
         if (node.name === correctNode?.name) {
-            return "bg-[#005E00]"
+            return "bg-green-600"
         }
         const containsWord = correctNode?.name?.split(' ').some(word => node.name?.includes(word));
         if (containsWord) {
-            return "bg-[#b3932c]";
+            return "bg-yellow-600";
         }
-        return "bg-[#900100]";
+        return "bg-red-600";
     }
 
     function validateType(node: Node) {
-        return node.type === correctNode?.type;
+        if (node.type === correctNode?.type) {
+            return "bg-green-600"
+        }
+        return "bg-red-600";
     }
 
     function validateContribution(node: Node) {
-        return node.contribution === correctNode?.contribution;
+        if (node.contribution === correctNode?.contribution) {
+            return "bg-green-600"
+        }
+        if (Math.abs(node.contribution - correctNode?.contribution) <= 1) {
+            return "bg-yellow-600";
+        }
+        return "bg-red-600";
     }
 
     function validateConnections(node: Node) {
-        return node.connections?.length === correctNode?.connections?.length;
+        if (node.connections.length === correctNode?.connections.length) {
+            return "bg-green-600"
+        }
+        if (Math.abs(node.connections.length - correctNode?.connections.length) <= 1) {
+            return "bg-yellow-600";
+        }
+        return "bg-red-600";
     }
 
     function validateTerritory(node: Node) {
-        return node.territory === correctNode?.territory;
+        if (node.territory === correctNode?.territory) {
+            return "bg-green-600"
+        }
+        return "bg-red-600";
     }
 
 
@@ -110,33 +124,23 @@ const BdodleAnswersTable = ({ userListOfGuesses, correctNode, }: BdodleAnswerTab
 
 
     return (
-        <div id="results" className=" gap-10 mt-[75]">
-            <div id="tableHeader" className="min-w-full flex justify-between gap-3">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Name</CardTitle>
-                    </CardHeader>
-                </Card>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Type</CardTitle>
-                    </CardHeader>
-                </Card>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Contribution</CardTitle>
-                    </CardHeader>
-                </Card>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Connections</CardTitle>
-                    </CardHeader>
-                </Card>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Territory</CardTitle>
-                    </CardHeader>
-                </Card>
+        <div id="results" className="pt-10">
+            <div id="tableHeader" className="min-w-full flex justify-center xl:gap-5">
+                <div className="xl:mt-5 mt-1 xl:min-w-[10vw] min-w-[20vw] h-[4vh] flex items-center justify-center border-2 border-yellow-700 bg-yellow-950">
+                    <h1 className="xl:text-xl md:text-sm text-xs font-semibold">Name</h1>
+                </div>
+                <div className="xl:mt-5 mt-1 xl:min-w-[10vw] min-w-[20vw] h-[4vh] flex items-center justify-center border-2 border-yellow-700 bg-yellow-950">
+                    <h1 className="xl:text-xl md:text-sm text-xs font-semibold">Type</h1>
+                </div>
+                <div className="xl:mt-5 mt-1 xl:min-w-[10vw] min-w-[20vw] h-[4vh] flex items-center justify-center border-2 border-yellow-700 bg-yellow-950">
+                    <h1 className="xl:text-xl md:text-sm text-xs font-semibold">Contribution</h1>
+                </div>
+                <div className="xl:mt-5 mt-1 xl:min-w-[10vw] min-w-[20vw] h-[4vh] flex items-center justify-center border-2 border-yellow-700 bg-yellow-950">
+                    <h1 className="xl:text-xl md:text-sm text-xs font-semibold">Connection</h1>
+                </div>
+                <div className="xl:mt-5 mt-1 xl:min-w-[10vw] min-w-[18.6vw] h-[4vh] flex items-center justify-center border-2 border-yellow-700 bg-yellow-950">
+                    <h1 className="xl:text-xl md:text-sm text-xs font-semibold">Territory</h1>
+                </div>
             </div>
             {
                 answerTable.length === 0
@@ -144,44 +148,24 @@ const BdodleAnswersTable = ({ userListOfGuesses, correctNode, }: BdodleAnswerTab
                     null
                     :
                     answerTable.map((node: Node, index: number) => (
-                        <div key={index} id="tableResults" className="w-full justify-between flex gap-3">
-                            <Card className={validateName(node)}>
-                                <CardHeader>
-                                    <CardContent>
-                                        <div className="text-2xl font-extrabold">{node.name}</div>
-                                    </CardContent>
-                                </CardHeader>
-                            </Card>
-                            <Card className={validateType(node) ? 'bg-[#005E00]' : 'bg-[#900100]'}>
-                                <CardHeader>
-                                    <CardContent>
-                                        <img className="h-24 w-24" src={getNodeTypeImage(node)?.src} alt="Location" />
-                                    </CardContent>
-                                </CardHeader>
-                            </Card>
-                            <Card className={validateContribution(node) ? 'bg-[#005E00]' : `bg-[#900100]`}>
-                                <CardHeader>
-                                    <CardContent>
-                                        <div className="text-2xl flex pt-5 justify-center items-center">{node.contribution}</div>
-                                        <img style={{ transform: getRotationString(node, "CONTRIBUTION") }} className={`h-24 w-24`} src={Arrow.src} alt="Location" />
-                                    </CardContent>
-                                </CardHeader>
-                            </Card>
-                            <Card className={validateConnections(node) ? 'bg-[#005E00]' : 'bg-[#900100]'}>
-                                <CardHeader>
-                                    <CardContent>
-                                        <div className="text-2xl flex pt-5 justify-center items-center">{node.connections?.length}</div>
-                                        <img style={{ transform: getRotationString(node, "CONNECTIONS") }} className={`h-24 w-24`} src={Arrow.src} alt="Location" />
-                                    </CardContent>
-                                </CardHeader>
-                            </Card>
-                            <Card className={validateTerritory(node) ? 'bg-[#005E00]' : 'bg-[#900100]'}>
-                                <CardHeader>
-                                    <CardContent>
-                                        <img className="h-24 w-24 p-3" src={getTerritoryImage(node)?.src} alt="Location" />
-                                    </CardContent>
-                                </CardHeader>
-                            </Card>
+                        <div key={index} id="tableResults" className="min-w-full flex justify-center xl:gap-5">
+                            <div style={{ animationIterationCount: 1 }} className={`animate-flip ${validateName(node)} xl:mt-5 xl:min-w-[10vw] xl:max-w-[10vw] text-center text-wrap min-w-[20vw] h-[12vh] flex items-center justify-center border-2 border-yellow-700`}>
+                                <h1 className="xl:text-xl text-wrap p-2 text-xs font-semibold flex justify-center items-center">{node.name}</h1>
+                            </div>
+                            <div style={{ animationIterationCount: 1 }} className={`animate-flip ${validateType(node)} xl:mt-5 xl:min-w-[10vw] xl:max-w-[10vw] text-center text-wrap min-w-[20vw] h-[12vh] flex items-center justify-center border-2 border-yellow-700`}>
+                                <img className="xl:size-24 size-16" src={getNodeTypeImage(node)?.src} alt="Location" />
+                            </div>
+                            <div style={{ animationIterationCount: 1 }} className={`animate-flip ${validateContribution(node)} xl:mt-5 xl:min-w-[10vw] xl:max-w-[10vw] text-center text-wrap min-w-[20vw] h-[12vh] flex flex-col justify-center items-center border-2 border-yellow-700`}>
+                                <div className="xl:text-2xl text-wrap p-2 text-xs mt-1">{node.contribution}</div>
+                                <img className={`xl:size-24 size-16`} style={{ transform: getRotationString(node, "CONTRIBUTION") }} src={Arrow.src} alt="Location" />
+                            </div>
+                            <div style={{ animationIterationCount: 1 }} className={`animate-flip ${validateConnections(node)} xl:mt-5 xl:min-w-[10vw] xl:max-w-[10vw] text-center text-wrap min-w-[20vw] h-[12vh] flex flex-col justify-center items-center border-2 border-yellow-700`}>
+                                <div className="xl:text-2xl text-wrap p-2 text-xs mt-1">{node.contribution}</div>
+                                <img className={`xl:size-24 size-16`} style={{ transform: getRotationString(node, "CONNECTIONS") }} src={Arrow.src} alt="Location" />
+                            </div>
+                            <div style={{ animationIterationCount: 1 }} className={`animate-flip ${validateTerritory(node)} xl:mt-5 xl:min-w-[10vw] xl:max-w-[10vw] text-center text-wrap min-w-[18.5vw] h-[12vh] flex items-center justify-center border-2 border-yellow-700`}>
+                                <img className="xl:size-24 size-14" src={getTerritoryImage(node)?.src} alt="Location" />
+                            </div>
                         </div>
                     ))
             }

@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'BDO';
-  src: url(../assets/web_pearl_original.ttf) format('truetype');
+  src: url(../assets/web_pearl_original.woff2) format('woff2');
 }
 
 /* width */
@@ -38,22 +38,4 @@ main {
   max-width: 50vw;
   justify-content: center;
   align-items: center;
-}
-
-
-.eye {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #f70200;
-  position: relative;
-  bottom: -40px;
-}
-
-#leftEye {
-  right: 58px;
-}
-
-#rightEye {
-  right: 165px;
 }

@@ -11,9 +11,10 @@
  - [x] Rotate arrow based on validation of contribution & connections
  - [x] Add local storage persistence
  - [x] Add win condition state
- - [ ] Build score component + show counter to new bdodle
+ - [x] Build score component + show counter to new bdodle
+ - [ ] Build filter tool to assist users
  - [ ] Add task? to change correct answer every 24 hours
- - [ ] Fix styling
+ - [x] Fix styling
 
 
 

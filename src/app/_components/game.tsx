@@ -1,13 +1,45 @@
 'use client'
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BdodleDropdown from "./bdodleDropdown";
 import BdodleAnswersTable from "./bdodleAnswersTable";
 import { Node, GameProps } from "../types";
+import BdodleScoreCard from "./bdodleScoreCard";
+import BdodleBouncingButton from "./bdodleBouncingButton";
 
 
 const Game = ({ nodes, correctNode }: GameProps) => {
     const [listOfGusses, setListOfGusses] = useState<Node[]>([]);
     const [isWin, setIsWin] = useState(false);
+    const [timeToNewGame, setTimeToNewGame] = useState(0);
+
+    useEffect(() => {
+        let timer = setInterval(() => {
+            setTimeToNewGame((timeToNewGame) => {
+                if (timeToNewGame === 0) {
+                    clearInterval(timeToNewGame);
+                    return 0;
+                } else return timeToNewGame - 1;
+            });
+        }, 1000);
+    }, []);
+
+    useEffect(() => {
+        if (timeToNewGame === 0) {
+            //localStorage.clear();
+            // setListOfGusses([]);
+            // setIsWin(false); 
+            //setTimeToNewGame(5);
+        }
+    }, [timeToNewGame]);
+
+    useEffect(() => {
+        if (isWin) {
+            console.log("YOU WIN");
+            const resetTime = new Date().setUTCHours(24, 0, 0, 0) - new Date().getTime();
+            const secondsToNewGame = Number((resetTime / 1000).toFixed(0));
+            setTimeToNewGame(secondsToNewGame);
+        }
+    }, [isWin]);
 
 
     // Load from local storage on component mount
@@ -15,9 +47,7 @@ const Game = ({ nodes, correctNode }: GameProps) => {
         const storedGuesses = localStorage.getItem('guessHistory');
 
         if (storedGuesses) {
-            const storedList = JSON.parse(storedGuesses)
-            console.log("I AM SETTING ANSWER TABLE WITH:")
-            console.log(storedList)
+            const storedList = JSON.parse(storedGuesses);
             setListOfGusses(storedList);
 
             storedList.forEach((element: Node) => {
@@ -29,25 +59,21 @@ const Game = ({ nodes, correctNode }: GameProps) => {
     }, []);
 
     useEffect(() => {
-        if (isWin) {
-            console.log("YOU WIN");
-        }
-    }, [isWin]);
-
-    useEffect(() => {
         if (listOfGusses[listOfGusses.length - 1]?.nodeOfDay) {
             setIsWin(true);
         }
+        localStorage.setItem('guessHistory', JSON.stringify(listOfGusses));
+        localStorage.setItem('date', new Date().toUTCString());
     }, [listOfGusses]);
 
     function updatedListOfGusses(node: Node) {
         setListOfGusses([...listOfGusses, node]);
-        console.log("PRINTING THE LIST OF GUSSES FROM THE GAME COMPONENT")
-        console.log(listOfGusses);
     }
 
     return (
-        <div>
+        <div className="flex flex-col">
+            <BdodleBouncingButton
+                isWin={isWin} />
             {
                 !isWin
                     ?
@@ -55,7 +81,9 @@ const Game = ({ nodes, correctNode }: GameProps) => {
                         nodes={nodes}
                         submitGuess={updatedListOfGusses} />
                     :
-                    <div>Replace this with some score card component + timer</div>
+                    <BdodleScoreCard
+                        numberOfAttempts={listOfGusses.length}
+                        timeToNewGame={timeToNewGame} />
             }
 
             <BdodleAnswersTable
