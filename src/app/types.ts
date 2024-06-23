@@ -11,10 +11,22 @@ export interface Node {
     territory: string;
     nodeOfDay: boolean | null; //nodeOfDay is stored in DB as true or null
 }
+export interface NodeWithLength {
+    id: number;
+    nodeId: number;
+    name: string;
+    type: string;
+    connections: number;
+    coordinates: { x: number, y: number };
+    contribution: number;
+    territory: string;
+    nodeOfDay: boolean | null; //nodeOfDay is stored in DB as true or null
+}
 
 export interface GameProps {
     nodes: Node[];
     correctNode: Node;
+    nodesWithConLength: NodeWithLength[];
 }
 
 export interface BdodleAnswerTableProps {
@@ -39,4 +51,12 @@ export interface BdodleScoreCardProps {
 
 export interface BdodleBouncingButtonProps {
     isWin: boolean;
+    toggleAssist: boolean;
+    setToggleAssist: (toggle: boolean) => void;
+    blackSpiritText: string;
+    setBlackSpiritText: (text: string) => void;
+}
+
+export interface BdodleAssistToolProps {
+    nodesWithConLength: NodeWithLength[];
 }

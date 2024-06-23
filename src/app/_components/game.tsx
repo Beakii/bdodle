@@ -5,12 +5,15 @@ import BdodleAnswersTable from "./bdodleAnswersTable";
 import { Node, GameProps } from "../types";
 import BdodleScoreCard from "./bdodleScoreCard";
 import BdodleBouncingButton from "./bdodleBouncingButton";
+import BdodleAssistTool from "./bdodleAssistTool";
 
 
-const Game = ({ nodes, correctNode }: GameProps) => {
+const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
     const [listOfGusses, setListOfGusses] = useState<Node[]>([]);
     const [isWin, setIsWin] = useState(false);
     const [timeToNewGame, setTimeToNewGame] = useState(0);
+    const [toggleAssist, setToggleAssist] = useState(false);
+    const [blackSpiritText, setBlackSpiritText] = useState("I can help!");
 
     useEffect(() => {
         let timer = setInterval(() => {
@@ -25,10 +28,9 @@ const Game = ({ nodes, correctNode }: GameProps) => {
 
     useEffect(() => {
         if (timeToNewGame === 0) {
-            //localStorage.clear();
-            // setListOfGusses([]);
-            // setIsWin(false); 
-            //setTimeToNewGame(5);
+            localStorage.clear();
+            setListOfGusses([]);
+            setIsWin(false);
         }
     }, [timeToNewGame]);
 
@@ -45,6 +47,19 @@ const Game = ({ nodes, correctNode }: GameProps) => {
     // Load from local storage on component mount
     useEffect(() => {
         const storedGuesses = localStorage.getItem('guessHistory');
+        const storedDate = localStorage.getItem('date');
+
+        if (storedDate) {
+            const currentDate = new Date().toUTCString();
+            const storedDateInUTC = new Date(storedDate).toUTCString();
+
+            if (currentDate > storedDateInUTC) {
+                localStorage.removeItem('guessHistory');
+                localStorage.removeItem('date');
+                setListOfGusses([]);
+                setIsWin(false);
+            }
+        }
 
         if (storedGuesses) {
             const storedList = JSON.parse(storedGuesses);
@@ -53,6 +68,7 @@ const Game = ({ nodes, correctNode }: GameProps) => {
             storedList.forEach((element: Node) => {
                 if (element.nodeOfDay) {
                     setIsWin(true);
+                    setBlackSpiritText("Nice job!");
                 }
             });
         }
@@ -73,22 +89,36 @@ const Game = ({ nodes, correctNode }: GameProps) => {
     return (
         <div className="flex flex-col">
             <BdodleBouncingButton
+                blackSpiritText={blackSpiritText}
+                setBlackSpiritText={setBlackSpiritText}
+                toggleAssist={toggleAssist}
+                setToggleAssist={setToggleAssist}
                 isWin={isWin} />
             {
-                !isWin
+                toggleAssist
                     ?
-                    <BdodleDropdown
-                        nodes={nodes}
-                        submitGuess={updatedListOfGusses} />
+                    <BdodleAssistTool
+                        nodesWithConLength={nodesWithConLength} />
                     :
-                    <BdodleScoreCard
-                        numberOfAttempts={listOfGusses.length}
-                        timeToNewGame={timeToNewGame} />
+                    <>
+                        {
+                            !isWin
+                                ?
+                                <BdodleDropdown
+                                    nodes={nodes}
+                                    submitGuess={updatedListOfGusses} />
+                                :
+                                <>
+                                    <BdodleScoreCard
+                                        numberOfAttempts={listOfGusses.length}
+                                        timeToNewGame={timeToNewGame} />
+                                </>
+                        }
+                        <BdodleAnswersTable
+                            userListOfGuesses={listOfGusses}
+                            correctNode={correctNode} />
+                    </>
             }
-
-            <BdodleAnswersTable
-                userListOfGuesses={listOfGusses}
-                correctNode={correctNode} />
         </div>
     );
 };

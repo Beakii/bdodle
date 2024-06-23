@@ -1,15 +1,16 @@
 'use client'
 import { useEffect, useState } from "react";
-import BlackSpirit from "~/assets/png/bdoAssets/BlackSpirit.png";
+import { BdodleAssistToolProps } from "../types";
+import { DataTable } from "./assistTool/DataTable";
+import { columns } from "./assistTool/columns";
 
 
-const BdodleAssistTool = ({ }) => {
+
+const BdodleAssistTool = ({ nodesWithConLength }: BdodleAssistToolProps) => {
 
 
     return (
-        <div>
-            poo
-        </div>
+        <DataTable columns={columns} data={nodesWithConLength} />
     );
 };
 

@@ -12,6 +12,7 @@
  - [x] Add local storage persistence
  - [x] Add win condition state
  - [x] Build score component + show counter to new bdodle
+ - [x] Sort dropdown list alphabetically
  - [ ] Build filter tool to assist users
  - [ ] Add task? to change correct answer every 24 hours
  - [x] Fix styling
