@@ -12,8 +12,13 @@
  - [x] Add local storage persistence
  - [x] Add win condition state
  - [x] Build score component + show counter to new bdodle
- - [x] Sort dropdown list alphabetically
- - [ ] Build filter tool to assist users
+ - [x] Build filter tool to assist users
+ - [ ] Add contribution number to BdodleDropDown
+ - [ ] Offset animation to reveal each card slowly
+ - [ ] Fix AnswerTable validation (Arrows on contri and connection not working correctly)
+ - [ ] Fix AnswerTable behaviour to display answers either top or bottom
+ - [ ] Add legend at the bottom to give information
+ - [ ] Fix and test localstorage + reset times
  - [ ] Add task? to change correct answer every 24 hours
  - [x] Fix styling
 

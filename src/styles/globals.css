@@ -39,3 +39,8 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+tbody tr {
+  @apply transition-colors;
+  @apply hover:bg-neutral-100/50;
+}
