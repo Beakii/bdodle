@@ -29,8 +29,9 @@ export interface GameProps {
     nodesWithConLength: NodeWithLength[];
 }
 
-export interface BdodleAnswerTableProps {
-    userListOfGuesses: Node[];
+export interface BdodleAnswerTableRowProps {
+    shouldPlayAnimation: boolean;
+    guessedNode: Node;
     correctNode: Node;
 }
 
