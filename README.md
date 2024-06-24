@@ -13,8 +13,8 @@
  - [x] Add win condition state
  - [x] Build score component + show counter to new bdodle
  - [x] Build filter tool to assist users
- - [ ] Add contribution number to BdodleDropDown
- - [ ] Offset animation to reveal each card slowly
+ - [x] Add contribution number to BdodleDropDown
+ - [x] Offset animation to reveal each card slowly
  - [ ] Fix AnswerTable validation (Arrows on contri and connection not working correctly)
  - [ ] Fix AnswerTable behaviour to display answers either top or bottom
  - [ ] Add legend at the bottom to give information

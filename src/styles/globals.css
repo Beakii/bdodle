@@ -44,3 +44,7 @@ tbody tr {
   @apply transition-colors;
   @apply hover:bg-neutral-100/50;
 }
+
+#tableResults {
+  animation-fill-mode: both;
+}

@@ -8,6 +8,17 @@ const config = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
+  safelist: [
+    "delay-1000",
+    "delay-1500",
+    "delay-2000",
+    "delay-2500",
+    "delay-3000",
+    "delay-3500",
+    "delay-4000",
+    "delay-4500",
+    "delay-5000",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -18,6 +29,14 @@ const config = {
       },
     },
     extend: {
+      transitionDelay: {
+        '1500': '1500ms',
+        '2000': '2000ms',
+        '2500': '2500ms',
+        '3000': '3000ms',
+        '3500': '3500ms',
+        '4000': '4000ms',
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -28,11 +47,8 @@ const config = {
           to: { height: "0" },
         },
         flip: {
-          "0%": { transform: "perspective(400px) rotateY(90deg)", opacity: "0" },
-          "40%": { transform: "perspective(400px) rotateY(-20deg)" },
-          "60%": { transform: "perspective(400px) rotateY(10deg)" },
-          "80%": { transform: "perspective(400px) rotateY(-5deg)" },
-          "100%": { transform: "perspective(400px)", opacity: "1" },
+          "0%": { transform: "perspective(400px) rotateY(-90deg)", opacity: "0" },
+          "100%": { transform: "perspective(400px) rotateY(0deg)", opacity: "1" },
         }
       },
       animation: {

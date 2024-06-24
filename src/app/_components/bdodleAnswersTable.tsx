@@ -149,21 +149,21 @@ const BdodleAnswersTable = ({ userListOfGuesses, correctNode, }: BdodleAnswerTab
                     :
                     answerTable.map((node: Node, index: number) => (
                         <div key={index} id="tableResults" className="min-w-full flex justify-center lg:gap-5">
-                            <div style={{ animationIterationCount: 1 }} className={`animate-flip ${validateName(node)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex items-center justify-center border-2 border-yellow-700`}>
+                            <div style={{ animationIterationCount: 1 }} className={`animate-flip fill-mode-both ${validateName(node)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex items-center justify-center border-2 border-yellow-700`}>
                                 <h1 className="lg:text-lg text-wrap p-2 text-xs font-semibold flex justify-center items-center">{node.name}</h1>
                             </div>
-                            <div style={{ animationIterationCount: 1 }} className={`animate-flip ${validateType(node)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex items-center justify-center border-2 border-yellow-700`}>
+                            <div style={{ animationIterationCount: 1 }} className={`animate-flip delay-1000 fill-mode-both ${validateType(node)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex items-center justify-center border-2 border-yellow-700`}>
                                 <img className="lg:size-24 size-16" src={getNodeTypeImage(node)?.src} alt="Location" />
                             </div>
-                            <div style={{ animationIterationCount: 1 }} className={`animate-flip ${validateContribution(node)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex flex-col justify-center items-center border-2 border-yellow-700`}>
+                            <div style={{ animationIterationCount: 1 }} className={`animate-flip delay-2000 fill-mode-both ${validateContribution(node)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex flex-col justify-center items-center border-2 border-yellow-700`}>
                                 <div className="lg:text-2xl text-wrap p-2 text-xs mt-1">{node.contribution}</div>
                                 <img className={`lg:size-24 size-16`} style={{ transform: getRotationString(node, "CONTRIBUTION") }} src={Arrow.src} alt="Location" />
                             </div>
-                            <div style={{ animationIterationCount: 1 }} className={`animate-flip ${validateConnections(node)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex flex-col justify-center items-center border-2 border-yellow-700`}>
+                            <div style={{ animationIterationCount: 1 }} className={`animate-flip delay-3000 fill-mode-both ${validateConnections(node)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex flex-col justify-center items-center border-2 border-yellow-700`}>
                                 <div className="lg:text-2xl text-wrap p-2 text-xs mt-1">{node.contribution}</div>
                                 <img className={`lg:size-24 size-16`} style={{ transform: getRotationString(node, "CONNECTIONS") }} src={Arrow.src} alt="Location" />
                             </div>
-                            <div style={{ animationIterationCount: 1 }} className={`animate-flip ${validateTerritory(node)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[18.5vw] lg:min-h-[vh] flex items-center justify-center border-2 border-yellow-700`}>
+                            <div style={{ animationIterationCount: 1 }} className={`animate-flip delay-4000 fill-mode-both ${validateTerritory(node)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[18.5vw] lg:min-h-[vh] flex items-center justify-center border-2 border-yellow-700`}>
                                 <img className="lg:size-24 size-14" src={getTerritoryImage(node)?.src} alt="Location" />
                             </div>
                         </div>
