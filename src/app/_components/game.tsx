@@ -78,13 +78,12 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
         }
         (itemRef.current as HTMLElement | null)?.lastElementChild?.scrollIntoView({ behavior: 'smooth' });
         localStorage.setItem('guessHistory', JSON.stringify(listOfGusses));
-        localStorage.setItem('date', new Date().toUTCString());
     }, [listOfGusses]);
 
     function updatedListOfGusses(node: Node) {
         setListOfGusses([...listOfGusses, node]);
         setShouldPlayAnimation(true);
-
+        localStorage.setItem('date', new Date().toUTCString());
         const timer = setTimeout(() => {
             setShouldPlayAnimation(false);
         }, 6000);
