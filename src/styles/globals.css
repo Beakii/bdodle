@@ -12,14 +12,10 @@
   width: 5px;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  @apply bg-yellow-700
-}
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #E8E4D9;
+  @apply rounded-lg;
 }
 
 /* Handle on hover */
