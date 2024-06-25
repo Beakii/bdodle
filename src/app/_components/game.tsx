@@ -7,6 +7,7 @@ import BdodleBouncingButton from "./bdodleBouncingButton";
 import BdodleAssistTool from "./bdodleAssistTool";
 import BdodleAnswersTableHeader from "./bdodleAnswersTableHeader";
 import BdodleAnswersTableRow from "./bdodleAnswerTableRow";
+import AnswerLegend from "./answerLegend";
 
 
 const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
@@ -128,7 +129,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
                         <>
                             <BdodleAnswersTableHeader />
                             {
-                                <div className="lg:min-h-[600px] lg:max-h-[600px] lg:mt-5 overflow-y-auto overflow-x-hidden">
+                                <div className="lg:max-h-[600px] lg:mt-5 overflow-y-auto overflow-x-hidden">
                                     {listOfGusses.map((node, index) => {
                                         return (
                                             <div ref={itemRef}>
@@ -142,6 +143,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
                                     })}
                                 </div>
                             }
+                            <AnswerLegend />
                         </>
                     </>
             }
