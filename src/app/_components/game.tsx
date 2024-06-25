@@ -39,7 +39,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
 
         const storedDateArray = storedDate?.split(' ');
         const currentDateArray = new Date().toUTCString().split(' ');
-
+        //[0] -  [1] -  [2] -  [3] -  [4] -  [5]    
         //Day - Date - Month - Year - Time - GMT
         if (storedDate) {
             //@ts-ignore
@@ -84,6 +84,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
     function updatedListOfGusses(node: Node) {
         setListOfGusses([...listOfGusses, node]);
         setShouldPlayAnimation(true);
+
         const timer = setTimeout(() => {
             setShouldPlayAnimation(false);
         }, 6000);
@@ -102,6 +103,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
                 toggleAssist
                     ?
                     <BdodleAssistTool
+                        setToggleAssist={setToggleAssist}
                         nodesWithConLength={nodesWithConLength} />
                     :
                     <>
@@ -121,12 +123,11 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
                         <>
                             <BdodleAnswersTableHeader />
                             {
-                                <div className="lg:max-h-[600px] lg:mt-5 overflow-y-auto overflow-x-hidden">
+                                <div className="lg:max-h-[600px] max-h-[40vh] lg:mt-5 overflow-y-scroll overflow-x-hidden">
                                     {listOfGusses.map((node, index) => {
                                         return (
                                             <div ref={itemRef}>
                                                 <BdodleAnswersTableRow
-                                                    key={index}
                                                     guessedNode={node}
                                                     correctNode={correctNode}
                                                     shouldPlayAnimation={index === (listOfGusses.length - 1) ? shouldPlayAnimation : false} />

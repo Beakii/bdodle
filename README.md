@@ -16,6 +16,7 @@
  - [x] Add contribution number to BdodleDropDown
  - [x] Add legend at the bottom to give information
  - [x] Add cron job to change correct answer every 24 hours
+ - [ ] Add antagonzing black spirit messages
 
 
  ## Debug
@@ -26,7 +27,8 @@
  - [x] Fix AnswerTable behaviour to be scrollable with auto-scroll bottom
  - [x] Fix and test localstorage
  - [x] Fix reset times with game reset
- - [ ] Fix styling
+ - [x] Fix styling
+ - [x] Fix data table contribution and connections All options
 
 
 

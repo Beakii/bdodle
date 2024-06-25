@@ -15,3 +15,4 @@ export { default as TradingPost } from "~/assets/png/nodeTypes/TradingPost.png";
 export { default as Connection } from "~/assets/png/nodeTypes/Connection.png";
 export { default as Danger } from "~/assets/png/nodeTypes/Danger.png";
 export { default as Town } from "~/assets/png/nodeTypes/Town.png";
+export { default as GoBackArrow } from "~/assets/png/bdoAssets/goBackArrow.png";

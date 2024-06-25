@@ -42,6 +42,22 @@ export const columns: ColumnDef<NodeTable>[] = [
         },
         accessorKey: 'type',
     },
+    // {
+    //     header: ({ column }) => {
+    //         return (
+    //             <Button
+    //                 className="lg:text-xl text-xs font-semibold text-[#E8E4D9]"
+    //                 variant="ghost"
+    //                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+    //             >
+    //                 Connections
+    //                 <ArrowUpDown className="ml-2 h-4 w-4" />
+    //             </Button>
+    //         )
+    //     },
+    //     accessorKey: 'connections',
+    //     filterFn: 'equalsString'
+    // },
     {
         header: ({ column }) => {
             return (
@@ -50,23 +66,7 @@ export const columns: ColumnDef<NodeTable>[] = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Connections
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
-        accessorKey: 'connections',
-        filterFn: 'equalsString'
-    },
-    {
-        header: ({ column }) => {
-            return (
-                <Button
-                    className="lg:text-xl text-xs font-semibold text-[#E8E4D9]"
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Contribution
+                    CP
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
@@ -82,7 +82,7 @@ export const columns: ColumnDef<NodeTable>[] = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Territory
+                    Terr.
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )

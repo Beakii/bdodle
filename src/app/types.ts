@@ -60,4 +60,5 @@ export interface BdodleBouncingButtonProps {
 
 export interface BdodleAssistToolProps {
     nodesWithConLength: NodeWithLength[];
+    setToggleAssist: (toggle: boolean) => void;
 }

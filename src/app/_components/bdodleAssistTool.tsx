@@ -6,11 +6,11 @@ import { columns } from "./assistTool/columns";
 
 
 
-const BdodleAssistTool = ({ nodesWithConLength }: BdodleAssistToolProps) => {
+const BdodleAssistTool = ({ nodesWithConLength, setToggleAssist }: BdodleAssistToolProps) => {
 
 
     return (
-        <DataTable columns={columns} data={nodesWithConLength} />
+        <DataTable columns={columns} data={nodesWithConLength} setToggleAssist={setToggleAssist} />
     );
 };
 
