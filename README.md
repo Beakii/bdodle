@@ -15,7 +15,7 @@
  - [x] Build filter tool to assist users
  - [x] Add contribution number to BdodleDropDown
  - [x] Add legend at the bottom to give information
- - [ ] Add task? to change correct answer every 24 hours
+ - [x] Add task? to change correct answer every 24 hours
 
 
  ## Debug
