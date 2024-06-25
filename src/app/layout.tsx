@@ -1,5 +1,6 @@
 import "~/styles/globals.css";
 import bdo from "../assets/png/bdoAssets/BlackSpiritIcon.png";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   title: "BDOdle",
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body className="flex flex-col min-w-full ">
         <TopNav />
         {children}
+        <SpeedInsights />
       </body>
     </html >
   );
