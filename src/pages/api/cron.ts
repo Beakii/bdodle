@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const listOfNodes: Node[] = await db.query.nodes.findMany();
     const currentCorrectNode: Node = listOfNodes.find(node => node.nodeOfDay === true)!;
 
-    const randomIndex = Math.floor(Math.random() * listOfNodes.length);
+    const randomIndex = Math.floor(Math.random() * (listOfNodes.length - 1)) + 1;
 
     await db.update(nodes)
         .set({ nodeOfDay: null })

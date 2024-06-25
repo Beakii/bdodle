@@ -25,18 +25,6 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
         const storedGuesses = localStorage.getItem('guessHistory');
         const storedDate = localStorage.getItem('date');
 
-        if (storedDate) {
-            const currentDate = new Date().toUTCString();
-            const storedDateInUTC = new Date(storedDate).toUTCString();
-
-            if (currentDate > storedDateInUTC) {
-                localStorage.removeItem('guessHistory');
-                localStorage.removeItem('date');
-                setListOfGusses([]);
-                setIsWin(false);
-            }
-        }
-
         if (storedGuesses) {
             const storedList = JSON.parse(storedGuesses);
             setListOfGusses(storedList);
@@ -47,6 +35,20 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
                     setBlackSpiritText("Nice job!");
                 }
             });
+        }
+
+        const storedDateArray = storedDate?.split(' ');
+        const currentDateArray = new Date().toUTCString().split(' ');
+
+        //Day - Date - Month - Year - Time - GMT
+        if (storedDate) {
+            //@ts-ignore
+            if (currentDateArray[1] !== storedDateArray[1]) {
+                localStorage.removeItem('guessHistory');
+                localStorage.removeItem('date');
+                setListOfGusses([]);
+                setIsWin(false);
+            }
         }
     }, []);
 
@@ -63,16 +65,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
     }, []);
 
     useEffect(() => {
-        if (timeToNewGame === 0) {
-            localStorage.clear();
-            setListOfGusses([]);
-            setIsWin(false);
-        }
-    }, [timeToNewGame]);
-
-    useEffect(() => {
         if (isWin) {
-            console.log("YOU WIN");
             const resetTime = new Date().setUTCHours(24, 0, 0, 0) - new Date().getTime();
             const secondsToNewGame = Number((resetTime / 1000).toFixed(0));
             setTimeToNewGame(secondsToNewGame);
@@ -89,7 +82,6 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
     }, [listOfGusses]);
 
     function updatedListOfGusses(node: Node) {
-        console.log("im adding an item to the list and updating the animation state")
         setListOfGusses([...listOfGusses, node]);
         setShouldPlayAnimation(true);
         const timer = setTimeout(() => {

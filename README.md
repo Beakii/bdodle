@@ -15,7 +15,7 @@
  - [x] Build filter tool to assist users
  - [x] Add contribution number to BdodleDropDown
  - [x] Add legend at the bottom to give information
- - [x] Add task? to change correct answer every 24 hours
+ - [x] Add cron job to change correct answer every 24 hours
 
 
  ## Debug
@@ -24,8 +24,8 @@
  - [x] Fix Offset animation to reveal each card slowly
  - [x] Fix animation to only play once
  - [x] Fix AnswerTable behaviour to be scrollable with auto-scroll bottom
- - [ ] Fix and test localstorage
- - [ ] Fix reset times with game reset
+ - [x] Fix and test localstorage
+ - [x] Fix reset times with game reset
  - [ ] Fix styling
 
 
