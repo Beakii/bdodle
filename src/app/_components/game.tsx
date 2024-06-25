@@ -1,15 +1,17 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BdodleDropdown from "./bdodleDropdown";
 import { Node, GameProps } from "../types";
 import BdodleScoreCard from "./bdodleScoreCard";
 import BdodleBouncingButton from "./bdodleBouncingButton";
 import BdodleAssistTool from "./bdodleAssistTool";
-import BdodleAnswersTableHeader from "./bdodleAnswersTable";
+import BdodleAnswersTableHeader from "./bdodleAnswersTableHeader";
 import BdodleAnswersTableRow from "./bdodleAnswerTableRow";
 
 
 const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
+    const itemRef = useRef(null);
+
     const [listOfGusses, setListOfGusses] = useState<Node[]>([]);
     const [isWin, setIsWin] = useState(false);
     const [timeToNewGame, setTimeToNewGame] = useState(0);
@@ -80,7 +82,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
         if (listOfGusses[listOfGusses.length - 1]?.nodeOfDay) {
             setIsWin(true);
         }
-
+        (itemRef.current as HTMLElement | null)?.lastElementChild?.scrollIntoView({ behavior: 'smooth' });
         localStorage.setItem('guessHistory', JSON.stringify(listOfGusses));
         localStorage.setItem('date', new Date().toUTCString());
     }, [listOfGusses]);
@@ -126,15 +128,19 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
                         <>
                             <BdodleAnswersTableHeader />
                             {
-                                listOfGusses.map((node, index) => {
-                                    return (
-                                        <BdodleAnswersTableRow
-                                            key={index}
-                                            guessedNode={node}
-                                            correctNode={correctNode}
-                                            shouldPlayAnimation={index === (listOfGusses.length - 1) ? shouldPlayAnimation : false} />
-                                    );
-                                })
+                                <div className="lg:min-h-[600px] lg:max-h-[600px] lg:mt-5 overflow-y-auto overflow-x-hidden">
+                                    {listOfGusses.map((node, index) => {
+                                        return (
+                                            <div ref={itemRef}>
+                                                <BdodleAnswersTableRow
+                                                    key={index}
+                                                    guessedNode={node}
+                                                    correctNode={correctNode}
+                                                    shouldPlayAnimation={index === (listOfGusses.length - 1) ? shouldPlayAnimation : false} />
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             }
                         </>
                     </>

@@ -112,25 +112,23 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
     }
 
     return (
-        <div>
-            <div id="tableResults" className="min-w-full flex justify-center lg:gap-5">
-                <div style={{ animationIterationCount: 1 }} className={` ${validateName(guessedNode)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex items-center justify-center border-2 border-yellow-700 ${shouldPlayAnimation ? "animate-flip fill-mode-both" : ""}`}>
-                    <h1 className="lg:text-lg text-wrap p-2 text-xs font-semibold flex justify-center items-center">{guessedNode.name}</h1>
-                </div>
-                <div style={{ animationIterationCount: 1 }} className={` ${validateType(guessedNode)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex items-center justify-center border-2 border-yellow-700 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-1000" : ""}`}>
-                    <img className="lg:size-24 size-16" src={getNodeTypeImage(guessedNode)?.src} alt="Node Type" />
-                </div>
-                <div style={{ animationIterationCount: 1 }} className={` ${validateContribution(guessedNode)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex flex-col justify-center items-center border-2 border-yellow-700 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-2000" : ""}`}>
-                    <div className="lg:text-2xl text-wrap p-2 text-xs mt-1">{guessedNode.contribution}</div>
-                    <img className={`lg:size-24 size-16`} style={{ transform: getRotationString(guessedNode, "CONTRIBUTION") }} src={Arrow.src} alt="Node Contributions" />
-                </div>
-                <div style={{ animationIterationCount: 1 }} className={` ${validateConnections(guessedNode)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex flex-col justify-center items-center border-2 border-yellow-700 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-3000" : ""}`}>
-                    <div className="lg:text-2xl text-wrap p-2 text-xs mt-1">{guessedNode.connections.length}</div>
-                    <img className={`lg:size-24 size-16`} style={{ transform: getRotationString(guessedNode, "CONNECTIONS") }} src={Arrow.src} alt="Node Connections" />
-                </div>
-                <div style={{ animationIterationCount: 1 }} className={` ${validateTerritory(guessedNode)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[18.5vw] lg:min-h-[vh] flex items-center justify-center border-2 border-yellow-700 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-4000" : ""}`}>
-                    <img className="lg:size-24 size-14" src={getTerritoryImage(guessedNode)?.src} alt="Node Territory" />
-                </div>
+        <div id="tableResults" className="min-w-full flex justify-center lg:pb-6">
+            <div style={{ animationIterationCount: 1 }} className={` ${validateName(guessedNode)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex items-center justify-center border-2 border-yellow-700 ${shouldPlayAnimation ? "animate-flip fill-mode-both" : ""}`}>
+                <h1 className="lg:text-lg text-wrap p-2 text-xs font-semibold flex justify-center items-center">{guessedNode.name}</h1>
+            </div>
+            <div style={{ animationIterationCount: 1 }} className={` ${validateType(guessedNode)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex items-center justify-center border-2 border-yellow-700 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-1000" : ""}`}>
+                <img className="lg:size-24 size-16" src={getNodeTypeImage(guessedNode)?.src} alt="Node Type" />
+            </div>
+            <div style={{ animationIterationCount: 1 }} className={` ${validateContribution(guessedNode)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex flex-col justify-center items-center border-2 border-yellow-700 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-2000" : ""}`}>
+                <div className="lg:text-2xl text-wrap p-2 text-xs mt-1">{guessedNode.contribution}</div>
+                <img className={`lg:size-24 size-16`} style={{ transform: getRotationString(guessedNode, "CONTRIBUTION") }} src={Arrow.src} alt="Node Contributions" />
+            </div>
+            <div style={{ animationIterationCount: 1 }} className={` ${validateConnections(guessedNode)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex flex-col justify-center items-center border-2 border-yellow-700 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-3000" : ""}`}>
+                <div className="lg:text-2xl text-wrap p-2 text-xs mt-1">{guessedNode.connections.length}</div>
+                <img className={`lg:size-24 size-16`} style={{ transform: getRotationString(guessedNode, "CONNECTIONS") }} src={Arrow.src} alt="Node Connections" />
+            </div>
+            <div style={{ animationIterationCount: 1 }} className={` ${validateTerritory(guessedNode)} lg:mt-5 lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[18.5vw] lg:min-h-[vh] flex items-center justify-center border-2 border-yellow-700 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-4000" : ""}`}>
+                <img className="lg:size-24 size-14" src={getTerritoryImage(guessedNode)?.src} alt="Node Territory" />
             </div>
         </div>
     );

@@ -23,6 +23,6 @@
  - [x] Fix AnswerTable validation (Arrows on contri and connection not working correctly)
  - [x] Fix Offset animation to reveal each card slowly
  - [x] Fix animation to only play once
- - [ ] Fix AnswerTable behaviour to be scrollable with auto-scroll bottom
+ - [x] Fix AnswerTable behaviour to be scrollable with auto-scroll bottom
  - [ ] Fix and test localstorage + reset times
  - [ ] Fix styling
