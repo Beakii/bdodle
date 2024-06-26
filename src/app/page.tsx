@@ -1,7 +1,8 @@
-'use server'
 import { db } from "~/server/db";
 import Game from "./_components/game";
 import { Node } from "./types";
+
+export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
   //@ts-ignore
