@@ -8,7 +8,6 @@ import BdodleAssistTool from "./bdodleAssistTool";
 import BdodleAnswersTableHeader from "./bdodleAnswersTableHeader";
 import BdodleAnswersTableRow from "./bdodleAnswerTableRow";
 import AnswerLegend from "./answerLegend";
-import { ArrowRightIcon, ArrowUp } from "lucide-react";
 
 
 const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
@@ -26,7 +25,13 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
         const storedGuesses = localStorage.getItem('guessHistory');
         const storedCorrectNodeId = localStorage.getItem('correctNodeId');
 
-        if (storedGuesses) {
+        if (!storedCorrectNodeId) {
+            localStorage.clear();
+            setIsWin(false);
+            setListOfGusses([]);
+        }
+
+        if (storedGuesses && storedCorrectNodeId) {
             const storedList = JSON.parse(storedGuesses);
             setListOfGusses(storedList);
 
@@ -122,7 +127,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
                         <>
                             <BdodleAnswersTableHeader />
                             {
-                                <div className="lg:max-h-[600px] max-h-[40vh] lg:mt-5 mt-2 overflow-y-scroll overflow-x-hidden">
+                                <div className="lg:min-h-[50vh] lg:max-h-[50vh] min-h-[40vh] max-h-[40vh] lg:mt-5 mt-2 overflow-y-scroll overflow-x-hidden">
                                     {listOfGusses.map((node, index) => {
                                         return (
                                             <div ref={itemRef}>

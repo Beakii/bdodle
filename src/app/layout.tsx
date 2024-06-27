@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 import bdo from "../assets/png/bdoAssets/BlackSpiritIcon.png";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
+import Footer from "./_components/footer";
 
 export const metadata = {
   title: "BDOdle",
@@ -11,7 +12,7 @@ export const metadata = {
 
 function TopNav() {
   return (
-    <nav className="flex flex-col w-full items-center border-b p-5 text-5xl font-semibold bg-black">
+    <nav className="flex flex-col w-full items-center border-b-2 p-5 text-5xl font-semibold bg-black">
       <div id="title" className="flex">
         <span>BD</span>
         <img src={bdo.src} className="size-11 m-1" />
@@ -37,6 +38,7 @@ export default function RootLayout({
         {children}
         <SpeedInsights />
         <Analytics />
+        <Footer />
       </body>
     </html >
   );

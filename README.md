@@ -21,7 +21,7 @@
  - [x] Add coordinates and rotating arrow
  - [x] Replace Up/Down arrow with a checkmark icon when contribution/connection is correct
  - [ ] Add antagonzing black spirit messages
- - [ ] Add footer that contains disclaimer that this isnt associated with PA and a link to a Ko-Fi + my discord
+ - [x] Add footer that contains disclaimer that this isnt associated with PA and a link to a Ko-Fi + my discord
 
 
  ## Debug

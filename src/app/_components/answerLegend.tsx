@@ -4,7 +4,7 @@ import Arrow from "~/assets/png/bdoAssets/Arrow.png";
 const AnswerLegend = () => {
 
     return (
-        <div className="mt-[10vh] w-full bottom-5 flex flex-col items-center">
+        <div className=" w-full bottom-5 flex flex-col items-center">
             <h1>Answer Legend</h1>
             <div className="flex justify-center items-center mt-5">
                 <div className="lg:size-20 size-16  border-2 border-stone-900 flex justify-center items-center bg-green-600">

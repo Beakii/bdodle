@@ -1,5 +1,5 @@
 'use client'
-import { ArrowRightCircle, ArrowBigDown, ArrowBigUp, CheckCircle } from "lucide-react";
+import { ArrowRightCircle, ArrowBigDown, ArrowBigUp, CheckCircle, ShieldQuestionIcon } from "lucide-react";
 import { Balenos, Serendia, Calpheon, Mediah, Valencia, Kamasylvia, Drieghan, Odyllita, MountainofEternalWinter, LandofMorningLight, Ulukita } from "../imageImports";
 import { City, Gateway, TradingPost, Connection, Danger, Town } from "../imageImports";
 import { Arrow, ArrowRight } from "../imageImports";
@@ -80,6 +80,16 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
         return "bg-red-600";
     }
 
+    function validateLocation(node: Node) {
+        if (node.coordinates?.[0] === correctNode?.coordinates?.[0] && node.coordinates?.[1] === correctNode?.coordinates?.[1]) {
+            return "bg-green-600"
+        }
+        if (node.territory === correctNode?.territory) {
+            return "bg-yellow-600"
+        }
+        return "bg-red-600";
+    }
+
     function validateTerritory(node: Node) {
         if (node.territory === correctNode?.territory) {
             return "bg-green-600"
@@ -87,7 +97,7 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
         return "bg-red-600";
     }
 
-    function getRotationString(node: Node, whatToValidate: string) {
+    function validateIcon(node: Node, whatToValidate: string) {
         switch (whatToValidate) {
             case "CONNECTIONS":
                 //@ts-ignore
@@ -109,8 +119,15 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
                 }
                 return <ArrowBigUp className="lg:size-32 md:size-20 size-16 md:mt-5 text-stone-900" />;
 
+            case "LOCATION":
+                //@ts-ignore
+                if (node.nodeOfDay) {
+                    return <CheckCircle className="lg:size-24 md:size-20 sm:size-16 size-14 lg:mt-7 md:mt-3 mt-2 text-stone-900" />;
+                }
+                return <ArrowRightCircle style={{ rotate: calcArrowRotation() }} className="lg:size-24 md:size-20 sm:size-16 size-14 lg:mt-7 mt-3 text-stone-900" />
+
             default:
-                return <ArrowBigUp className="lg:size-32 md:size-20 size-16 md:mt-5 text-stone-900" />;
+                return <ShieldQuestionIcon className="lg:size-32 md:size-20 size-16 md:mt-5 text-stone-900" />;
         }
     }
 
@@ -143,7 +160,6 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
         }
     }
 
-
     function calcArrowRotation() {
         //x1, y1 = Guess
         //x2, y2 = Correct
@@ -172,14 +188,14 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
             </div>
             <div style={{ animationIterationCount: 1 }} className={` ${validateContribution(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex flex-col justify-start items-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-1000" : ""}`}>
                 <div className="lg:text-2xl text-wrap text-xs">{guessedNode.contribution}</div>
-                {getRotationString(guessedNode, "CONTRIBUTION")}
+                {validateIcon(guessedNode, "CONTRIBUTION")}
             </div>
             <div style={{ animationIterationCount: 1 }} className={` ${validateConnections(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex flex-col justify-start items-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-1500" : ""}`}>
                 <div className="lg:text-2xl text-wrap text-xs">{guessedNode.connections.length}</div>
-                {getRotationString(guessedNode, "CONNECTIONS")}
+                {validateIcon(guessedNode, "CONNECTIONS")}
             </div>
-            <div style={{ animationIterationCount: 1 }} className={` ${validateTerritory(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-2000" : ""}`}>
-                <ArrowRightCircle style={{ rotate: calcArrowRotation() }} className="lg:size-24 md:size-20 sm:size-16 size-14 lg:mt-7 mt-3 text-stone-900" />
+            <div style={{ animationIterationCount: 1 }} className={` ${validateLocation(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-2000" : ""}`}>
+                {validateIcon(guessedNode, "LOCATION")}
             </div>
             <div style={{ animationIterationCount: 1 }} className={` ${validateTerritory(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex flex-col items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-2500" : ""}`}>
                 <div className="lg:text-xl lg:block text-wrap p-2 text-xs mt-1 hidden">{getTerritoryName(guessedNode.territory)}</div>

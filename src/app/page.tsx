@@ -20,7 +20,6 @@ export default async function HomePage() {
   return (
     <>
       <main className="flex flex-col min-w-full">
-
         <div className=" lg:w-[70vw] w-full h-full">
           <Game
             nodesWithConLength={nodesWithConLength}
