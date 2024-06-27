@@ -6,7 +6,7 @@ export interface Node {
     name: string;
     type: string;
     connections: number[];
-    coordinates: { x: number, y: number };
+    coordinates: number[];
     contribution: number;
     territory: string;
     nodeOfDay: boolean | null; //nodeOfDay is stored in DB as true or null
@@ -17,7 +17,7 @@ export interface NodeWithLength {
     name: string;
     type: string;
     connections: number;
-    coordinates: { x: number, y: number };
+    coordinates: number[];
     contribution: number;
     territory: string;
     nodeOfDay: boolean | null; //nodeOfDay is stored in DB as true or null
@@ -51,11 +51,9 @@ export interface BdodleScoreCardProps {
 }
 
 export interface BdodleBouncingButtonProps {
-    isWin: boolean;
     toggleAssist: boolean;
     setToggleAssist: (toggle: boolean) => void;
     blackSpiritText: string;
-    setBlackSpiritText: (text: string) => void;
 }
 
 export interface BdodleAssistToolProps {

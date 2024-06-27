@@ -9,19 +9,17 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
+  @apply hidden;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
   background: #E8E4D9;
   @apply rounded-lg;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
+} */
 
 body {
   @apply bg-stone-900;

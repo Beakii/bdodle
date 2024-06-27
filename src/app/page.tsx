@@ -1,10 +1,11 @@
+'use server'
 import { db } from "~/server/db";
 import Game from "./_components/game";
 import { Node } from "./types";
-
-export const dynamic = 'force-dynamic'
+import { unstable_noStore as noStore } from 'next/cache'
 
 export default async function HomePage() {
+  noStore();
   //@ts-ignore
   const nodes: Node[] = await db.query.nodes.findMany();
   nodes.sort((a, b) => (a?.nodeId || 0) - (b?.nodeId || 0));
@@ -15,9 +16,6 @@ export default async function HomePage() {
       connections: node.connections.length
     }
   });
-
-  // const nodes: Node[] = [];
-  // const correctNode: Node = {};
 
   return (
     <>

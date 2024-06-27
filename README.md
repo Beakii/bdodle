@@ -16,7 +16,12 @@
  - [x] Add contribution number to BdodleDropDown
  - [x] Add legend at the bottom to give information
  - [x] Add cron job to change correct answer every 24 hours
+ - [x] Add more website responsiveness
+ - [x] Add a check to reset the game if the node of the day changes not on time
+ - [x] Add coordinates and rotating arrow
+ - [x] Replace Up/Down arrow with a checkmark icon when contribution/connection is correct
  - [ ] Add antagonzing black spirit messages
+ - [ ] Add footer that contains disclaimer that this isnt associated with PA and a link to a Ko-Fi + my discord
 
 
  ## Debug

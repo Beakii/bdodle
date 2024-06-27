@@ -4,11 +4,7 @@ import { BdodleBouncingButtonProps } from "../types";
 import { useEffect } from "react";
 
 
-const BdodleBouncingButton = ({ isWin, setToggleAssist, toggleAssist, blackSpiritText, setBlackSpiritText }: BdodleBouncingButtonProps) => {
-
-    useEffect(() => {
-        setBlackSpiritText(toggleAssist ? "Click me to return!" : "I can help!");
-    }, [toggleAssist]);
+const BdodleBouncingButton = ({ setToggleAssist, toggleAssist, blackSpiritText }: BdodleBouncingButtonProps) => {
 
     function handleClick() {
         setToggleAssist(!toggleAssist);

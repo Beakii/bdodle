@@ -16,3 +16,5 @@ export { default as Connection } from "~/assets/png/nodeTypes/Connection.png";
 export { default as Danger } from "~/assets/png/nodeTypes/Danger.png";
 export { default as Town } from "~/assets/png/nodeTypes/Town.png";
 export { default as GoBackArrow } from "~/assets/png/bdoAssets/goBackArrow.png";
+export { default as ArrowRight } from "~/assets/png/bdoAssets/ArrowRight.png";
+export { default as Arrow } from "~/assets/png/bdoAssets/Arrow.png";

@@ -1,8 +1,10 @@
 'use client'
+import { ArrowRightCircle, ArrowBigDown, ArrowBigUp, CheckCircle } from "lucide-react";
 import { Balenos, Serendia, Calpheon, Mediah, Valencia, Kamasylvia, Drieghan, Odyllita, MountainofEternalWinter, LandofMorningLight, Ulukita } from "../imageImports";
 import { City, Gateway, TradingPost, Connection, Danger, Town } from "../imageImports";
-import Arrow from "~/assets/png/bdoAssets/Arrow.png";
+import { Arrow, ArrowRight } from "../imageImports";
 import { Node, BdodleAnswerTableRowProps } from "../types";
+
 
 export const dynamic = "force-dynamic";
 const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }: BdodleAnswerTableRowProps) => {
@@ -90,46 +92,98 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
             case "CONNECTIONS":
                 //@ts-ignore
                 if (node.connections?.length > correctNode?.connections?.length) {
-                    return "rotate(180deg)";
+                    return <ArrowBigDown className="lg:size-32 md:size-20 size-16 md:mt-5 text-stone-900" />;
                 }
                 if (node.connections?.length === correctNode?.connections?.length) {
-                    return "rotate(90deg)";
+                    return <CheckCircle className="lg:size-24 md:size-20 sm:size-16 size-14 lg:mt-3 md:mt-5 text-stone-900" />;
                 }
-                return "rotate(0deg)";
+                return <ArrowBigUp className="lg:size-32 md:size-20 size-16 md:mt-5 text-stone-900" />;
 
             case "CONTRIBUTION":
                 //@ts-ignore
                 if (node.contribution > correctNode?.contribution) {
-                    return "rotate(180deg)";
+                    return <ArrowBigDown className="lg:size-32 md:size-20 size-16 md:mt-5 text-stone-900" />;
                 }
                 if (node.contribution === correctNode?.contribution) {
-                    return "rotate(90deg)";
+                    return <CheckCircle className="lg:size-24 md:size-20 sm:size-16 size-14 lg:mt-3 md:mt-5 text-stone-900" />;
                 }
-                return "rotate(0deg)";
+                return <ArrowBigUp className="lg:size-32 md:size-20 size-16 md:mt-5 text-stone-900" />;
 
             default:
-                return "rotate(0deg)";
+                return <ArrowBigUp className="lg:size-32 md:size-20 size-16 md:mt-5 text-stone-900" />;
         }
+    }
+
+    function getTerritoryName(unformattedName: string) {
+        switch (unformattedName) {
+            case "Balenos":
+                return "Balenos";
+            case "Serendia":
+                return "Serendia";
+            case "Calpheon":
+                return "Calpheon";
+            case "Mediah":
+                return "Mediah";
+            case "Valencia":
+                return "Valencia";
+            case "Kamasylvia":
+                return "Kamasylvia";
+            case "Drieghan":
+                return "Drieghan";
+            case "O'dyllita":
+                return "O'dyllita";
+            case "MountainofEternalWinter":
+                return "Mnt of E. Winter";
+            case "LandofMorningLight":
+                return "Land of M. Light";
+            case "Ulukita":
+                return "Ulukita";
+            default:
+                return "Unknown Territory";
+        }
+    }
+
+
+    function calcArrowRotation() {
+        //x1, y1 = Guess
+        //x2, y2 = Correct
+        const x1 = guessedNode.coordinates[0];
+        const y1 = guessedNode.coordinates[1];
+
+        const x2 = correctNode.coordinates[0];
+        const y2 = correctNode.coordinates[1];
+
+        const dx = x2! - x1!;
+        const dy = y2! - y1!;
+
+        const thetaRadians = Math.atan2(dy, dx);
+        const thetaDegrees = thetaRadians * (180 / Math.PI);
+
+        return thetaDegrees + "deg";
     }
 
     return (
         <div id="tableResults" className="min-w-full flex justify-center pb-6">
-            <div style={{ animationIterationCount: 1 }} className={` ${validateName(guessedNode)} lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both" : ""}`}>
+            <div style={{ animationIterationCount: 1 }} className={` ${validateName(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both" : ""}`}>
                 <h1 className="lg:text-lg text-wrap p-2 text-xs font-semibold flex justify-center items-center">{guessedNode.name}</h1>
             </div>
-            <div style={{ animationIterationCount: 1 }} className={` ${validateType(guessedNode)} lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-1000" : ""}`}>
-                <img className="lg:size-24 size-16" src={getNodeTypeImage(guessedNode)?.src} alt="Node Type" />
+            <div style={{ animationIterationCount: 1 }} className={` ${validateType(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-500" : ""}`}>
+                <img className="lg:size-24 md:size-20 sm:size-16 size-14" src={getNodeTypeImage(guessedNode)?.src} alt="Node Type" />
             </div>
-            <div style={{ animationIterationCount: 1 }} className={` ${validateContribution(guessedNode)} lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex flex-col justify-center items-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-2000" : ""}`}>
-                <div className="lg:text-2xl text-wrap p-2 text-xs mt-1">{guessedNode.contribution}</div>
-                <img className={`lg:size-24 size-16`} style={{ transform: getRotationString(guessedNode, "CONTRIBUTION") }} src={Arrow.src} alt="Node Contributions" />
+            <div style={{ animationIterationCount: 1 }} className={` ${validateContribution(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex flex-col justify-start items-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-1000" : ""}`}>
+                <div className="lg:text-2xl text-wrap text-xs">{guessedNode.contribution}</div>
+                {getRotationString(guessedNode, "CONTRIBUTION")}
             </div>
-            <div style={{ animationIterationCount: 1 }} className={` ${validateConnections(guessedNode)} lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[20vw] lg:min-h-[vh] flex flex-col justify-center items-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-3000" : ""}`}>
-                <div className="lg:text-2xl text-wrap p-2 text-xs mt-1">{guessedNode.connections.length}</div>
-                <img className={`lg:size-24 size-16`} style={{ transform: getRotationString(guessedNode, "CONNECTIONS") }} src={Arrow.src} alt="Node Connections" />
+            <div style={{ animationIterationCount: 1 }} className={` ${validateConnections(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex flex-col justify-start items-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-1500" : ""}`}>
+                <div className="lg:text-2xl text-wrap text-xs">{guessedNode.connections.length}</div>
+                {getRotationString(guessedNode, "CONNECTIONS")}
             </div>
-            <div style={{ animationIterationCount: 1 }} className={` ${validateTerritory(guessedNode)} lg:min-w-[10vw] lg:max-w-[10vw] text-center text-wrap min-w-[18.5vw] lg:min-h-[vh] flex items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-4000" : ""}`}>
-                <img className="lg:size-24 size-14" src={getTerritoryImage(guessedNode)?.src} alt="Node Territory" />
+            <div style={{ animationIterationCount: 1 }} className={` ${validateTerritory(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-2000" : ""}`}>
+                <ArrowRightCircle style={{ rotate: calcArrowRotation() }} className="lg:size-24 md:size-20 sm:size-16 size-14 lg:mt-7 mt-3 text-stone-900" />
+            </div>
+            <div style={{ animationIterationCount: 1 }} className={` ${validateTerritory(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex flex-col items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-2500" : ""}`}>
+                <div className="lg:text-xl lg:block text-wrap p-2 text-xs mt-1 hidden">{getTerritoryName(guessedNode.territory)}</div>
+                <img className="lg:size-16 size-12 " src={getTerritoryImage(guessedNode)?.src} alt="Node Territory" />
             </div>
         </div>
     );

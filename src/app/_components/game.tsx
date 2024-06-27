@@ -8,6 +8,7 @@ import BdodleAssistTool from "./bdodleAssistTool";
 import BdodleAnswersTableHeader from "./bdodleAnswersTableHeader";
 import BdodleAnswersTableRow from "./bdodleAnswerTableRow";
 import AnswerLegend from "./answerLegend";
+import { ArrowRightIcon, ArrowUp } from "lucide-react";
 
 
 const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
@@ -23,7 +24,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
     // Load from local storage on component mount
     useEffect(() => {
         const storedGuesses = localStorage.getItem('guessHistory');
-        const storedDate = localStorage.getItem('date');
+        const storedCorrectNodeId = localStorage.getItem('correctNodeId');
 
         if (storedGuesses) {
             const storedList = JSON.parse(storedGuesses);
@@ -37,19 +38,16 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
             });
         }
 
-        const storedDateArray = storedDate?.split(' ');
-        const currentDateArray = new Date().toUTCString().split(' ');
-        //[0] -  [1] -  [2] -  [3] -  [4] -  [5]    
-        //Day - Date - Month - Year - Time - GMT
-        if (storedDate) {
-            //@ts-ignore
-            if (currentDateArray[1] !== storedDateArray[1]) {
-                localStorage.removeItem('guessHistory');
-                localStorage.removeItem('date');
-                setListOfGusses([]);
+        if (storedCorrectNodeId) {
+            const storedCorrectNodeIdJson = JSON.parse(storedCorrectNodeId);
+            if (storedCorrectNodeIdJson !== correctNode.nodeId) {
+                localStorage.clear();
                 setIsWin(false);
+                setListOfGusses([]);
             }
         }
+
+        localStorage.setItem('correctNodeId', JSON.stringify(correctNode.nodeId));
     }, []);
 
     //Timer used for new game
@@ -63,6 +61,10 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
             });
         }, 1000);
     }, []);
+
+    useEffect(() => {
+        setBlackSpiritText(toggleAssist ? "Click me to return!" : "I can help!");
+    }, [toggleAssist]);
 
     useEffect(() => {
         if (isWin) {
@@ -94,10 +96,8 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
         <div className="flex flex-col">
             <BdodleBouncingButton
                 blackSpiritText={blackSpiritText}
-                setBlackSpiritText={setBlackSpiritText}
                 toggleAssist={toggleAssist}
-                setToggleAssist={setToggleAssist}
-                isWin={isWin} />
+                setToggleAssist={setToggleAssist} />
             {
                 toggleAssist
                     ?
@@ -122,7 +122,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
                         <>
                             <BdodleAnswersTableHeader />
                             {
-                                <div className="lg:max-h-[600px] max-h-[40vh] lg:mt-5 overflow-y-scroll overflow-x-hidden">
+                                <div className="lg:max-h-[600px] max-h-[40vh] lg:mt-5 mt-2 overflow-y-scroll overflow-x-hidden">
                                     {listOfGusses.map((node, index) => {
                                         return (
                                             <div ref={itemRef}>
