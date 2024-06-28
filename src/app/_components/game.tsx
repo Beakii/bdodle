@@ -12,6 +12,7 @@ import AnswerLegend from "./answerLegend";
 
 const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
     const itemRef = useRef(null);
+    const obfuscation = 184523;
 
     const [listOfGusses, setListOfGusses] = useState<Node[]>([]);
     const [isWin, setIsWin] = useState(false);
@@ -19,6 +20,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
     const [toggleAssist, setToggleAssist] = useState(false);
     const [blackSpiritText, setBlackSpiritText] = useState("I can help!");
     const [shouldPlayAnimation, setShouldPlayAnimation] = useState(false);
+    const [filteredNodes, setFilteredNodes] = useState<Node[]>(nodes);
 
     // Load from local storage on component mount
     useEffect(() => {
@@ -45,14 +47,16 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
 
         if (storedCorrectNodeId) {
             const storedCorrectNodeIdJson = JSON.parse(storedCorrectNodeId);
-            if (storedCorrectNodeIdJson !== correctNode.nodeId) {
+            let correctId = storedCorrectNodeIdJson / obfuscation;
+            if (correctId !== correctNode.nodeId) {
                 localStorage.clear();
                 setIsWin(false);
                 setListOfGusses([]);
             }
         }
 
-        localStorage.setItem('correctNodeId', JSON.stringify(correctNode.nodeId));
+        const obfuscatedCorrectNode = correctNode.nodeId * obfuscation;
+        localStorage.setItem('correctNodeId', JSON.stringify(obfuscatedCorrectNode));
     }, []);
 
     //Timer used for new game
@@ -83,6 +87,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
         if (listOfGusses[listOfGusses.length - 1]?.nodeOfDay) {
             setIsWin(true);
         }
+        setFilteredNodes(filteredNodes.filter(node => node !== listOfGusses[listOfGusses.length - 1]));
         (itemRef.current as HTMLElement | null)?.lastElementChild?.scrollIntoView({ behavior: 'smooth' });
         localStorage.setItem('guessHistory', JSON.stringify(listOfGusses));
     }, [listOfGusses]);
@@ -115,7 +120,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
                             !isWin
                                 ?
                                 <BdodleDropdown
-                                    nodes={nodes}
+                                    nodes={filteredNodes}
                                     submitGuess={updatedListOfGusses} />
                                 :
                                 <>

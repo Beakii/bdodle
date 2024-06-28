@@ -23,7 +23,7 @@
  - [x] Add footer that contains disclaimer that this isnt associated with PA and a link to a Ko-Fi + my discord
  - [ ] Add antagonzing black spirit messages
  - [x] Add persistant state for the assisttool on reload
- - [ ] Add highlighting/remove nodes that have already been selected
+ - [x] Add highlighting/remove nodes that have already been selected - note: doesnt persist reloads, doesnt feel necessary
  - [ ] Add way to make a guess from the assist tool
 
 
