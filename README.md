@@ -20,8 +20,11 @@
  - [x] Add a check to reset the game if the node of the day changes not on time
  - [x] Add coordinates and rotating arrow
  - [x] Replace Up/Down arrow with a checkmark icon when contribution/connection is correct
- - [ ] Add antagonzing black spirit messages
  - [x] Add footer that contains disclaimer that this isnt associated with PA and a link to a Ko-Fi + my discord
+ - [ ] Add antagonzing black spirit messages
+ - [x] Add persistant state for the assisttool on reload
+ - [ ] Add highlighting/remove nodes that have already been selected
+ - [ ] Add way to make a guess from the assist tool
 
 
  ## Debug

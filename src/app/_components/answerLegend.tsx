@@ -1,5 +1,5 @@
 'use client'
-import Arrow from "~/assets/png/bdoAssets/Arrow.png";
+import { ArrowBigDown, ArrowBigUp } from "lucide-react";
 
 const AnswerLegend = () => {
 
@@ -17,13 +17,13 @@ const AnswerLegend = () => {
                 <div className="lg:size-20 size-16  border-2 border-stone-900 flex justify-center items-center bg-red-600">
                     <h1 className="text-sm">Incorrect</h1>
                 </div>
-                <div className="lg:size-20 size-16  border-2 border-stone-900 flex flex-col justify-center items-center bg-red-600">
+                <div className="lg:size-20 size-16 border-2 border-stone-900 flex flex-col justify-center items-center bg-red-600">
                     <h1 className="text-sm">Higher</h1>
-                    <img className="lg:size-10 size-8" src={Arrow.src}></img>
+                    <ArrowBigUp className="lg:size-10 size-8 text-black" />
                 </div>
-                <div className="lg:size-20 size-16  border-2 border-stone-900 flex flex-col justify-center items-center bg-red-600">
+                <div className="lg:size-20 size-16 border-2 border-stone-900 flex flex-col justify-center items-center bg-red-600">
                     <h1 className="text-sm">Lower</h1>
-                    <img className="lg:size-10 size-8 rotate-180" src={Arrow.src}></img>
+                    <ArrowBigDown className="lg:size-10 size-8 text-black" />
                 </div>
             </div>
         </div>

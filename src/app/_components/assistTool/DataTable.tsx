@@ -10,7 +10,7 @@ import {
     getFilteredRowModel,
     ColumnFiltersState,
 } from "@tanstack/react-table"
-import { useEffect, useState } from "react"
+import { SetStateAction, useEffect, useState } from "react"
 import { Button } from "~/components/ui/button"
 import {
     Table,
@@ -47,11 +47,16 @@ export function DataTable<TData, TValue>({ columns, data, setToggleAssist }: Dat
     const [isClearFilter, setIsClearFilter] = useState<boolean>(false)
 
     useEffect(() => {
+        loadFilter();
+    }, [])
+
+
+    useEffect(() => {
         if (columnFilters.length > 0) {
-            setIsClearFilter(true)
+            setIsClearFilter(true);
+            saveFilter();
         }
     }, [columnFilters])
-
 
     const table = useReactTable({
         data,
@@ -68,6 +73,33 @@ export function DataTable<TData, TValue>({ columns, data, setToggleAssist }: Dat
             columnFilters,
         },
     })
+
+    function saveFilter() {
+        localStorage.setItem("filter", JSON.stringify(table.getState().columnFilters))
+    }
+
+    function loadFilter() {
+        const filter = localStorage.getItem("filter")
+        if (filter) {
+            const jsonFilter = JSON.parse(filter)
+            setColumnFilters(jsonFilter)
+
+            jsonFilter.forEach((filter: { id: string; value: SetStateAction<string> }) => {
+                if (filter.id === "type") {
+                    setTypeFilterButton(filter.value)
+                }
+                // else if (filter.columnId === "connections") {
+                //     setConnectionFilterButton(filter.value)
+                // }
+                else if (filter.id === "contribution") {
+                    setContributionFilterButton(filter.value)
+                }
+                else if (filter.id === "territory") {
+                    setTerritoryFilterButton(filter.value)
+                }
+            });
+        }
+    }
 
     function handleTypeFilterClick(name: string) {
         setTypeFilterButton(name)
