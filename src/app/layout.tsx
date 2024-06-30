@@ -6,17 +6,10 @@ import Footer from "./_components/footer";
 
 export const metadata = {
   title: "BDOdle",
-  description: "Test your game knowledge with BDOdle! A new challenge every day!",
+  description: "Test your game knowledge with BDOdle! A new challenge daily",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
-  lang: "en",
-  charset: "UTF-8",
-  og: {
-    title: "BDOdle",
-    description: "Test your game knowledge with BDOdle! A new challenge every day!",
-    type: "website",
-    url: "https://bdodle.com",
-    image: "../assets/png/bdoAssets/ogimage.png",
-    site_name: "BDOdle",
+  openGraph: {
+    images: '/opengraph-image.png',
   },
 };
 
