@@ -11,6 +11,9 @@ const AnswerLegend = () => {
                     <h1 className="text-sm">Correct</h1>
                 </div>
                 <div className="lg:size-20 size-16  border-2 border-stone-900 flex flex-col justify-center items-center text-wrap bg-yellow-600">
+                    <h1 className="text-sm text-center">1 Word Correct</h1>
+                </div>
+                <div className="lg:size-20 size-16  border-2 border-stone-900 flex flex-col justify-center items-center text-wrap bg-yellow-600">
                     <h1 className="text-sm">Partial</h1>
                     <h1 className="text-sm">Close</h1>
                 </div>
