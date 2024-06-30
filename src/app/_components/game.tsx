@@ -132,7 +132,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
                         <>
                             <BdodleAnswersTableHeader />
                             {
-                                <div className="lg:min-h-[50vh] lg:max-h-[50vh] min-h-[40vh] max-h-[40vh] lg:mt-5 mt-2 overflow-y-scroll overflow-x-hidden">
+                                <div style={{ scrollbarWidth: "none" }} className="lg:min-h-[50vh] lg:max-h-[50vh] min-h-[40vh] max-h-[40vh] lg:mt-5 mt-2 overflow-y-scroll overflow-x-hidden">
                                     {listOfGusses.map((node, index) => {
                                         return (
                                             <div ref={itemRef}>
