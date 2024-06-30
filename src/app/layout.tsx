@@ -16,7 +16,7 @@ export const metadata = {
     description: "Test your game knowledge with BDOdle! A new challenge every day!",
     type: "website",
     url: "https://bdodle.com",
-    image: "/favicon.ico",
+    image: "/ogiimage.png",
     site_name: "BDOdle",
   },
 };
