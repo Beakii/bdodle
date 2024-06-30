@@ -54,7 +54,9 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
     }
 
     function validateType(node: Node) {
-        if (node.type === correctNode?.type) {
+        const guessNodeType = node.type?.replace(/\s/g, '') ?? "";
+        const correctNodeType = correctNode?.type?.replace(/\s/g, '') ?? "";
+        if (guessNodeType === correctNodeType) {
             return "bg-green-600"
         }
         return "bg-red-600";
@@ -91,7 +93,9 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
     }
 
     function validateTerritory(node: Node) {
-        if (node.territory === correctNode?.territory) {
+        const guessNode = node.territory?.replace(/\s/g, '') ?? "";
+        const correctNodeNoSpace = correctNode?.territory?.replace(/\s/g, '') ?? "";
+        if (guessNode === correctNodeNoSpace) {
             return "bg-green-600"
         }
         return "bg-red-600";

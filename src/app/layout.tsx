@@ -9,7 +9,6 @@ export const metadata = {
   description: "Test your game knowledge with BDOdle! A new challenge every day!",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
   lang: "en",
-  viewport: "width=device-width, initial-scale=1.0",
   charset: "UTF-8",
   og: {
     title: "BDOdle",
