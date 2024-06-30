@@ -16,7 +16,7 @@ const Footer = () => {
                     <HoverCard>
                         <HoverCardTrigger>
                             <div className="lg:px-2 py-1 flex justify-center items-center">
-                                <a href="https://discord.gg/AJGHXgdbFh">
+                                <a href="https://discord.gg/AJGHXgdbFh" target="_blank">
                                     <FaDiscord className="lg:size-14 size-10 hover:text-amber-700" />
                                 </a>
                             </div>
@@ -28,7 +28,7 @@ const Footer = () => {
                     <HoverCard>
                         <HoverCardTrigger>
                             <div className="lg:px-2 py-1 flex justify-center items-center">
-                                <a href="https://ko-fi.com/beakie">
+                                <a href="https://ko-fi.com/beakie" target="_blank">
                                     <SiKofi className="lg:size-14 size-10 hover:text-amber-700" />
                                 </a>
                             </div>
