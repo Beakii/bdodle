@@ -21,10 +21,13 @@
  - [x] Add coordinates and rotating arrow
  - [x] Replace Up/Down arrow with a checkmark icon when contribution/connection is correct
  - [x] Add footer that contains disclaimer that this isnt associated with PA and a link to a Ko-Fi + my discord
- - [ ] Add antagonzing black spirit messages
  - [x] Add persistant state for the assisttool on reload
  - [x] Add highlighting/remove nodes that have already been selected - note: doesnt persist reloads, doesnt feel necessary
- - [ ] Add way to make a guess from the assist tool
+ - [x] Add collapsable navbar
+ - [x] Add twitch user authentication
+ - [ ] Add replayable game mode
+ - [ ] Add 2 leaderboards for the daily game mode (One for approved list of streamers, other for everyone)
+ - [ ] Add antagonzing black spirit messages
 
 
  ## Debug

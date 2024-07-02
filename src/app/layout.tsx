@@ -1,8 +1,10 @@
 import "~/styles/globals.css";
-import bdo from "../assets/png/bdoAssets/BlackSpiritIcon.png";
+
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
+import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "./_components/footer";
+import { TopNav } from "./_components/topNav";
 
 export const metadata = {
   title: "BDOdle",
@@ -13,21 +15,7 @@ export const metadata = {
   },
 };
 
-function TopNav() {
-  return (
-    <nav className="flex flex-col w-full items-center border-b-2 p-5 text-5xl font-semibold bg-black">
-      <div id="title" className="flex">
-        <span>BD</span>
-        <img src={bdo.src} className="size-11 m-1" />
-        <span>dle</span>
-      </div>
-      <div className="flex gap-20 pt-3">
-        <div className="bg-[#E30D03] size-7 rounded-full blur-sm"></div>
-        <div className="bg-[#E30D03] size-7 rounded-full blur-sm"></div>
-      </div>
-    </nav>
-  );
-}
+
 
 export default function RootLayout({
   children,
@@ -35,14 +23,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="flex flex-col min-w-full ">
-        <TopNav />
-        {children}
-        <SpeedInsights />
-        <Analytics />
-        <Footer />
-      </body>
-    </html >
+    <ClerkProvider>
+      <html lang="en">
+        <body className="flex flex-col min-w-full ">
+          <TopNav />
+          {children}
+          <Footer />
+          <SpeedInsights />
+          <Analytics />
+        </body>
+      </html >
+    </ClerkProvider>
   );
 }
