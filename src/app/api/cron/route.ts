@@ -4,13 +4,14 @@ import { Node } from "~/app/types";
 import { nodes } from "~/server/db/schema";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
+import { getAllNodes } from "~/server/queries";
 
 export async function GET(req: NextRequest) {
     if (req.headers.get('authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
         return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
     //@ts-ignore
-    const listOfNodes: Node[] = await db.query.nodes.findMany();
+    const listOfNodes: Node[] = getAllNodes();
     const currentCorrectNode: Node = listOfNodes.find(node => node.nodeOfDay === true)!;
 
     const randomIndex = Math.floor(Math.random() * (listOfNodes.length - 1)) + 1;
