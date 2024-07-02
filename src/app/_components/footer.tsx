@@ -13,30 +13,13 @@ const Footer = () => {
                     <h1 className="lg:text-l text-sm">This project is not affiliated with Pearl Abyss</h1>
                 </div>
                 <div className="flex lg:flex-row flex-col">
-                    <HoverCard>
-                        <HoverCardTrigger>
-                            <div className="lg:px-2 py-1 flex justify-center items-center">
-                                <a href="https://discord.gg/AJGHXgdbFh" target="_blank">
-                                    <FaDiscord className="lg:size-14 size-10 hover:text-amber-700" />
-                                </a>
-                            </div>
-                        </HoverCardTrigger>
-                        <HoverCardContent>
-                            <h1>Have a suggestion or issue? Join the discord</h1>
-                        </HoverCardContent>
-                    </HoverCard>
-                    <HoverCard>
-                        <HoverCardTrigger>
-                            <div className="lg:px-2 py-1 flex justify-center items-center">
-                                <a href="https://ko-fi.com/beakie" target="_blank">
-                                    <SiKofi className="lg:size-14 size-10 hover:text-amber-700" />
-                                </a>
-                            </div>
-                        </HoverCardTrigger>
-                        <HoverCardContent>
-                            <h1>Not necessary but helps with server costs!</h1>
-                        </HoverCardContent>
-                    </HoverCard>
+                    <a className="lg:px-2 py-1 flex justify-center items-center" href="https://discord.gg/AJGHXgdbFh" target="_blank">
+                        <FaDiscord className="lg:size-14 size-10 hover:text-amber-700" />
+                    </a>
+
+                    <a className="lg:px-2 py-1 flex justify-center items-center" href="https://ko-fi.com/beakie" target="_blank">
+                        <SiKofi className="lg:size-14 size-10 hover:text-amber-700" />
+                    </a>
                 </div>
             </div>
         </div>

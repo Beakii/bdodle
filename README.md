@@ -24,7 +24,7 @@
  - [ ] Add antagonzing black spirit messages
  - [x] Add persistant state for the assisttool on reload
  - [x] Add highlighting/remove nodes that have already been selected - note: doesnt persist reloads, doesnt feel necessary
- - [ ] Add way to make a guess from the assist tool
+ - [ ] Add "streamer mode" where games arent based on daily timer, so streamers can play over and over
 
 
  ## Debug
