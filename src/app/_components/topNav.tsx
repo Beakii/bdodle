@@ -18,7 +18,7 @@ export async function TopNav() {
     console.log(user?.fullName)
 
     return (
-        <nav className="flex w-full items-center justify-center border-b-2 p-5 text-5xl font-semibold bg-black">
+        <nav className="flex w-full items-center justify-center border-b-2 mb-5 p-5 text-5xl font-semibold bg-black">
             <div>
                 <Menubar className="absolute lg:left-[50px] left-[5px] top-[50px]">
                     <MenubarMenu>

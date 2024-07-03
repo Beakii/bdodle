@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className="flex flex-col min-w-full ">
+        <body className="min-h-[100vh] flex flex-col justify-between">
           <TopNav />
           {children}
           <Footer />

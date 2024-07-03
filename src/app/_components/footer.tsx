@@ -1,13 +1,11 @@
 'use client'
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@radix-ui/react-hover-card";
 import { FaDiscord } from "react-icons/fa";
 import { SiKofi } from "react-icons/si";
 
 const Footer = () => {
 
-
     return (
-        <div className="lg:h-[9.9vh] min-h-[12vh] max-h-[15vh] w-full bg-stone-800 mt-5 border-t-2">
+        <div id="footer" className="w-full h-[12.4vh] bg-stone-800 mt-5 border-t-2">
             <div className="lg:max-w-[50vw] mx-auto flex justify-between px-2 py-2">
                 <div className="flex justify-center items-center">
                     <h1 className="lg:text-l text-sm">This project is not affiliated with Pearl Abyss</h1>
