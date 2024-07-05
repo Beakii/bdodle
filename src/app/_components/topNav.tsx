@@ -15,7 +15,6 @@ import {
 export async function TopNav() {
 
     const user = await currentUser();
-    console.log(user?.fullName)
 
     return (
         <nav className="flex w-full items-center justify-center border-b-2 mb-5 p-5 text-5xl font-semibold bg-black">
