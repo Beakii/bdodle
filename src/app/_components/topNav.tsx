@@ -1,6 +1,7 @@
 'use server'
 import { SignedIn, SignedOut, SignInButton, SignOutButton, UserButton, } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
+import Link from "next/link";
 import bdo from "~/assets/png/bdoAssets/BlackSpiritIcon.png";
 import { Button } from "~/components/ui/button";
 import {
@@ -30,9 +31,13 @@ export async function TopNav() {
                                 <div className="flex justify-center items-center">{`You are not signed in`}</div>
                             </SignedOut>
                             <MenubarSeparator />
-                            <MenubarItem>Daily</MenubarItem>
+                            <Link href="/daily">
+                                <Button className="flex justify-start w-full text-neutral-900 hover:text-white bg-white">Daily</Button>
+                            </Link>
                             <MenubarSeparator />
-                            <MenubarItem>Arcade - Coming Soon</MenubarItem>
+                            <Link href="/arcade">
+                                <Button className="flex justify-start w-full text-neutral-900 hover:text-white bg-white">Arcade</Button>
+                            </Link>
                             <MenubarSeparator />
                             <MenubarItem>
                                 <SignedOut>
@@ -52,11 +57,13 @@ export async function TopNav() {
                 </Menubar>
             </div>
             <div className="flex flex-col items-center justify-center">
-                <div id="title" className="flex select-none">
-                    <span>BD</span>
-                    <img src={bdo.src} className="size-11 m-1" />
-                    <span>dle</span>
-                </div>
+                <Link href="/">
+                    <div id="title" className="flex select-none">
+                        <span>BD</span>
+                        <img src={bdo.src} className="size-11 m-1" />
+                        <span>dle</span>
+                    </div>
+                </Link>
                 <div className="flex gap-20 pt-3">
                     <div className="bg-[#E30D03] size-7 rounded-full blur-sm"></div>
                     <div className="bg-[#E30D03] size-7 rounded-full blur-sm"></div>

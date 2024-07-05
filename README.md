@@ -25,10 +25,8 @@
  - [x] Add highlighting/remove nodes that have already been selected - note: doesnt persist reloads, doesnt feel necessary
  - [x] Add collapsable navbar
  - [x] Add twitch user authentication
- - [ ] Add landing page to select between the game modes
+ - [x] Add landing page to select between the game modes
  - [ ] Add replayable game mode
- - [ ] Make arcade not playable without logging in ()
- - [ ] Add 2 leaderboards for the daily game mode (One for approved list of streamers, other for everyone)
  - [ ] Add antagonzing black spirit messages
 
 
