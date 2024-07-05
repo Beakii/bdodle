@@ -11,7 +11,7 @@ const BdodleBouncingButton = ({ setToggleAssist, toggleAssist, blackSpiritText }
     }
 
     return (
-        <div className="absolute lg:top-[25vh] lg:right-[8vw] lg:border-none right-0 top-0 border bg-stone-900">
+        <div className="lg:static lg:border-none border absolute top-0 right-0 bg-stone-900">
             <div onClick={handleClick} className="size-20 lg:animate-bounce hover:cursor-pointer flex flex-col items-center">
                 <img src={BlackSpirit.src} />
                 <div className="text-center">{blackSpiritText}</div>

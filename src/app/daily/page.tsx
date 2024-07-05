@@ -26,6 +26,7 @@ export default async function HomePage() {
                         nodesWithConLength={nodesWithConLength}
                         nodes={nodes}
                         correctNode={correctNode}
+                        gameMode="daily"
                     />
                 </div>
             </main>

@@ -30,11 +30,13 @@
  - [x] Add collapsable navbar
  - [x] Add twitch user authentication
  - [x] Add landing page to select between the game modes
- - [ ] Add replayable game mode
+ - [x] Add replayable game mode
+ - [ ] Add header above input that shows timer on daily game mode and reset button on arcade
  - [ ] Swap img components for Next Image Components
+ - [ ] Add details to landing page to explain game modes + how to play
+ - [ ] Add Sentry report a bug component - https://www.youtube.com/watch?v=8CdKgnErqQM
  - [ ] Add leaderboard component
  - [ ] Connect leaderboard component with database table
- - [ ] Add antagonzing black spirit messages
  - [ ] Merge to main and push to production
 ---
  ## Debug
@@ -46,6 +48,7 @@
  - [x] Fix reset times with game reset
  - [x] Fix styling
  - [x] Fix data table contribution and connections All options
+ - [ ] Fix css to anchor footer to bottom and ideally scale webpage to not be scrollable
 
 
 

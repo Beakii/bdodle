@@ -1,10 +1,9 @@
 'use client'
-import { use, useEffect, useState } from "react";
-
+import { Button } from "~/components/ui/button";
 import { BdodleScoreCardProps } from "../types";
 
 
-const BdodleScoreCard = ({ numberOfAttempts, timeToNewGame }: BdodleScoreCardProps) => {
+const BdodleScoreCard = ({ numberOfAttempts, timeToNewGame, gameMode }: BdodleScoreCardProps) => {
 
     function getFormattedTime(timeInSeconds: number) {
         const dateObj = new Date(timeInSeconds * 1000);
@@ -24,9 +23,15 @@ const BdodleScoreCard = ({ numberOfAttempts, timeToNewGame }: BdodleScoreCardPro
             <span className="font-semibold text-3xl">🎉 Congratulations 🎉</span>
             <div className="">{"You took: " + numberOfAttempts + " attempts to guess the correct node"}</div>
 
-            <div>
-                {"Time to new game: " + getFormattedTime(timeToNewGame)}
-            </div>
+            {gameMode === "daily"
+                ?
+                <div>
+                    {"Time to new game: " + getFormattedTime(timeToNewGame)}
+                </div>
+                :
+                <Button className="w-full border-2 border-yellow-700 bg-yellow-950 hover:opacity-75 hover:bg-yellow-950">Play Again</Button>
+            }
+
         </div>
     );
 };

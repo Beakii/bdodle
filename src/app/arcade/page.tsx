@@ -23,6 +23,7 @@ export default async function HomePage() {
                         nodesWithConLength={nodesWithConLength}
                         nodes={nodes}
                         correctNode={correctNode}
+                        gameMode="arcade"
                     />
                 </div>
             </main>
