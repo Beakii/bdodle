@@ -27,6 +27,8 @@
  - [x] Add twitch user authentication
  - [x] Add landing page to select between the game modes
  - [ ] Add replayable game mode
+ - [ ] Add leaderboard component
+ - [ ] Connect leaderboard component with database table
  - [ ] Add antagonzing black spirit messages
 
 
