@@ -123,11 +123,11 @@ const Game = ({ nodes, correctNode, nodesWithConLength }: GameProps) => {
                                     nodes={filteredNodes}
                                     submitGuess={updatedListOfGusses} />
                                 :
-                                <>
-                                    <BdodleScoreCard
-                                        numberOfAttempts={listOfGusses.length}
-                                        timeToNewGame={timeToNewGame} />
-                                </>
+
+                                <BdodleScoreCard
+                                    numberOfAttempts={listOfGusses.length}
+                                    timeToNewGame={timeToNewGame} />
+
                         }
                         <>
                             <BdodleAnswersTableHeader />

@@ -2,7 +2,6 @@
 import { ArrowRightCircle, ArrowBigDown, ArrowBigUp, CheckCircle, ShieldQuestionIcon } from "lucide-react";
 import { Balenos, Serendia, Calpheon, Mediah, Valencia, Kamasylvia, Drieghan, Odyllita, MountainofEternalWinter, LandofMorningLight, Ulukita } from "../imageImports";
 import { City, Gateway, TradingPost, Connection, Danger, Town } from "../imageImports";
-import { Arrow, ArrowRight } from "../imageImports";
 import { Node, BdodleAnswerTableRowProps } from "../types";
 
 
