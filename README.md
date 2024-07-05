@@ -1,5 +1,6 @@
- ## TODO
+ ## Development Roadmap
 
+ ## Release v1
  - [x] Make it Deploy
  - [x] Scaffold basic ui with mock data
  - [x] Setup DB
@@ -22,18 +23,21 @@
  - [x] Replace Up/Down arrow with a checkmark icon when contribution/connection is correct
  - [x] Add footer that contains disclaimer that this isnt associated with PA and a link to a Ko-Fi + my discord
  - [x] Add persistant state for the assisttool on reload
+ - [x] Merge to main and push to production
+---
+ ## Release v2
  - [x] Add highlighting/remove nodes that have already been selected - note: doesnt persist reloads, doesnt feel necessary
  - [x] Add collapsable navbar
  - [x] Add twitch user authentication
  - [x] Add landing page to select between the game modes
  - [ ] Add replayable game mode
+ - [ ] Swap img components for Next Image Components
  - [ ] Add leaderboard component
  - [ ] Connect leaderboard component with database table
  - [ ] Add antagonzing black spirit messages
-
-
+ - [ ] Merge to main and push to production
+---
  ## Debug
-
  - [x] Fix AnswerTable validation (Arrows on contri and connection not working correctly)
  - [x] Fix Offset animation to reveal each card slowly
  - [x] Fix animation to only play once
