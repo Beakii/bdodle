@@ -25,12 +25,14 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className="min-h-[100vh] flex flex-col justify-between">
-          <TopNav />
-          {children}
-          <Footer />
-          <SpeedInsights />
-          <Analytics />
+        <body>
+          <div className="min-h-[100vh] flex flex-col justify-between">
+            <TopNav />
+            {children}
+            <Footer />
+            <SpeedInsights />
+            <Analytics />
+          </div>
         </body>
       </html >
     </ClerkProvider>

@@ -21,6 +21,12 @@
   background: #555;
 } */
 
+html,
+body,
+#__next {
+  height: 100%;
+}
+
 body {
   @apply bg-stone-900;
   font-family: 'BDO', sans-serif;
