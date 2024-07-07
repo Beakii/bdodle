@@ -9,6 +9,7 @@ import {
 } from "~/components/ui/hover-card"
 import { useState } from "react";
 import { Node, BdodleDropdownProps } from "../types";
+import Image from 'next/image';
 
 const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
     const [inputValue, setInputValue] = useState("");
@@ -58,7 +59,7 @@ const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
     const filteredNodes = nodes.filter((node: Node) => node.name?.toLowerCase().includes(inputValue.toLowerCase()));
 
     return (
-        <div className=" flex flex-col justify-center items-center xl:pt-6 pt-5">
+        <div className=" flex flex-col justify-center items-center">
             <BdodleInput
                 getInput={updateInputValue}
                 inputValue={inputValue} />
@@ -67,14 +68,14 @@ const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
                     {filteredNodes.map((node: Node, index: number) => (
                         <li onClick={() => submitClicked(node)} key={index} className="flex p-2 lg:pl-10 lg:pr-10 border-l-2 border-r-2 border-b-2 border-yellow-700 cursor-pointer items-center">
                             <HoverCard>
-                                <HoverCardTrigger><img src={getTerritoryImage(node)?.src} alt={node.territory ?? ""} className="size-12" /></HoverCardTrigger>
+                                <HoverCardTrigger><Image src={getTerritoryImage(node) ?? ""} alt={node.territory ?? ""} width={40} height={40} loading="lazy" /></HoverCardTrigger>
                                 <HoverCardContent>
                                     {node.territory}
                                 </HoverCardContent>
                             </HoverCard>
                             <span className="lg:pl-10 pl-5 mr-auto">{node.name}</span>
                             <HoverCard>
-                                <HoverCardTrigger><img src={getNodeTypeImage(node)?.src} alt={node.type ?? ""} className="ml-auto size-14" /></HoverCardTrigger>
+                                <HoverCardTrigger><Image src={getNodeTypeImage(node) ?? ""} alt={node.type ?? ""} width={50} height={50} loading="lazy" className="ml-auto" /></HoverCardTrigger>
                                 <HoverCardContent>
                                     {node.type}
                                 </HoverCardContent>

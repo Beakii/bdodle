@@ -32,7 +32,7 @@
  - [x] Add landing page to select between the game modes
  - [x] Add replayable game mode
  - [x] Add header above input that shows timer on daily game mode and reset button on arcade
- - [ ] Swap img components for Next Image Components
+ - [x] Swap img components for Next Image Components
  - [ ] Add details to landing page to explain game modes + how to play
  - [x] Add Sentry report a bug component - https://www.youtube.com/watch?v=8CdKgnErqQM
  - [ ] Add leaderboard component with shadcn ui skeleton loading while not signed in
@@ -48,6 +48,8 @@
  - [x] Fix reset times with game reset
  - [x] Fix styling
  - [x] Fix data table contribution and connections All options
+ - [x] Fix play again button (randomize node on arcade page.tsx and refresh the route?)
+ - [ ] Fix window.location.reload to wait for the reload to finish before showing the UI
  - [ ] Fix css to anchor footer to bottom and ideally scale webpage to not be scrollable
 
 

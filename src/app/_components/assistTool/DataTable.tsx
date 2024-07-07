@@ -30,6 +30,7 @@ import {
 import { HoverCard, HoverCardTrigger } from "@radix-ui/react-hover-card"
 import { HoverCardContent } from "~/components/ui/hover-card"
 import GoBackArrow from "~/assets/png/bdoAssets/goBackArrow.png"
+import Image from "next/image";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -157,7 +158,7 @@ export function DataTable<TData, TValue>({ columns, data, setToggleAssist }: Dat
                 <Button
                     onClick={() => setToggleAssist(false)}
                     className="relative ml-auto lg:max-w-[10vw] max-w-[20vw] bg-[#E8E4D9] border-b-2 border-l-2 border-yellow-700 hover:shadow-md hover:bg-neutral-100 rounded-tr-none rounded-br-none rounded-tl-none">
-                    <img className="size-8" src={GoBackArrow.src} alt="Go Back" />
+                    <Image src={GoBackArrow.src} alt="Go Back" height={32} width={32} loading="lazy" />
                 </Button>
                 <div className="flex justify-center">
                     <HoverCard>

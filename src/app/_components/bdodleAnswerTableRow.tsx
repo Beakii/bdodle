@@ -3,6 +3,7 @@ import { ArrowRightCircle, ArrowBigDown, ArrowBigUp, CheckCircle, ShieldQuestion
 import { Balenos, Serendia, Calpheon, Mediah, Valencia, Kamasylvia, Drieghan, Odyllita, MountainofEternalWinter, LandofMorningLight, Ulukita } from "../imageImports";
 import { City, Gateway, TradingPost, Connection, Danger, Town } from "../imageImports";
 import { Node, BdodleAnswerTableRowProps } from "../types";
+import Image from "next/image";
 
 
 export const dynamic = "force-dynamic";
@@ -187,7 +188,7 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
                 <h1 className="lg:text-lg text-wrap p-2 text-xs font-semibold flex justify-center items-center">{guessedNode.name}</h1>
             </div>
             <div style={{ animationIterationCount: 1 }} className={` ${validateType(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-500" : ""}`}>
-                <img className="lg:size-24 md:size-20 sm:size-16 size-14" src={getNodeTypeImage(guessedNode)?.src} alt="Node Type" />
+                <Image src={getNodeTypeImage(guessedNode) ?? ""} alt="Node Type" height={90} width={90} />
             </div>
             <div style={{ animationIterationCount: 1 }} className={` ${validateContribution(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex flex-col justify-start items-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-1000" : ""}`}>
                 <div className="lg:text-2xl text-wrap text-xs">{guessedNode.contribution}</div>
@@ -202,7 +203,7 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
             </div>
             <div style={{ animationIterationCount: 1 }} className={` ${validateTerritory(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex flex-col items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-2500" : ""}`}>
                 <div className="lg:text-xl lg:block text-wrap p-2 text-xs mt-1 hidden">{getTerritoryName(guessedNode.territory)}</div>
-                <img className="lg:size-16 size-12 " src={getTerritoryImage(guessedNode)?.src} alt="Node Territory" />
+                <Image src={getTerritoryImage(guessedNode) ?? ""} alt="Node Territory" height={70} width={70} />
             </div>
         </div>
     );

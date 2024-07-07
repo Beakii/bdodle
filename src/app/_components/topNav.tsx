@@ -12,6 +12,7 @@ import {
     MenubarSeparator,
     MenubarTrigger,
 } from "~/components/ui/menubar"
+import Image from "next/image";
 
 export async function TopNav() {
 
@@ -60,7 +61,7 @@ export async function TopNav() {
                 <Link href="/">
                     <div id="title" className="flex select-none">
                         <span>BD</span>
-                        <img src={bdo.src} className="size-11 m-1" />
+                        <Image src={bdo.src} alt="BlackSpiritSpiral" height={44} width={44} className="m-1" />
                         <span>dle</span>
                     </div>
                 </Link>

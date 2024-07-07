@@ -26,79 +26,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
 
     // Load from local storage on component mount
     useEffect(() => {
-        if (gameMode === "daily") {
-            const storedGuesses = localStorage.getItem('guessHistory');
-            const storedCorrectNodeId = localStorage.getItem('correctNodeId');
-
-            if (!storedCorrectNodeId) {
-                localStorage.removeItem('guessHistory');
-                setIsWin(false);
-                setListOfGusses([]);
-            }
-
-            if (storedGuesses && storedCorrectNodeId) {
-                const storedList = JSON.parse(storedGuesses);
-                setListOfGusses(storedList);
-
-                storedList.forEach((element: Node) => {
-                    if (element.nodeOfDay) {
-                        setIsWin(true);
-                        setBlackSpiritText("Nice job!");
-                    }
-                });
-            }
-
-            if (storedCorrectNodeId) {
-                const storedCorrectNodeIdJson = JSON.parse(storedCorrectNodeId);
-                let correctId = storedCorrectNodeIdJson / obfuscation;
-                if (correctId !== correctNode.nodeId) {
-                    localStorage.removeItem('guessHistory');
-                    localStorage.removeItem('correctNodeId');
-                    setIsWin(false);
-                    setListOfGusses([]);
-                }
-            }
-
-            const obfuscatedCorrectNode = correctNode.nodeId * obfuscation;
-            localStorage.setItem('correctNodeId', JSON.stringify(obfuscatedCorrectNode));
-        }
-
-        if (gameMode === "arcade") {
-            const storedGuesses = localStorage.getItem('arcadeHistory');
-            const storedCorrectNodeId = localStorage.getItem('arcadeCorrectNodeId');
-
-            if (!storedCorrectNodeId) {
-                localStorage.removeItem('arcadeHistory');
-                setIsWin(false);
-                setListOfGusses([]);
-            }
-
-            if (storedGuesses && storedCorrectNodeId) {
-                const storedList = JSON.parse(storedGuesses);
-                setListOfGusses(storedList);
-
-                storedList.forEach((element: Node) => {
-                    if (element.nodeOfDay) {
-                        setIsWin(true);
-                        setBlackSpiritText("Nice job!");
-                    }
-                });
-            }
-
-            if (storedCorrectNodeId) {
-                const storedCorrectNodeIdJson = JSON.parse(storedCorrectNodeId);
-                let correctId = storedCorrectNodeIdJson / obfuscation;
-                if (correctId !== correctNode.nodeId) {
-                    localStorage.removeItem('arcadeHistory');
-                    localStorage.removeItem('arcadeCorrectNodeId');
-                    setIsWin(false);
-                    setListOfGusses([]);
-                }
-            }
-
-            const obfuscatedCorrectNode = correctNode.nodeId * obfuscation;
-            localStorage.setItem('arcadeCorrectNodeId', JSON.stringify(obfuscatedCorrectNode));
-        }
+        pageLoad(gameMode);
     }, []);
 
     //Timer used for new game
@@ -126,6 +54,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
     }, [isWin]);
 
     useEffect(() => {
+        console.log(listOfGusses[listOfGusses.length - 1]);
         if (listOfGusses[listOfGusses.length - 1]?.nodeOfDay) {
             setIsWin(true);
         }
@@ -133,12 +62,58 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
         (itemRef.current as HTMLElement | null)?.lastElementChild?.scrollIntoView({ behavior: 'smooth' });
 
         if (gameMode === "daily") {
-            localStorage.setItem('guessHistory', JSON.stringify(listOfGusses));
+            localStorage.setItem('dailyHistory', JSON.stringify(listOfGusses));
         }
         if (gameMode === "arcade") {
             localStorage.setItem('arcadeHistory', JSON.stringify(listOfGusses));
         }
     }, [listOfGusses]);
+
+    function pageLoad(gameMode: string) {
+        const storedGuesses = localStorage.getItem(`${gameMode}History`);
+        const storedCorrectNodeId = localStorage.getItem(`${gameMode}CorrectNodeId`);
+
+        if (!storedCorrectNodeId) {
+            localStorage.removeItem(`${gameMode}History`);
+            setIsWin(false);
+            setListOfGusses([]);
+        }
+
+        if (storedGuesses && storedCorrectNodeId) {
+            const storedList = JSON.parse(storedGuesses);
+            setListOfGusses(storedList);
+
+            storedList.forEach((element: Node) => {
+                if (element.nodeOfDay) {
+                    setIsWin(true);
+                    setBlackSpiritText("Nice job!");
+                }
+            });
+        }
+
+        if (storedCorrectNodeId) {
+            const storedCorrectNodeIdJson = JSON.parse(storedCorrectNodeId);
+            let correctId = storedCorrectNodeIdJson / obfuscation;
+            if (correctId !== correctNode.nodeId) {
+                localStorage.removeItem(`${gameMode}History`);
+                localStorage.removeItem(`${gameMode}CorrectNodeId`);
+                setIsWin(false);
+                setListOfGusses([]);
+            }
+        }
+
+        const obfuscatedCorrectNode = correctNode.nodeId * obfuscation;
+        localStorage.setItem(`${gameMode}CorrectNodeId`, JSON.stringify(obfuscatedCorrectNode));
+    }
+
+    function resetGame() {
+        setListOfGusses([]);
+        setIsWin(false);
+        setFilteredNodes(nodes);
+        localStorage.removeItem('arcadeHistory');
+        localStorage.removeItem('arcadeCorrectNodeId');
+        window.location.reload();
+    }
 
     function updatedListOfGusses(node: Node) {
         setListOfGusses([...listOfGusses, node]);
@@ -162,8 +137,11 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
                     :
                     <>
                         <div id="gameHeader" className="flex justify-center items-center">
-                            <div id="gameMode" className="lg:flex items-center text-[80px] hidden">
+                            <div id="gameMode" className="lg:flex flex-col justify-center items-center text-[80px] hidden">
                                 {gameMode === "daily" ? <IoMdTimer /> : <SiApplearcade />}
+                                <div className="text-xl select-none">
+                                    {gameMode === "daily" ? "Daily" : "Arcade"}
+                                </div>
                             </div>
                             {
                                 !isWin
@@ -172,12 +150,11 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
                                         nodes={filteredNodes}
                                         submitGuess={updatedListOfGusses} />
                                     :
-
                                     <BdodleScoreCard
                                         numberOfAttempts={listOfGusses.length}
                                         timeToNewGame={timeToNewGame}
-                                        gameMode={gameMode} />
-
+                                        gameMode={gameMode}
+                                        resetGame={resetGame} />
                             }
                             <BdodleBouncingButton
                                 blackSpiritText={blackSpiritText}

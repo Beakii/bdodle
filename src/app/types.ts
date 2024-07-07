@@ -50,6 +50,7 @@ export interface BdodleScoreCardProps {
     numberOfAttempts: number;
     timeToNewGame: number;
     gameMode: string;
+    resetGame: () => void;
 }
 
 export interface BdodleBouncingButtonProps {

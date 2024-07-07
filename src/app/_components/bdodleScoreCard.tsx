@@ -3,7 +3,7 @@ import { Button } from "~/components/ui/button";
 import { BdodleScoreCardProps } from "../types";
 
 
-const BdodleScoreCard = ({ numberOfAttempts, timeToNewGame, gameMode }: BdodleScoreCardProps) => {
+const BdodleScoreCard = ({ numberOfAttempts, timeToNewGame, gameMode, resetGame }: BdodleScoreCardProps) => {
 
     function getFormattedTime(timeInSeconds: number) {
         const dateObj = new Date(timeInSeconds * 1000);
@@ -29,9 +29,8 @@ const BdodleScoreCard = ({ numberOfAttempts, timeToNewGame, gameMode }: BdodleSc
                     {"Time to new game: " + getFormattedTime(timeToNewGame)}
                 </div>
                 :
-                <Button className="w-full border-2 border-yellow-700 bg-yellow-950 hover:opacity-75 hover:bg-yellow-950">Play Again</Button>
+                <Button onClick={() => { resetGame() }} className="w-full border-2 border-yellow-700 bg-yellow-950 hover:opacity-75 hover:bg-yellow-950">Play Again</Button>
             }
-
         </div>
     );
 };

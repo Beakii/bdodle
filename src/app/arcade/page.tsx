@@ -5,9 +5,16 @@ import { getAllNodes } from "~/server/queries";
 
 export default async function HomePage() {
     //@ts-ignore
-    const nodes: Node[] = await getAllNodes();
+    let nodes: Node[] = await getAllNodes();
     nodes.sort((a, b) => (a?.nodeId || 0) - (b?.nodeId || 0));
+
+    const randomIndex = Math.floor(Math.random() * nodes.length - 1);
+    nodes.forEach((node, index) => {
+        node.nodeOfDay = index === randomIndex ? true : false;
+    });
+
     const correctNode: Node = nodes.find(node => node.nodeOfDay === true)!;
+    console.log(correctNode);
     const nodesWithConLength = nodes.map(node => {
         return {
             ...node,
