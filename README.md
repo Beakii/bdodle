@@ -49,6 +49,7 @@
  - [x] Fix styling
  - [x] Fix data table contribution and connections All options
  - [x] Fix play again button (randomize node on arcade page.tsx and refresh the route?)
+ - [x] Fix long rerenders on input box
  - [ ] Fix window.location.reload to wait for the reload to finish before showing the UI
  - [ ] Fix css to anchor footer to bottom and ideally scale webpage to not be scrollable
 

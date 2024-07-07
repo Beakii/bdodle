@@ -7,12 +7,17 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from "~/components/ui/hover-card"
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Node, BdodleDropdownProps } from "../types";
 import Image from 'next/image';
 
 const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
     const [inputValue, setInputValue] = useState("");
+    const [filteredNodes, setFilteredNodes] = useState<Node[]>(nodes);
+
+    useEffect(() => {
+        setFilteredNodes(nodes.filter((node: Node) => node.name?.toLowerCase().includes(inputValue.toLowerCase())));
+    }, [inputValue]);
 
     const territoryImage = [
         Balenos,
@@ -56,8 +61,6 @@ const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
         updateInputValue("");
     }
 
-    const filteredNodes = nodes.filter((node: Node) => node.name?.toLowerCase().includes(inputValue.toLowerCase()));
-
     return (
         <div className=" flex flex-col justify-center items-center">
             <BdodleInput
@@ -65,17 +68,17 @@ const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
                 inputValue={inputValue} />
             <div className="flex">
                 <ul className={`absolute lg:left-[37.5vw] lg:right-[37.5vw] left-0.5 right-0.5 max-h-[370px] bg-yellow-950 overflow-y-auto z-10 ` + (inputValue === "" ? 'hidden' : '')}>
-                    {filteredNodes.map((node: Node, index: number) => (
+                    {filteredNodes.slice(0, 75).map((node: Node, index: number) => (
                         <li onClick={() => submitClicked(node)} key={index} className="flex p-2 lg:pl-10 lg:pr-10 border-l-2 border-r-2 border-b-2 border-yellow-700 cursor-pointer items-center">
                             <HoverCard>
-                                <HoverCardTrigger><Image src={getTerritoryImage(node) ?? ""} alt={node.territory ?? ""} width={40} height={40} loading="lazy" /></HoverCardTrigger>
+                                <HoverCardTrigger><Image src={getTerritoryImage(node) ?? ""} alt={node.territory ?? ""} width={40} height={40} /></HoverCardTrigger>
                                 <HoverCardContent>
                                     {node.territory}
                                 </HoverCardContent>
                             </HoverCard>
                             <span className="lg:pl-10 pl-5 mr-auto">{node.name}</span>
                             <HoverCard>
-                                <HoverCardTrigger><Image src={getNodeTypeImage(node) ?? ""} alt={node.type ?? ""} width={50} height={50} loading="lazy" className="ml-auto" /></HoverCardTrigger>
+                                <HoverCardTrigger><Image src={getNodeTypeImage(node) ?? ""} alt={node.type ?? ""} width={50} height={50} className="ml-auto" /></HoverCardTrigger>
                                 <HoverCardContent>
                                     {node.type}
                                 </HoverCardContent>
