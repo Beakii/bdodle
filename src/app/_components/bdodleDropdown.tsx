@@ -85,7 +85,6 @@ const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
                                     {"Amount of Contribution Points required to invest"}
                                 </HoverCardContent>
                             </HoverCard>
-
                         </li>
                     ))}
                 </ul>

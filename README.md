@@ -31,11 +31,11 @@
  - [x] Add twitch user authentication
  - [x] Add landing page to select between the game modes
  - [x] Add replayable game mode
- - [ ] Add header above input that shows timer on daily game mode and reset button on arcade
+ - [x] Add header above input that shows timer on daily game mode and reset button on arcade
  - [ ] Swap img components for Next Image Components
  - [ ] Add details to landing page to explain game modes + how to play
- - [ ] Add Sentry report a bug component - https://www.youtube.com/watch?v=8CdKgnErqQM
- - [ ] Add leaderboard component
+ - [x] Add Sentry report a bug component - https://www.youtube.com/watch?v=8CdKgnErqQM
+ - [ ] Add leaderboard component with shadcn ui skeleton loading while not signed in
  - [ ] Connect leaderboard component with database table
  - [ ] Merge to main and push to production
 ---
