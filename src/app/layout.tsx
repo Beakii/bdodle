@@ -2,7 +2,6 @@ import "~/styles/globals.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
-import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "./_components/footer";
 import { TopNav } from "./_components/topNav";
 
@@ -23,18 +22,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body>
-          <div className="min-h-[100vh] flex flex-col justify-between">
-            <TopNav />
-            {children}
-            <Footer />
-            <SpeedInsights />
-            <Analytics />
-          </div>
-        </body>
-      </html >
-    </ClerkProvider>
+    <html lang="en">
+      <body>
+        <div className="min-h-[100vh] flex flex-col justify-between">
+          <TopNav />
+          {children}
+          <Footer />
+          <SpeedInsights />
+          <Analytics />
+        </div>
+      </body>
+    </html >
   );
 }

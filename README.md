@@ -35,10 +35,15 @@
  - [x] Swap img components for Next Image Components
  - [x] Add details to landing page to explain game modes + how to play
  - [x] Add Sentry report a bug component - https://www.youtube.com/watch?v=8CdKgnErqQM
- - [ ] Add leaderboard component with shadcn ui skeleton loading while not signed in
- - [ ] Connect leaderboard component with database table
+ - [x] Remove clerk
+ - [ ] Make the auto scroll target the specific div, not the entire page
  - [ ] Merge to main and push to production
 ---
+ ## Release v2.1
+ - [ ] Add Next Auth
+ - [ ] Add leaderboard component with shadcn ui skeleton loading while not signed in
+ - [ ] Connect leaderboard component with database table
+ ---
  ## Debug
  - [x] Fix AnswerTable validation (Arrows on contri and connection not working correctly)
  - [x] Fix Offset animation to reveal each card slowly
@@ -52,7 +57,6 @@
  - [x] Fix long rerenders on input box
  - [x] Fix window.location.reload to wait for the reload to finish before showing the UI - SEEMS TO BE NON ISSUE IN PRODUCTION
  - [x] Fix css to anchor footer to bottom and ideally scale webpage to not be scrollable
- - [ ] Fix clerk auth error
 
 
 

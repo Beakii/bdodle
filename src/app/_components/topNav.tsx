@@ -1,6 +1,4 @@
-'use server'
-import { SignedIn, SignedOut, SignInButton, SignOutButton, UserButton, } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
+'use server';
 import Link from "next/link";
 import bdo from "~/assets/png/bdoAssets/BlackSpiritIcon.png";
 import { Button } from "~/components/ui/button";
@@ -16,8 +14,6 @@ import Image from "next/image";
 
 export async function TopNav() {
 
-    const user = await currentUser();
-
     return (
         <nav className="flex w-full items-center justify-center border-b-2 mb-5 p-5 text-5xl font-semibold bg-black">
             <div>
@@ -25,12 +21,11 @@ export async function TopNav() {
                     <MenubarMenu>
                         <MenubarTrigger>☰</MenubarTrigger>
                         <MenubarContent>
-                            <SignedIn>
-                                <div className="flex justify-center items-center">{`Hello ${user?.fullName}!`}</div>
-                            </SignedIn>
-                            <SignedOut>
-                                <div className="flex justify-center items-center">{`You are not signed in`}</div>
-                            </SignedOut>
+                            {/* <div className="flex justify-center items-center">{`You are not signed in`}</div> */}
+                            <MenubarSeparator />
+                            <Link href="/">
+                                <Button className="flex justify-start w-full text-neutral-900 hover:text-white bg-white">Home</Button>
+                            </Link>
                             <MenubarSeparator />
                             <Link href="/daily">
                                 <Button className="flex justify-start w-full text-neutral-900 hover:text-white bg-white">Daily</Button>
@@ -40,19 +35,12 @@ export async function TopNav() {
                                 <Button className="flex justify-start w-full text-neutral-900 hover:text-white bg-white">Arcade</Button>
                             </Link>
                             <MenubarSeparator />
-                            <MenubarItem>
-                                <SignedOut>
-                                    <SignInButton>
-                                        <Button className="flex justify-start w-full text-neutral-900 hover:text-white bg-white">Sign in</Button>
-                                    </SignInButton>
-                                </SignedOut>
-                                <SignedIn>
-                                    <SignOutButton>
-                                        <Button className="flex justify-start w-full text-neutral-900 hover:text-white bg-white">Sign out</Button>
-                                    </SignOutButton>
-                                </SignedIn>
+                            {/* <MenubarItem>
+                                <Button className="flex justify-start w-full text-neutral-900 hover:text-white bg-white">Sign in</Button>
+
+                                <Button className="flex justify-start w-full text-neutral-900 hover:text-white bg-white">Sign out</Button>
                             </MenubarItem>
-                            <MenubarSeparator />
+                            <MenubarSeparator /> */}
                         </MenubarContent>
                     </MenubarMenu>
                 </Menubar>
@@ -71,12 +59,6 @@ export async function TopNav() {
                 </div>
             </div>
             <div className="lg:absolute lg:block right-5 hidden">
-                <SignedIn>
-                    <div className="flex flex-col justify-center items-center">
-                        <div className="text-sm pb-2">{`Hello ${user?.fullName}`}</div>
-                        <UserButton />
-                    </div>
-                </SignedIn>
             </div>
         </nav>
     );
