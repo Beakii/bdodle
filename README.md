@@ -33,7 +33,7 @@
  - [x] Add replayable game mode
  - [x] Add header above input that shows timer on daily game mode and reset button on arcade
  - [x] Swap img components for Next Image Components
- - [ ] Add details to landing page to explain game modes + how to play
+ - [x] Add details to landing page to explain game modes + how to play
  - [x] Add Sentry report a bug component - https://www.youtube.com/watch?v=8CdKgnErqQM
  - [ ] Add leaderboard component with shadcn ui skeleton loading while not signed in
  - [ ] Connect leaderboard component with database table

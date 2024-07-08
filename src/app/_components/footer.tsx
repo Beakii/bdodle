@@ -1,5 +1,4 @@
 'use client'
-import { FaDiscord } from "react-icons/fa";
 import { SiKofi } from "react-icons/si";
 
 const Footer = () => {
