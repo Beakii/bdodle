@@ -36,8 +36,8 @@
  - [x] Add details to landing page to explain game modes + how to play
  - [x] Add Sentry report a bug component - https://www.youtube.com/watch?v=8CdKgnErqQM
  - [x] Remove clerk
- - [ ] Make the auto scroll target the specific div, not the entire page
- - [ ] Merge to main and push to production
+ - [x] Make the auto scroll target the specific div, not the entire page
+ - [x] Merge to main and push to production
 ---
  ## Release v2.1
  - [ ] Add Next Auth

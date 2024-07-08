@@ -150,6 +150,7 @@ export function DataTable<TData, TValue>({ columns, data, setToggleAssist }: Dat
         setTypeFilterButton("All")
         setContributionFilterButton("All")
         setTerritoryFilterButton("All")
+        localStorage.removeItem("filter")
     }
 
     return (

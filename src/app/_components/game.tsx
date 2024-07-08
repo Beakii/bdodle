@@ -54,12 +54,11 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
     }, [isWin]);
 
     useEffect(() => {
-        console.log(listOfGusses[listOfGusses.length - 1]);
         if (listOfGusses[listOfGusses.length - 1]?.nodeOfDay) {
             setIsWin(true);
         }
         setFilteredNodes(filteredNodes.filter(node => node !== listOfGusses[listOfGusses.length - 1]));
-        (itemRef.current as HTMLElement | null)?.lastElementChild?.scrollIntoView({ behavior: 'smooth' });
+        (itemRef.current as HTMLElement | null)?.lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
 
         if (gameMode === "daily") {
             localStorage.setItem('dailyHistory', JSON.stringify(listOfGusses));
@@ -121,7 +120,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
         localStorage.setItem('date', new Date().toUTCString());
         const timer = setTimeout(() => {
             setShouldPlayAnimation(false);
-        }, 6000);
+        }, 4000);
         return () => clearTimeout(timer);
     }
 

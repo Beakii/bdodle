@@ -68,7 +68,7 @@ const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
                 inputValue={inputValue} />
             <div className="flex">
                 <ul className={`absolute lg:left-[37.5vw] lg:right-[37.5vw] left-0.5 right-0.5 max-h-[370px] bg-yellow-950 overflow-y-auto z-10 ` + (inputValue === "" ? 'hidden' : '')}>
-                    {filteredNodes.slice(0, 75).map((node: Node, index: number) => (
+                    {filteredNodes.slice(0, 50).map((node: Node, index: number) => (
                         <li onClick={() => submitClicked(node)} key={index} className="flex p-2 lg:pl-10 lg:pr-10 border-l-2 border-r-2 border-b-2 border-yellow-700 cursor-pointer items-center">
                             <HoverCard>
                                 <HoverCardTrigger><Image src={getTerritoryImage(node) ?? ""} alt={node.territory ?? ""} width={40} height={40} /></HoverCardTrigger>

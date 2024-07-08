@@ -14,7 +14,6 @@ export default async function HomePage() {
     });
 
     const correctNode: Node = nodes.find(node => node.nodeOfDay === true)!;
-    console.log(correctNode);
     const nodesWithConLength = nodes.map(node => {
         return {
             ...node,
