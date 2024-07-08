@@ -2,8 +2,10 @@
 import Game from "../_components/game";
 import { Node } from "../types";
 import { getAllNodes } from "~/server/queries";
+import { unstable_noStore as noStore } from 'next/cache'
 
 export default async function HomePage() {
+    noStore();
     //@ts-ignore
     let nodes: Node[] = await getAllNodes();
     nodes.sort((a, b) => (a?.nodeId || 0) - (b?.nodeId || 0));

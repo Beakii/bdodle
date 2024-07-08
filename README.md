@@ -43,6 +43,7 @@
  - [ ] Add Next Auth
  - [ ] Add leaderboard component with shadcn ui skeleton loading while not signed in
  - [ ] Connect leaderboard component with database table
+ - [ ] Add a user dashboard with previous scores
  ---
  ## Debug
  - [x] Fix AnswerTable validation (Arrows on contri and connection not working correctly)
