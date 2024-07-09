@@ -83,10 +83,12 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
     }
 
     function validateLocation(node: Node) {
+        const guessNode = node.territory?.replace(/\s/g, '') ?? "";
+        const correctNodeNoSpace = correctNode?.territory?.replace(/\s/g, '') ?? "";
         if (node.coordinates?.[0] === correctNode?.coordinates?.[0] && node.coordinates?.[1] === correctNode?.coordinates?.[1]) {
             return "bg-green-600"
         }
-        if (node.territory === correctNode?.territory) {
+        if (guessNode === correctNodeNoSpace) {
             return "bg-yellow-600"
         }
         return "bg-red-600";
@@ -187,7 +189,8 @@ const BdodleAnswersTableRow = ({ guessedNode, correctNode, shouldPlayAnimation }
             <div style={{ animationIterationCount: 1 }} className={` ${validateName(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both" : ""}`}>
                 <h1 className="lg:text-lg text-wrap p-2 text-xs font-semibold flex justify-center items-center">{guessedNode.name}</h1>
             </div>
-            <div style={{ animationIterationCount: 1 }} className={` ${validateType(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-500" : ""}`}>
+            <div style={{ animationIterationCount: 1 }} className={` ${validateType(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex flex-col items-center justify-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-500" : ""}`}>
+                <div className="lg:text-xl lg:block text-wrap p-2 text-xs mt-1 hidden">{guessedNode.type}</div>
                 <Image src={getNodeTypeImage(guessedNode) ?? ""} alt="Node Type" height={90} width={90} />
             </div>
             <div style={{ animationIterationCount: 1 }} className={` ${validateContribution(guessedNode)} lg:size-40 md:size-36 sm:size-28 size-20 text-center text-wrap flex flex-col justify-start items-center border-2 border-stone-900 ${shouldPlayAnimation ? "animate-flip fill-mode-both delay-1000" : ""}`}>
