@@ -1,5 +1,6 @@
- ## TODO
+ ## Development Roadmap
 
+ ## Release v1
  - [x] Make it Deploy
  - [x] Scaffold basic ui with mock data
  - [x] Setup DB
@@ -22,16 +23,29 @@
  - [x] Replace Up/Down arrow with a checkmark icon when contribution/connection is correct
  - [x] Add footer that contains disclaimer that this isnt associated with PA and a link to a Ko-Fi + my discord
  - [x] Add persistant state for the assisttool on reload
+ - [x] Merge to main and push to production
+---
+ ## Release v2
  - [x] Add highlighting/remove nodes that have already been selected - note: doesnt persist reloads, doesnt feel necessary
  - [x] Add collapsable navbar
  - [x] Add twitch user authentication
- - [ ] Add replayable game mode
- - [ ] Add 2 leaderboards for the daily game mode (One for approved list of streamers, other for everyone)
- - [ ] Add antagonzing black spirit messages
-
-
+ - [x] Add landing page to select between the game modes
+ - [x] Add replayable game mode
+ - [x] Add header above input that shows timer on daily game mode and reset button on arcade
+ - [x] Swap img components for Next Image Components
+ - [x] Add details to landing page to explain game modes + how to play
+ - [x] Add Sentry report a bug component - https://www.youtube.com/watch?v=8CdKgnErqQM
+ - [x] Remove clerk
+ - [x] Make the auto scroll target the specific div, not the entire page
+ - [x] Merge to main and push to production
+---
+ ## Release v2.1
+ - [ ] Add Next Auth
+ - [ ] Add leaderboard component with shadcn ui skeleton loading while not signed in
+ - [ ] Connect leaderboard component with database table
+ - [ ] Add a user dashboard with previous scores
+ ---
  ## Debug
-
  - [x] Fix AnswerTable validation (Arrows on contri and connection not working correctly)
  - [x] Fix Offset animation to reveal each card slowly
  - [x] Fix animation to only play once
@@ -40,6 +54,10 @@
  - [x] Fix reset times with game reset
  - [x] Fix styling
  - [x] Fix data table contribution and connections All options
+ - [x] Fix play again button (randomize node on arcade page.tsx and refresh the route?)
+ - [x] Fix long rerenders on input box
+ - [x] Fix window.location.reload to wait for the reload to finish before showing the UI - SEEMS TO BE NON ISSUE IN PRODUCTION
+ - [x] Fix css to anchor footer to bottom and ideally scale webpage to not be scrollable
 
 
 

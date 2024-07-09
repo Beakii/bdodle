@@ -7,11 +7,17 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from "~/components/ui/hover-card"
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Node, BdodleDropdownProps } from "../types";
+import Image from 'next/image';
 
 const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
     const [inputValue, setInputValue] = useState("");
+    const [filteredNodes, setFilteredNodes] = useState<Node[]>(nodes);
+
+    useEffect(() => {
+        setFilteredNodes(nodes.filter((node: Node) => node.name?.toLowerCase().includes(inputValue.toLowerCase())));
+    }, [inputValue]);
 
     const territoryImage = [
         Balenos,
@@ -55,26 +61,24 @@ const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
         updateInputValue("");
     }
 
-    const filteredNodes = nodes.filter((node: Node) => node.name?.toLowerCase().includes(inputValue.toLowerCase()));
-
     return (
-        <div className="min-w-full flex flex-col justify-center items-center xl:pt-16 pt-5">
+        <div className=" flex flex-col justify-center items-center">
             <BdodleInput
                 getInput={updateInputValue}
                 inputValue={inputValue} />
             <div className="flex">
-                <ul className={`absolute lg:left-[32.5vw] lg:right-[32.5vw] left-0.5 right-0.5 max-h-[370px] bg-yellow-950 overflow-y-auto z-10 ` + (inputValue === "" ? 'hidden' : '')}>
-                    {filteredNodes.map((node: Node, index: number) => (
+                <ul className={`absolute lg:left-[37.5vw] lg:right-[37.5vw] left-0.5 right-0.5 max-h-[370px] bg-yellow-950 overflow-y-auto z-10 ` + (inputValue === "" ? 'hidden' : '')}>
+                    {filteredNodes.slice(0, 50).map((node: Node, index: number) => (
                         <li onClick={() => submitClicked(node)} key={index} className="flex p-2 lg:pl-10 lg:pr-10 border-l-2 border-r-2 border-b-2 border-yellow-700 cursor-pointer items-center">
                             <HoverCard>
-                                <HoverCardTrigger><img src={getTerritoryImage(node)?.src} alt={node.territory ?? ""} className="size-12" /></HoverCardTrigger>
+                                <HoverCardTrigger><Image src={getTerritoryImage(node) ?? ""} alt={node.territory ?? ""} width={40} height={40} /></HoverCardTrigger>
                                 <HoverCardContent>
                                     {node.territory}
                                 </HoverCardContent>
                             </HoverCard>
                             <span className="lg:pl-10 pl-5 mr-auto">{node.name}</span>
                             <HoverCard>
-                                <HoverCardTrigger><img src={getNodeTypeImage(node)?.src} alt={node.type ?? ""} className="ml-auto size-14" /></HoverCardTrigger>
+                                <HoverCardTrigger><Image src={getNodeTypeImage(node) ?? ""} alt={node.type ?? ""} width={50} height={50} className="ml-auto" /></HoverCardTrigger>
                                 <HoverCardContent>
                                     {node.type}
                                 </HoverCardContent>
@@ -85,7 +89,6 @@ const BdodleDropdown = ({ nodes, submitGuess }: BdodleDropdownProps) => {
                                     {"Amount of Contribution Points required to invest"}
                                 </HoverCardContent>
                             </HoverCard>
-
                         </li>
                     ))}
                 </ul>

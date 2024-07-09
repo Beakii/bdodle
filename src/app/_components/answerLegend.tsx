@@ -1,5 +1,6 @@
 'use client'
 import { ArrowBigDown, ArrowBigUp } from "lucide-react";
+import TutorialModal from "./tutorialModal";
 
 const AnswerLegend = () => {
 
@@ -29,6 +30,7 @@ const AnswerLegend = () => {
                     <ArrowBigDown className="lg:size-10 size-8 text-black" />
                 </div>
             </div>
+            <TutorialModal />
         </div>
     );
 };

@@ -15,7 +15,7 @@ const BdodleAnswersTableHeader = () => {
                     <h1 className="lg:text-lg md:text-sm text-[0.6rem] font-semibold">Contribution</h1>
                 </div>
                 <div className="lg:w-40 md:w-36 sm:w-28 w-20 h-10 flex items-center justify-center border-2 border-yellow-700 bg-yellow-950">
-                    <h1 className="lg:text-lg md:text-sm text-[0.6rem] font-semibold">Connection</h1>
+                    <h1 className="lg:text-lg md:text-sm text-[0.6rem] font-semibold">Connections</h1>
                 </div>
                 <div className="lg:w-40 md:w-36 sm:w-28 w-20 h-10 flex items-center justify-center border-2 border-yellow-700 bg-yellow-950">
                     <h1 className="lg:text-lg md:text-sm text-xs font-semibold">Location</h1>

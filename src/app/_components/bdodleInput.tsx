@@ -14,7 +14,7 @@ const BdodleInput = ({ getInput, inputValue }: BdodleInputProps) => {
     return (
         <input
             placeholder="Enter a node name to guess..."
-            className="lg:min-w-[35vw] lg:max-w-[35vw] min-w-[99vw] h-12 p-8 bg-yellow-950 border-2 border-yellow-700"
+            className="lg:min-w-[25vw] lg:max-w-[30vw] lg:mx-20 min-w-[99vw] h-12 p-8 bg-yellow-950 border-2 border-yellow-700"
             onChange={(e) => getInput(e.target.value)}
             value={value}
         />
