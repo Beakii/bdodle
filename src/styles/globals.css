@@ -9,17 +9,16 @@
 
 /* width */
 ::-webkit-scrollbar {
-  @apply hidden;
+  @apply bg-yellow-950;
 }
 
-/* ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: #E8E4D9;
-  @apply rounded-lg;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
-} */
+  @apply bg-yellow-700
+}
 
 html,
 body,

@@ -43,6 +43,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
 
     useEffect(() => {
         setBlackSpiritText(toggleAssist ? "Click me to return!" : "I can help!");
+        (itemRef.current as HTMLElement | null)?.lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
     }, [toggleAssist]);
 
     useEffect(() => {
@@ -58,6 +59,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
             setIsWin(true);
         }
         setFilteredNodes(filteredNodes.filter(node => node !== listOfGusses[listOfGusses.length - 1]));
+
         (itemRef.current as HTMLElement | null)?.lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
 
         if (gameMode === "daily") {

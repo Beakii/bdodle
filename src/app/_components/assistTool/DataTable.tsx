@@ -155,7 +155,7 @@ export function DataTable<TData, TValue>({ columns, data, setToggleAssist }: Dat
 
     return (
         <div className="flex justify-center max-w-full min-w-full ">
-            <div className="lg:max-h-[70vh] lg:min-h-[70vh] lg:max-w-[60vw] lg:min-w-[50vw] lg:mt-16 my-[2.5vh] flex flex-col max-w-full max-h-[80vh] bg-yellow-950 text-[#E8E4D9] border-2 border-yellow-700">
+            <div className=" lg:max-w-[60vw] lg:min-w-[50vw] lg:mt-16 my-[2.5vh] flex flex-col max-w-full max-h-[80vh] bg-yellow-950 text-[#E8E4D9] border-2 border-yellow-700">
                 <Button
                     onClick={() => setToggleAssist(false)}
                     className="relative ml-auto lg:max-w-[10vw] max-w-[20vw] bg-[#E8E4D9] border-b-2 border-l-2 border-yellow-700 hover:shadow-md hover:bg-neutral-100 rounded-tr-none rounded-br-none rounded-tl-none">
