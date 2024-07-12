@@ -37,3 +37,16 @@ export const nodes = createTable(
     nameIndex: index("name_idx").on(example.name),
   })
 );
+
+export const leaderboard = createTable(
+  "leaderboard",
+  {
+    id: serial("id").primaryKey(),
+    name: varchar("profilePicture", { length: 256 }),
+    type: varchar("discordUsername", { length: 256 }),
+    contribution: integer("score"),
+  },
+  (example) => ({
+    nameIndex: index("name1_idx").on(example.name),
+  })
+);
