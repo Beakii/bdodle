@@ -40,7 +40,8 @@
  - [x] Merge to main and push to production
 ---
  ## Release v2.1
- - [ ] Add Next Auth
+ - [x] Add Next Auth
+ - [ ] Add suspense components to show loading spinners on stateful components
  - [ ] Add leaderboard component with shadcn ui skeleton loading while not signed in
  - [ ] Connect leaderboard component with database table
  - [ ] Add a user dashboard with previous scores

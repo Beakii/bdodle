@@ -6,6 +6,14 @@ await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
 const coreConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.discordapp.com',
+      }
+    ]
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -16,6 +24,7 @@ const coreConfig = {
 };
 
 import { withSentryConfig } from "@sentry/nextjs";
+import { hostname } from "os";
 
 const config = withSentryConfig(
   coreConfig,

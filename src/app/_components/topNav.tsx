@@ -5,6 +5,7 @@ import { Button } from "~/components/ui/button";
 import {
     Menubar,
     MenubarContent,
+    MenubarItem,
     MenubarMenu,
     MenubarSeparator,
     MenubarTrigger,
@@ -12,15 +13,31 @@ import {
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { CiMenuBurger } from "react-icons/ci";
+import SignedIn from "../context/SignedIn";
+import SignedOut from "../context/SignedOut";
+
 
 
 const loadingSpinner = <svg fill="white" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect className="spinner_zWVm" x="1" y="1" width="7.33" height="7.33" /><rect className="spinner_gfyD" x="8.33" y="1" width="7.33" height="7.33" /><rect className="spinner_T5JJ" x="1" y="8.33" width="7.33" height="7.33" /><rect className="spinner_E3Wz" x="15.66" y="1" width="7.33" height="7.33" /><rect className="spinner_g2vs" x="8.33" y="8.33" width="7.33" height="7.33" /><rect className="spinner_ctYB" x="1" y="15.66" width="7.33" height="7.33" /><rect className="spinner_BDNj" x="15.66" y="8.33" width="7.33" height="7.33" /><rect className="spinner_rCw3" x="8.33" y="15.66" width="7.33" height="7.33" /><rect className="spinner_Rszm" x="15.66" y="15.66" width="7.33" height="7.33" /></svg>;
 
 export function TopNav() {
+    const session = useSession();
     const pathName = usePathname();
     const [homeLoading, setHomeLoading] = useState(false);
     const [dailyLoading, setDailyLoading] = useState(false);
     const [arcadeLoading, setArcadeLoading] = useState(false);
+
+    const userImage = session.data?.user?.image ? (
+        <Image
+            src={session.data.user.image}
+            alt="User Image"
+            width={50}
+            height={50}
+            className="rounded-full"
+        />
+    ) : null
 
     useEffect(() => {
         setHomeLoading(false);
@@ -28,14 +45,28 @@ export function TopNav() {
         setArcadeLoading(false);
     }, [pathName]);
 
+    console.log(session);
+
     return (
         <nav className="flex w-full items-center justify-center border-b-2 mb-5 p-5 text-5xl font-semibold bg-black">
             <div>
                 <Menubar className="absolute lg:left-[50px] left-[5px] top-[50px]">
                     <MenubarMenu>
-                        <MenubarTrigger>☰</MenubarTrigger>
+                        <MenubarTrigger>
+                            <SignedIn>
+                                {userImage}
+                            </SignedIn>
+                            <SignedOut>
+                                <CiMenuBurger className="text-white" />
+                            </SignedOut>
+                        </MenubarTrigger>
                         <MenubarContent>
-                            {/* <div className="flex justify-center items-center">{`You are not signed in`}</div> */}
+                            <SignedIn>
+                                <div className="flex justify-center items-center text-white">{`Hello ${session.data?.user?.name}`}</div>
+                            </SignedIn>
+                            <SignedOut>
+                                <div className="flex justify-center items-center text-white">{"You are not signed in"}</div>
+                            </SignedOut>
                             <MenubarSeparator />
                             <Link href="/" onClick={() => { setHomeLoading(true) }}>
                                 <Button className="flex justify-start w-full bg-yellow-950 hover:bg-yellow-900">{homeLoading ? loadingSpinner : "Home"}</Button>
@@ -49,12 +80,17 @@ export function TopNav() {
                                 <Button className="flex justify-start w-full bg-yellow-950 hover:bg-yellow-900">{arcadeLoading ? loadingSpinner : "Arcade"}</Button>
                             </Link>
                             <MenubarSeparator />
-                            {/* <MenubarItem>
-                                <Button className="flex justify-start w-full text-neutral-900 hover:text-white bg-white">Sign in</Button>
-
-                                <Button className="flex justify-start w-full text-neutral-900 hover:text-white bg-white">Sign out</Button>
-                            </MenubarItem>
-                            <MenubarSeparator /> */}
+                            <SignedIn>
+                                <Link href="/api/auth/signout">
+                                    <Button className="flex justify-start w-full bg-yellow-950 hover:bg-yellow-900">Sign out</Button>
+                                </Link>
+                            </SignedIn>
+                            <SignedOut>
+                                <Link href="/api/auth/signin">
+                                    <Button className="flex justify-start w-full bg-yellow-950 hover:bg-yellow-900">Sign in</Button>
+                                </Link>
+                            </SignedOut>
+                            <MenubarSeparator />
                         </MenubarContent>
                     </MenubarMenu>
                 </Menubar>
