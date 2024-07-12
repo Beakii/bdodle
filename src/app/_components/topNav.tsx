@@ -5,7 +5,6 @@ import { Button } from "~/components/ui/button";
 import {
     Menubar,
     MenubarContent,
-    MenubarItem,
     MenubarMenu,
     MenubarSeparator,
     MenubarTrigger,
@@ -45,8 +44,6 @@ export function TopNav() {
         setArcadeLoading(false);
     }, [pathName]);
 
-    console.log(session);
-
     return (
         <nav className="flex w-full items-center justify-center border-b-2 mb-5 p-5 text-5xl font-semibold bg-black">
             <div>
@@ -82,12 +79,12 @@ export function TopNav() {
                             <MenubarSeparator />
                             <SignedIn>
                                 <Link href="/api/auth/signout">
-                                    <Button className="flex justify-start w-full bg-yellow-950 hover:bg-yellow-900">Sign out</Button>
+                                    <Button className="flex justify-start w-full bg-yellow-900 hover:bg-yellow-800">Sign out</Button>
                                 </Link>
                             </SignedIn>
                             <SignedOut>
                                 <Link href="/api/auth/signin">
-                                    <Button className="flex justify-start w-full bg-yellow-950 hover:bg-yellow-900">Sign in</Button>
+                                    <Button className="flex justify-start w-full bg-yellow-900 hover:bg-yellow-800">Sign in</Button>
                                 </Link>
                             </SignedOut>
                             <MenubarSeparator />
