@@ -1,5 +1,11 @@
 //Type Interfaces
 
+export interface User {
+    profilePicture: string;
+    discordUsername: string;
+    score: number;
+}
+
 export interface Node {
     id: number;
     nodeId: number;
@@ -62,4 +68,12 @@ export interface BdodleBouncingButtonProps {
 export interface BdodleAssistToolProps {
     nodesWithConLength: NodeWithLength[];
     setToggleAssist: (toggle: boolean) => void;
+}
+
+export interface LeaderboardProps {
+    leaderboardData: User[];
+}
+
+export interface LandingPageProps {
+    leaderboardData: User[];
 }

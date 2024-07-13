@@ -43,7 +43,7 @@
  - [x] Add Next Auth
  - [ ] Add suspense components to show loading spinners on stateful components
  - [x] Add leaderboard component with shadcn ui skeleton loading while not signed in
- - [ ] Connect leaderboard component with database table
+ - [x] Connect leaderboard component with database table
  - [ ] Add a user dashboard with previous scores
  ---
  ## Debug

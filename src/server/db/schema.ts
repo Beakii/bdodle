@@ -42,11 +42,11 @@ export const leaderboard = createTable(
   "leaderboard",
   {
     id: serial("id").primaryKey(),
-    name: varchar("profilePicture", { length: 256 }),
-    type: varchar("discordUsername", { length: 256 }),
-    contribution: integer("score"),
+    profilePicture: varchar("profilePicture", { length: 256 }),
+    discordUsername: varchar("discordUsername", { length: 256 }),
+    score: integer("score"),
   },
   (example) => ({
-    nameIndex: index("name1_idx").on(example.name),
+    nameIndex: index("name1_idx").on(example.profilePicture),
   })
 );
