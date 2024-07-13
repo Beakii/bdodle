@@ -1,8 +1,8 @@
 export const usernameMap = [
-    {
-        discordUsername: "beakie.",
-        twitchUsername: "Beakie"
-    },
+    // {
+    //     discordUsername: "beakie.",
+    //     twitchUsername: "Beakie"
+    // },
     {
         discordUsername: "monstermonchi",
         twitchUsername: "Mushki"
