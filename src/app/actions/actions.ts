@@ -1,5 +1,5 @@
 "use server"
-import { addLeaderboardRow } from "~/server/queries";
+import { addLeaderboardRow, getLeaderboard } from "~/server/queries";
 import { User } from "../types"
 import { usernameMap } from "../usernameMap";
 
@@ -10,6 +10,11 @@ export const addScore = async (user: User) => {
             user.discordUsername = creator.twitchUsername;
         }
     })
-    const newScore = await addLeaderboardRow(user);
-    console.log(newScore);
+
+    const listOfUsers = await getLeaderboard();
+    const userAlreadyOnLeaderboard = listOfUsers.find(userOnLeaderboard => userOnLeaderboard.discordUsername === user.discordUsername);
+
+    if (!userAlreadyOnLeaderboard) {
+        await addLeaderboardRow(user);
+    }
 }

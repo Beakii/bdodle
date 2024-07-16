@@ -41,7 +41,6 @@
 ---
  ## Release v2.1
  - [x] Add Next Auth
- - [ ] Add suspense components to show loading spinners on stateful components
  - [x] Add leaderboard component with shadcn ui skeleton loading while not signed in
  - [x] Connect leaderboard component with database table
  - [ ] Add toast component for on login + when you submit score to DB

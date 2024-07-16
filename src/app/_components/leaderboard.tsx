@@ -48,7 +48,13 @@ export const Leaderboard = ({ leaderboardData }: LeaderboardProps) => {
                                         <span className="text-2xl">{player.score + " guess(es)"}</span>
                                     </SignedIn>
                                     <SignedOut>
-                                        <LeaderboardSkeleton />
+                                        <div className="flex flex-col space-y-2">
+                                            <LeaderboardSkeleton />
+                                            <LeaderboardSkeleton />
+                                            <LeaderboardSkeleton />
+                                            <LeaderboardSkeleton />
+                                            <LeaderboardSkeleton />
+                                        </div>
                                     </SignedOut>
                                 </div>
                             ))

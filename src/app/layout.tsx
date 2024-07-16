@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react"
 import Footer from "./_components/footer";
 import { TopNav } from "./_components/topNav";
 import AuthProvider from "./context/AuthProvider";
+import { Toaster } from "~/components/ui/sonner";
 
 
 export const metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({
           <div className="min-h-[100vh] flex flex-col justify-between">
             <TopNav />
             {children}
+            <Toaster position="bottom-left" />
             <Footer />
             <SpeedInsights />
             <Analytics />

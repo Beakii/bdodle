@@ -13,6 +13,8 @@ import { SiApplearcade } from "react-icons/si";
 import { useSession } from "next-auth/react";
 import { usernameMap } from "../usernameMap";
 import { addScore } from "../actions/actions";
+import { toast } from "sonner";
+
 
 
 const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) => {
@@ -63,6 +65,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
                         score: listOfGusses.length
                     }
                     addScore(user);
+                    toast.success("Score added to leaderboard!");
                 }
             }
         }

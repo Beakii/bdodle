@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
     //@ts-ignore
-    const listOfNodes: Node[] = getAllNodes();
+    const listOfNodes: Node[] = await getAllNodes();
     const currentCorrectNode: Node = listOfNodes.find(node => node.nodeOfDay === true)!;
 
     const randomIndex = Math.floor(Math.random() * (listOfNodes.length - 1)) + 1;
