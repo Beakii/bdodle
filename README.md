@@ -43,7 +43,7 @@
  - [x] Add Next Auth
  - [x] Add leaderboard component with shadcn ui skeleton loading while not signed in
  - [x] Connect leaderboard component with database table
- - [ ] Add toast component for on login + when you submit score to DB
+ - [x] Add toast component for on login + when you submit score to DB
  - [ ] Add a share button on daily
  ---
  ## Debug

@@ -1,6 +1,7 @@
 'use client'
 import { Button } from "~/components/ui/button";
 import { BdodleScoreCardProps } from "../types";
+import { toast } from "sonner";
 
 
 const BdodleScoreCard = ({ numberOfAttempts, timeToNewGame, gameMode, resetGame }: BdodleScoreCardProps) => {
@@ -17,6 +18,12 @@ const BdodleScoreCard = ({ numberOfAttempts, timeToNewGame, gameMode, resetGame 
         return timeString;
     }
 
+    function copyToClipboard() {
+        const history = localStorage.getItem("dailyHistory");
+        const historyJSON = JSON.parse(history!);
+        toast.success("Link copied to clipboard");
+    }
+
 
     return (
         <div className="flex flex-col justify-center items-center lg:min-w-[25vw] lg:max-w-[30vw] lg:mx-20 min-w-[99vw]">
@@ -26,9 +33,10 @@ const BdodleScoreCard = ({ numberOfAttempts, timeToNewGame, gameMode, resetGame 
             {
                 gameMode === "daily"
                     ?
-                    <div>
+                    <>
                         {"Time to new game: " + getFormattedTime(timeToNewGame)}
-                    </div>
+                        <Button onClick={() => { copyToClipboard() }} className="w-[50%] mt-1 border-2 border-yellow-700 bg-yellow-950 hover:opacity-75 hover:bg-yellow-950">Share</Button>
+                    </>
                     :
                     <Button onClick={() => { resetGame() }} className="w-[50%] mt-1 border-2 border-yellow-700 bg-yellow-950 hover:opacity-75 hover:bg-yellow-950">Play Again</Button>
             }
