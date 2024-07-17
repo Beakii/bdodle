@@ -1,5 +1,5 @@
 'use client'
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BdodleDropdown from "./bdodleDropdown";
 import { Node, GameProps, User } from "../types";
 import BdodleScoreCard from "./bdodleScoreCard";
@@ -14,12 +14,10 @@ import { useSession } from "next-auth/react";
 import { usernameMap } from "../usernameMap";
 import { addScore } from "../actions/actions";
 import { toast } from "sonner";
-
-
+import { obfuscation } from "../nodeValidator";
 
 const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) => {
     const itemRef = useRef(null);
-    const obfuscation = 184523;
     const userSession = useSession();
 
     const [listOfGusses, setListOfGusses] = useState<Node[]>([]);
@@ -36,7 +34,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
     }, []);
 
     useEffect(() => {
-        if (userSession.status === "authenticated") {
+        if (userSession.status === "authenticated" && isWin) {
             saveScore();
         }
     }, [userSession.status])
@@ -181,7 +179,8 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
                                         numberOfAttempts={listOfGusses.length}
                                         timeToNewGame={timeToNewGame}
                                         gameMode={gameMode}
-                                        resetGame={resetGame} />
+                                        resetGame={resetGame}
+                                        correctNode={correctNode} />
                             }
                             <BdodleBouncingButton
                                 blackSpiritText={blackSpiritText}

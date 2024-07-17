@@ -56,6 +56,7 @@ export interface BdodleScoreCardProps {
     numberOfAttempts: number;
     timeToNewGame: number;
     gameMode: string;
+    correctNode: Node;
     resetGame: () => void;
 }
 
