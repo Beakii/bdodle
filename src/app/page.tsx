@@ -8,7 +8,7 @@ export default async function HomePage() {
   noStore();
   //@ts-ignore
   const data: User[] = await getLeaderboard();
-  data.sort((a, b) => b.score - a.score);
+  data.sort((a, b) => a.score - b.score);
 
   return (
     <main className="flex flex-col min-w-full">
