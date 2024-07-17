@@ -3,9 +3,23 @@
  * for Docker builds.
  */
 await import("./src/env.js");
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 /** @type {import("next").NextConfig} */
 const coreConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.discordapp.com',
+      }
+    ]
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -15,8 +29,8 @@ const coreConfig = {
   reactStrictMode: false
 };
 
-import { withSentryConfig } from "@sentry/nextjs";
 
+import { withSentryConfig } from "@sentry/nextjs";
 const config = withSentryConfig(
   coreConfig,
   {
@@ -55,4 +69,4 @@ const config = withSentryConfig(
   }
 );
 
-export default config;
+export default withBundleAnalyzer(config);

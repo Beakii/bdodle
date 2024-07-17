@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from "react";
 import BdodleDropdown from "./bdodleDropdown";
-import { Node, GameProps } from "../types";
+import { Node, GameProps, User } from "../types";
 import BdodleScoreCard from "./bdodleScoreCard";
 import BdodleBouncingButton from "./bdodleBouncingButton";
 import BdodleAssistTool from "./bdodleAssistTool";
@@ -10,11 +10,15 @@ import BdodleAnswersTableRow from "./bdodleAnswerTableRow";
 import AnswerLegend from "./answerLegend";
 import { IoMdTimer } from "react-icons/io";
 import { SiApplearcade } from "react-icons/si";
-
+import { useSession } from "next-auth/react";
+import { usernameMap } from "../usernameMap";
+import { addScore } from "../actions/actions";
+import { toast } from "sonner";
+import { obfuscation } from "../nodeValidator";
 
 const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) => {
     const itemRef = useRef(null);
-    const obfuscation = 184523;
+    const userSession = useSession();
 
     const [listOfGusses, setListOfGusses] = useState<Node[]>([]);
     const [isWin, setIsWin] = useState(false);
@@ -28,6 +32,12 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
     useEffect(() => {
         pageLoad(gameMode);
     }, []);
+
+    useEffect(() => {
+        if (userSession.status === "authenticated" && isWin) {
+            saveScore();
+        }
+    }, [userSession.status])
 
     //Timer used for new game
     useEffect(() => {
@@ -51,6 +61,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
             const resetTime = new Date().setUTCHours(24, 0, 0, 0) - new Date().getTime();
             const secondsToNewGame = Number((resetTime / 1000).toFixed(0));
             setTimeToNewGame(secondsToNewGame);
+            saveScore();
         }
     }, [isWin]);
 
@@ -107,6 +118,20 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
         localStorage.setItem(`${gameMode}CorrectNodeId`, JSON.stringify(obfuscatedCorrectNode));
     }
 
+    function saveScore() {
+        if (gameMode === "daily") {
+            if (usernameMap.map(user => user.discordUsername).includes(userSession.data?.user?.name!)) {
+                const user: User = {
+                    profilePicture: userSession.data?.user?.image!,
+                    discordUsername: userSession.data?.user?.name!,
+                    score: listOfGusses.length
+                }
+                addScore(user);
+                toast.success("Score added to leaderboard!");
+            }
+        }
+    }
+
     function resetGame() {
         setListOfGusses([]);
         setIsWin(false);
@@ -154,7 +179,8 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
                                         numberOfAttempts={listOfGusses.length}
                                         timeToNewGame={timeToNewGame}
                                         gameMode={gameMode}
-                                        resetGame={resetGame} />
+                                        resetGame={resetGame}
+                                        correctNode={correctNode} />
                             }
                             <BdodleBouncingButton
                                 blackSpiritText={blackSpiritText}

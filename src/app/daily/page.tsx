@@ -6,7 +6,6 @@ import { getAllNodes } from "~/server/queries";
 
 export default async function HomePage() {
     noStore();
-
     //@ts-ignore
     const nodes: Node[] = await getAllNodes();
     nodes.sort((a, b) => (a?.nodeId || 0) - (b?.nodeId || 0));

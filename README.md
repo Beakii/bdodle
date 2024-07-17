@@ -40,10 +40,11 @@
  - [x] Merge to main and push to production
 ---
  ## Release v2.1
- - [ ] Add Next Auth
- - [ ] Add leaderboard component with shadcn ui skeleton loading while not signed in
- - [ ] Connect leaderboard component with database table
- - [ ] Add a user dashboard with previous scores
+ - [x] Add Next Auth
+ - [x] Add leaderboard component with shadcn ui skeleton loading while not signed in
+ - [x] Connect leaderboard component with database table
+ - [x] Add toast component for on login + when you submit score to DB
+ - [x] Add a share button on daily
  ---
  ## Debug
  - [x] Fix AnswerTable validation (Arrows on contri and connection not working correctly)

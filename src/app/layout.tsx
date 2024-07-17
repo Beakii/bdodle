@@ -1,9 +1,11 @@
 import "~/styles/globals.css";
-
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 import Footer from "./_components/footer";
 import { TopNav } from "./_components/topNav";
+import AuthProvider from "./context/AuthProvider";
+import { Toaster } from "~/components/ui/sonner";
+
 
 export const metadata = {
   title: "BDOdle",
@@ -14,8 +16,6 @@ export const metadata = {
   },
 };
 
-
-
 export default function RootLayout({
   children,
 }: {
@@ -24,13 +24,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="min-h-[100vh] flex flex-col justify-between">
-          <TopNav />
-          {children}
-          <Footer />
-          <SpeedInsights />
-          <Analytics />
-        </div>
+        <AuthProvider>
+          <div className="min-h-[100vh] flex flex-col justify-between">
+            <TopNav />
+            {children}
+            <Toaster position="bottom-left" />
+            <Footer />
+            <SpeedInsights />
+            <Analytics />
+          </div>
+        </AuthProvider>
       </body>
     </html >
   );
