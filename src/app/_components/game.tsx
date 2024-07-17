@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import BdodleDropdown from "./bdodleDropdown";
 import { Node, GameProps, User } from "../types";
 import BdodleScoreCard from "./bdodleScoreCard";
@@ -35,6 +35,12 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
         pageLoad(gameMode);
     }, []);
 
+    useEffect(() => {
+        if (userSession.status === "authenticated") {
+            saveScore();
+        }
+    }, [userSession.status])
+
     //Timer used for new game
     useEffect(() => {
         let timer = setInterval(() => {
@@ -57,17 +63,7 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
             const resetTime = new Date().setUTCHours(24, 0, 0, 0) - new Date().getTime();
             const secondsToNewGame = Number((resetTime / 1000).toFixed(0));
             setTimeToNewGame(secondsToNewGame);
-            if (gameMode === "daily") {
-                if (usernameMap.map(user => user.discordUsername).includes(userSession.data?.user?.name!)) {
-                    const user: User = {
-                        profilePicture: userSession.data?.user?.image!,
-                        discordUsername: userSession.data?.user?.name!,
-                        score: listOfGusses.length
-                    }
-                    addScore(user);
-                    toast.success("Score added to leaderboard!");
-                }
-            }
+            saveScore();
         }
     }, [isWin]);
 
@@ -122,6 +118,20 @@ const Game = ({ nodes, correctNode, nodesWithConLength, gameMode }: GameProps) =
 
         const obfuscatedCorrectNode = correctNode.nodeId * obfuscation;
         localStorage.setItem(`${gameMode}CorrectNodeId`, JSON.stringify(obfuscatedCorrectNode));
+    }
+
+    function saveScore() {
+        if (gameMode === "daily") {
+            if (usernameMap.map(user => user.discordUsername).includes(userSession.data?.user?.name!)) {
+                const user: User = {
+                    profilePicture: userSession.data?.user?.image!,
+                    discordUsername: userSession.data?.user?.name!,
+                    score: listOfGusses.length
+                }
+                addScore(user);
+                toast.success("Score added to leaderboard!");
+            }
+        }
     }
 
     function resetGame() {

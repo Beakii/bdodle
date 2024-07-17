@@ -2,7 +2,16 @@
 import { Button } from "~/components/ui/button";
 import { BdodleScoreCardProps } from "../types";
 import { toast } from "sonner";
-
+import SignedOut from "../context/SignedOut";
+import { signIn } from "next-auth/react";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "~/components/ui/tooltip"
+import { BsInfoCircleFill } from "react-icons/bs";
+import { FaDiscord } from "react-icons/fa";
 
 const BdodleScoreCard = ({ numberOfAttempts, timeToNewGame, gameMode, resetGame }: BdodleScoreCardProps) => {
 
@@ -21,9 +30,8 @@ const BdodleScoreCard = ({ numberOfAttempts, timeToNewGame, gameMode, resetGame 
     function copyToClipboard() {
         const history = localStorage.getItem("dailyHistory");
         const historyJSON = JSON.parse(history!);
-        toast.success("Link copied to clipboard");
+        toast.success("Score copied to clipboard");
     }
-
 
     return (
         <div className="flex flex-col justify-center items-center lg:min-w-[25vw] lg:max-w-[30vw] lg:mx-20 min-w-[99vw]">
@@ -35,7 +43,22 @@ const BdodleScoreCard = ({ numberOfAttempts, timeToNewGame, gameMode, resetGame 
                     ?
                     <>
                         {"Time to new game: " + getFormattedTime(timeToNewGame)}
-                        <Button onClick={() => { copyToClipboard() }} className="w-[50%] mt-1 border-2 border-yellow-700 bg-yellow-950 hover:opacity-75 hover:bg-yellow-950">Share</Button>
+                        <div className="w-full justify-center items-centers flex gap-1">
+                            <Button onClick={() => { copyToClipboard() }} className="w-[50%] mt-1 border-2 border-yellow-700 bg-yellow-950 hover:opacity-75 hover:bg-yellow-950">Share</Button>
+                            <SignedOut>
+                                <Button onClick={() => { signIn("discord", { callbackUrl: "/daily" }) }} className="w-[50%] mt-1 border-2 border-yellow-700 bg-yellow-950 hover:opacity-75 hover:bg-yellow-950">{<>Login<FaDiscord className="size-4 ml-2" /></>}</Button>
+                                <TooltipProvider>
+                                    <Tooltip>
+                                        <TooltipTrigger>
+                                            <BsInfoCircleFill className="size-6 text-yellow-700" />
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            {"If you are a content creator you can Login and have your score displayed on the leaderboard"}
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>
+                            </SignedOut>
+                        </div>
                     </>
                     :
                     <Button onClick={() => { resetGame() }} className="w-[50%] mt-1 border-2 border-yellow-700 bg-yellow-950 hover:opacity-75 hover:bg-yellow-950">Play Again</Button>

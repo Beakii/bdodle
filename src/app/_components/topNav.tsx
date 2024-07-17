@@ -12,8 +12,9 @@ import {
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { CiMenuBurger } from "react-icons/ci";
+import { FaDiscord } from "react-icons/fa";
 import SignedIn from "../context/SignedIn";
 import SignedOut from "../context/SignedOut";
 
@@ -78,13 +79,13 @@ export function TopNav() {
                             </Link>
                             <MenubarSeparator />
                             <SignedIn>
-                                <Link href="/api/auth/signout">
+                                <Link href="" onClick={() => { signOut({ callbackUrl: pathName }) }}>
                                     <Button className="flex justify-start w-full bg-yellow-900 hover:bg-yellow-800">Sign out</Button>
                                 </Link>
                             </SignedIn>
                             <SignedOut>
-                                <Link href="/api/auth/signin">
-                                    <Button className="flex justify-start w-full bg-yellow-900 hover:bg-yellow-800">Sign in</Button>
+                                <Link href="" onClick={() => { signIn("discord", { callbackUrl: pathName }) }}>
+                                    <Button className="flex justify-start w-full bg-yellow-900 hover:bg-yellow-800"><>Sign in<FaDiscord className="size-4 ml-2" /></></Button>
                                 </Link>
                             </SignedOut>
                             <MenubarSeparator />
